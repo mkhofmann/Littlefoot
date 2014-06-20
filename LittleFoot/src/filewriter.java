@@ -59,14 +59,26 @@ public class filewriter {
 		// type qualifications
 		// position A (all the way through top area
 		if (position.equals("a")) {
+			if (lefty)
+				writer.println("mirror([1,0,0]){");
 			writer.println("protrusion(62," + diameter + ");");
+			if (lefty)
+				writer.println("}");
 		} else if (position.equals("b")) {
+			if (lefty)
+				writer.println("mirror([1,0,0]){");
 			writer.println("protrusion(" + lin + "," + diameter + ");");
+			if (lefty)
+				writer.println("}");
 		} else if (position.equals("c")) {
+			if (lefty)
+				writer.println("mirror([1,0,0]){");
 			writer.println("union(){");
 			writer.println("protrusion(" + lin + "," + diameter + ");");
 			writer.println("barrelA(" + lout + "," + diameter + ");");
 			writer.println("}");
+			if (lefty)
+				writer.println("}");
 		} else {
 			throw new PositionNotSupportedException();
 		}

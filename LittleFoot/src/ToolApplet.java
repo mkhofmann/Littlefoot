@@ -5,20 +5,22 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class ToolApplet extends Applet {
-	String[] positions = { "a","b","c" };
+	String[] positions = { "a", "b", "c" };
 	String[] stls = { "gripA.stl" };
 	TextField diameter = new TextField("6", 5);
-	TextField lout = new TextField("20",5);
-	TextField lin = new TextField("62",5);
-	TextField filefield = new TextField("C:\\Users\\Megan\\Desktop\\LittlefootPrints\\grip.scad", 40);
+	TextField lout = new TextField("20", 5);
+	TextField lin = new TextField("62", 5);
+	TextField filefield = new TextField(
+			"C:\\Users\\Megan\\Desktop\\LittlefootPrints\\grip.scad", 40);
 	Choice position = new Choice();
 	Choice stl = new Choice();
+	Checkbox lefty = new Checkbox("Left Handed", false);
 	Button submit = new Button("Submit");
 
 	filewriter writer = new filewriter();
 
 	public void init() {
-		resize(400,100);
+		resize(400, 100);
 		diameter.setEditable(true);
 		filefield.setEditable(true);
 		lout.setEditable(true);
@@ -33,6 +35,7 @@ public class ToolApplet extends Applet {
 		add(position);
 		add(stl);
 		add(filefield);
+		add(lefty);
 		add(submit);
 	}
 
@@ -44,6 +47,7 @@ public class ToolApplet extends Applet {
 			writer.lout = Double.parseDouble(lout.getText());
 			writer.lin = Double.parseDouble(lin.getText());
 			writer.filename = filefield.getText();
+			writer.lefty = lefty.getState();
 			try {
 				writer.writefile();
 			} catch (FileNotFoundException | PositionNotSupportedException e) {
