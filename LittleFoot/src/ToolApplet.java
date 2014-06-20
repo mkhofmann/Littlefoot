@@ -5,12 +5,12 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class ToolApplet extends Applet {
-	String[] positions = { "a" };
+	String[] positions = { "a","b","c" };
 	String[] stls = { "gripA.stl" };
 	TextField diameter = new TextField("5", 10);
 	TextField posfield = new TextField("a", 20);
 	TextField stlfield = new TextField("gripA.stl", 20);
-	TextField filefield = new TextField("grip.scad", 20);
+	TextField filefield = new TextField("C:\\Users\\Megan\\Desktop\\LittlefootPrints\\grip.scad", 40);
 	Choice position = new Choice();
 	Choice stl = new Choice();
 	Button posButton = new Button("Choose Position");
@@ -55,6 +55,7 @@ public class ToolApplet extends Applet {
 			} catch (FileNotFoundException | PositionNotSupportedException e) {
 				e.printStackTrace();
 			}
+			showStatus("Submited file");
 		} else
 			return super.action(evt, arg);
 		return true;
