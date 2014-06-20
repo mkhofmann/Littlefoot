@@ -21,35 +21,35 @@ public class filewriter {
 		position = pos;
 		filename = fn + ".scad";
 	}
-	public filewriter(){
+
+	public filewriter() {
 		stlTitle = "gripA.stl";
-		lefty=false;
-		diameter =5;
+		lefty = false;
+		diameter = 5;
 		lout = 10;
 		lin = 62;
-		position="a";
-		filename="gripFile.scad";
+		position = "a";
+		filename = "gripFile.scad";
 	}
-	
-	
 
-	public void writefile() throws PositionNotSupportedException, FileNotFoundException {
+	public void writefile() throws PositionNotSupportedException,
+			FileNotFoundException {
 
-		PrintWriter writer= new PrintWriter(filename);
+		PrintWriter writer = new PrintWriter(filename);
 
 		// basic hole module for difference()
 		writer.println("module hole(length,diameter){");
 		writer.println("cylinder(length,diameter/2,diameter/2);");
 		writer.println("}");
-		
-		//stl protrusion
+
+		// stl protrusion
 		writer.println("module protrusion(length,diameter){");
 		writer.println("difference(){");
-		writer.println("import(\""+stlTitle+"\");");
+		writer.println("import(\"" + stlTitle + "\");");
 		writer.println("hole(length,diameter);");
 		writer.println("}}");
-		
-		//barrelA
+
+		// barrelA
 		writer.println("module barrelA(length,diameter){");
 		writer.println("difference(){");
 		writer.println("translate([0,0,-length]) cylinder(length+1,(1+diameter)/2,(1+diameter)/2);");
@@ -59,18 +59,15 @@ public class filewriter {
 		// type qualifications
 		// position A (all the way through top area
 		if (position.equals("a")) {
-			writer.println("protrusion(62,"+diameter+");");
-		} 
-		else if (position.equals("b")){
-			writer.println("protrusion("+lin+","+diameter+");");
-		}
-		else if (position.equals("c")){
+			writer.println("protrusion(62," + diameter + ");");
+		} else if (position.equals("b")) {
+			writer.println("protrusion(" + lin + "," + diameter + ");");
+		} else if (position.equals("c")) {
 			writer.println("union(){");
-			writer.println("protrusion("+lin+","+diameter+");");
-			writer.println("barrelA("+lout+","+diameter+");");
+			writer.println("protrusion(" + lin + "," + diameter + ");");
+			writer.println("barrelA(" + lout + "," + diameter + ");");
 			writer.println("}");
-		}
-		else {
+		} else {
 			throw new PositionNotSupportedException();
 		}
 		writer.close();
@@ -87,6 +84,5 @@ public class filewriter {
 		}
 
 	}
-
 
 }

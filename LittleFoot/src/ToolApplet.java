@@ -7,50 +7,44 @@ import java.util.ArrayList;
 public class ToolApplet extends Applet {
 	String[] positions = { "a","b","c" };
 	String[] stls = { "gripA.stl" };
-	TextField diameter = new TextField("5", 10);
-	TextField posfield = new TextField("a", 20);
-	TextField stlfield = new TextField("gripA.stl", 20);
+	TextField diameter = new TextField("6", 5);
+	TextField lout = new TextField("20",5);
+	TextField lin = new TextField("62",5);
 	TextField filefield = new TextField("C:\\Users\\Megan\\Desktop\\LittlefootPrints\\grip.scad", 40);
 	Choice position = new Choice();
 	Choice stl = new Choice();
-	Button posButton = new Button("Choose Position");
-	Button stlButton = new Button("Choose stl");
-	Button diamButton = new Button("Submit Diameter");
 	Button submit = new Button("Submit");
 
 	filewriter writer = new filewriter();
 
 	public void init() {
+		resize(400,100);
 		diameter.setEditable(true);
 		filefield.setEditable(true);
-		posfield.setEditable(false);
-		stlfield.setEditable(false);
+		lout.setEditable(true);
+		lin.setEditable(true);
 		for (String s : positions)
 			position.add(s);
 		for (String s : stls)
 			stl.add(s);
 		add(diameter);
-		add(posfield);
+		add(lout);
+		add(lin);
 		add(position);
-		add(stlfield);
 		add(stl);
 		add(filefield);
 		add(submit);
 	}
 
 	public boolean action(Event evt, Object arg) {
-		if (evt.target.equals(position))
-			posfield.setText(position.getSelectedItem());
-		else if (evt.target.equals(stl))
-			stlfield.setText(stl.getSelectedItem());
-		else if (evt.target.equals(submit)) {
-//			System.out.println("made it here");
-//			writer.position = posfield.getText();
-//			writer.stlTitle = stlfield.getText();
-//			writer.diameter = Double.parseDouble(diameter.getText());
+		if (evt.target.equals(submit)) {
+			writer.position = position.getSelectedItem();
+			writer.stlTitle = stl.getSelectedItem();
+			writer.diameter = Double.parseDouble(diameter.getText());
+			writer.lout = Double.parseDouble(lout.getText());
+			writer.lin = Double.parseDouble(lin.getText());
 			writer.filename = filefield.getText();
 			try {
-				System.out.println(writer.filename);
 				writer.writefile();
 			} catch (FileNotFoundException | PositionNotSupportedException e) {
 				e.printStackTrace();
