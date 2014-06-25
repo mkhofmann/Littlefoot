@@ -43,20 +43,39 @@ public class ToolApplet extends Applet {
 	@SuppressWarnings("deprecation")
 	public boolean action(Event evt, Object arg) {
 		if (evt.target.equals(submit)) {
+			showStatus("Submitting...");
 			writer.position = position.getSelectedItem();
+			showStatus("position accepted");
 			writer.stlTitle = stl.getSelectedItem();
+			showStatus("stl file accepted");
 			writer.diameter = Double.parseDouble(diameter.getText());
+			showStatus("diameter accepted");
 			writer.lout = Double.parseDouble(lout.getText());
+			showStatus("Outer length Accepted");
 			writer.lin = Double.parseDouble(lin.getText());
+			showStatus("Inner Length Accepted");
 			writer.angle = Double.parseDouble(angle.getText());
+			showStatus("angle accepted");
 			writer.filename = filefield.getText();
+			showStatus("filename accepted");
 			writer.lefty = lefty.getState();
+			showStatus("left handed state accepted");
 			try {
 				writer.writefile();
-			} catch (FileNotFoundException | PositionNotSupportedException e) {
+				showStatus("Submitted File");
+			} catch (FileNotFoundException e) {
+				showStatus("Error: File Not found");
+				e.printStackTrace();
+			} catch (PositionNotSupportedException e) {
+				showStatus("Error: No position available");
+				e.printStackTrace();
+			} catch (invalidDiameterException e) {
+				showStatus("Error: Diameter Invalid");
+				e.printStackTrace();
+			} catch (STLNotPresentException e) {
+				showStatus("Error: Stl file not present");
 				e.printStackTrace();
 			}
-			showStatus("Submited file");
 		} else
 			return super.action(evt, arg);
 		return true;
