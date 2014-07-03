@@ -42,13 +42,13 @@ public class GripApp extends javax.swing.JApplet {
 
 	private javax.swing.JLabel ExtensionLabel;
 	private javax.swing.JLabel ExtensionLabelB;
+	private javax.swing.JFileChooser FileChooser;
 	private javax.swing.JTabbedPane Panel;
 	private javax.swing.JTextField angleCyl;
 	private javax.swing.JLabel angleCylLabel;
 	private javax.swing.JTextField angleULRec;
 	private javax.swing.JButton chooseExtension;
 	private javax.swing.JButton chooseExtensionB;
-	private javax.swing.JButton chooseFile;
 	private javax.swing.JButton chooseGrips;
 	private javax.swing.JTextField cylHoleLin;
 	private javax.swing.JLabel cylHoleLinLabel;
@@ -79,7 +79,6 @@ public class GripApp extends javax.swing.JApplet {
 	private javax.swing.JLabel holeHeightLabel;
 	private javax.swing.JTextField holeWidth;
 	private javax.swing.JLabel holeWidthLabel;
-	private javax.swing.JFileChooser jFileChooser1;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
@@ -131,7 +130,7 @@ public class GripApp extends javax.swing.JApplet {
 		 * http://download.oracle.com/javase
 		 * /tutorial/uiswing/lookandfeel/plaf.html
 		 */
-		resize(300,225);
+		resize(600,600);
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
 					.getInstalledLookAndFeels()) {
@@ -182,17 +181,6 @@ public class GripApp extends javax.swing.JApplet {
 		gripLabel = new javax.swing.JLabel();
 		gripsBox = new javax.swing.JComboBox();
 		chooseGrips = new javax.swing.JButton();
-		recUnlockSetPanel = new javax.swing.JInternalFrame();
-		jLabel1 = new javax.swing.JLabel();
-		jLabel2 = new javax.swing.JLabel();
-		jLabel3 = new javax.swing.JLabel();
-		jLabel4 = new javax.swing.JLabel();
-		loutULRec = new javax.swing.JTextField();
-		widthUL = new javax.swing.JTextField();
-		heightUL = new javax.swing.JTextField();
-		angleULRec = new javax.swing.JTextField();
-		leftyULRec = new javax.swing.JCheckBox();
-		submitULRec = new javax.swing.JButton();
 		recLocSetPanel = new javax.swing.JInternalFrame();
 		heigthLLabel = new javax.swing.JLabel();
 		widthLLabel = new javax.swing.JLabel();
@@ -204,15 +192,6 @@ public class GripApp extends javax.swing.JApplet {
 		linRec = new javax.swing.JTextField();
 		leftyLRec = new javax.swing.JCheckBox();
 		submitLRec = new javax.swing.JButton();
-		cylLSetPanel = new javax.swing.JInternalFrame();
-		diameterLLabel = new javax.swing.JLabel();
-		loutLCylLabel = new javax.swing.JLabel();
-		linCylLabel = new javax.swing.JLabel();
-		loutLCyl = new javax.swing.JTextField();
-		diameterL = new javax.swing.JTextField();
-		linCyl = new javax.swing.JTextField();
-		leftyLCyl = new javax.swing.JCheckBox();
-		submitLCyl = new javax.swing.JButton();
 		cylULSetPanel = new javax.swing.JInternalFrame();
 		diameterULLabel = new javax.swing.JLabel();
 		loutCylULLabel = new javax.swing.JLabel();
@@ -223,28 +202,10 @@ public class GripApp extends javax.swing.JApplet {
 		leftyCylUL = new javax.swing.JCheckBox();
 		submitULCyl = new javax.swing.JButton();
 		jLabel5 = new javax.swing.JLabel();
-		finishPanel = new javax.swing.JInternalFrame();
-		fileLabel = new javax.swing.JLabel();
-		fileLocation = new javax.swing.JTextField();
-		submitFile = new javax.swing.JButton();
-		chooseFile = new javax.swing.JButton();
-		jFileChooser1 = new javax.swing.JFileChooser();
-		extrusionPanel = new javax.swing.JInternalFrame();
-		ExtensionLabel = new javax.swing.JLabel();
-		extensionBox = new javax.swing.JComboBox();
-		chooseExtension = new javax.swing.JButton();
 		extrusionPanelB = new javax.swing.JInternalFrame();
 		ExtensionLabelB = new javax.swing.JLabel();
 		extensionBoxB = new javax.swing.JComboBox();
 		chooseExtensionB = new javax.swing.JButton();
-		cylHoleSetPanel = new javax.swing.JInternalFrame();
-		holeDiameterLabel = new javax.swing.JLabel();
-		cylHoleLinLabel = new javax.swing.JLabel();
-		cylHoleLin = new javax.swing.JTextField();
-		holeDiameter = new javax.swing.JTextField();
-		leftyCylHole = new javax.swing.JCheckBox();
-		submitCylHole = new javax.swing.JButton();
-		cylThroughCheck = new javax.swing.JCheckBox();
 		recHoleSetPanel = new javax.swing.JInternalFrame();
 		holeWidthLabel = new javax.swing.JLabel();
 		recHoleLinLabel = new javax.swing.JLabel();
@@ -255,18 +216,45 @@ public class GripApp extends javax.swing.JApplet {
 		recThroughCheck = new javax.swing.JCheckBox();
 		holeHeightLabel = new javax.swing.JLabel();
 		holeHeight = new javax.swing.JTextField();
+		finishPanel = new javax.swing.JInternalFrame();
+		fileLabel = new javax.swing.JLabel();
+		fileLocation = new javax.swing.JTextField();
+		submitFile = new javax.swing.JButton();
+		FileChooser = new javax.swing.JFileChooser();
+		recUnlockSetPanel = new javax.swing.JInternalFrame();
+		jLabel1 = new javax.swing.JLabel();
+		jLabel2 = new javax.swing.JLabel();
+		jLabel3 = new javax.swing.JLabel();
+		jLabel4 = new javax.swing.JLabel();
+		loutULRec = new javax.swing.JTextField();
+		widthUL = new javax.swing.JTextField();
+		heightUL = new javax.swing.JTextField();
+		angleULRec = new javax.swing.JTextField();
+		leftyULRec = new javax.swing.JCheckBox();
+		submitULRec = new javax.swing.JButton();
+		extrusionPanel = new javax.swing.JInternalFrame();
+		ExtensionLabel = new javax.swing.JLabel();
+		extensionBox = new javax.swing.JComboBox();
+		chooseExtension = new javax.swing.JButton();
+		cylLSetPanel = new javax.swing.JInternalFrame();
+		diameterLLabel = new javax.swing.JLabel();
+		loutLCylLabel = new javax.swing.JLabel();
+		linCylLabel = new javax.swing.JLabel();
+		loutLCyl = new javax.swing.JTextField();
+		diameterL = new javax.swing.JTextField();
+		linCyl = new javax.swing.JTextField();
+		leftyLCyl = new javax.swing.JCheckBox();
+		submitLCyl = new javax.swing.JButton();
+		cylHoleSetPanel = new javax.swing.JInternalFrame();
+		holeDiameterLabel = new javax.swing.JLabel();
+		cylHoleLinLabel = new javax.swing.JLabel();
+		cylHoleLin = new javax.swing.JTextField();
+		holeDiameter = new javax.swing.JTextField();
+		leftyCylHole = new javax.swing.JCheckBox();
+		submitCylHole = new javax.swing.JButton();
+		cylThroughCheck = new javax.swing.JCheckBox();
 
 		gripPanel();
-
-		// extrusionPanel();
-		//
-		// recULSetPanel();
-		//
-		// recLSetPanel();
-		//
-		// cylLSetPanel();
-		//
-		// cylULSetPanel();
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
@@ -287,116 +275,15 @@ public class GripApp extends javax.swing.JApplet {
 						.addGap(0, 79, Short.MAX_VALUE)));
 	}// </editor-fold>//GEN-END:initComponents
 
-	protected void fileLocationActionPerformed(ActionEvent evt) {
-		gripFab.filename = fileLocation.getText();
-	}
-
-	protected void loutULCylActionPerformed(ActionEvent evt) {
-		gripFab.lout = Double.parseDouble(loutULCyl.getText());
-	}
-
-	protected void loutLCylActionPerformed(ActionEvent evt) {
-		gripFab.lout = Double.parseDouble(loutLCyl.getText());
-	}
-
-	protected void widthLActionPerformed(ActionEvent evt) {
-		gripFab.width = Double.parseDouble(widthL.getText());
-	}
-
-	protected void loutLRecActionPerformed(ActionEvent evt) {
-		gripFab.lout = Double.parseDouble(loutLRec.getText());
-	}
-
-	protected void extensionBoxActionPerformed(ActionEvent evt) {
-		gripFab.position = (String) extensionBox.getSelectedItem();
-	}
-
-	protected void gripsBoxActionPerformed(ActionEvent evt) {
-		gripFab.stlTitle = (String) gripsBox.getSelectedItem();
-	}
-
-	protected void widthULActionPerformed(ActionEvent evt) {
-		gripFab.width = Double.parseDouble(widthUL.getText());
-	}
-
-	protected void loutULRecActionPerformed(ActionEvent evt) {
-		gripFab.lout = Double.parseDouble(loutULRec.getText());
-	}
-
-	protected void heightULActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.height = Double.parseDouble(heightUL.getText());
-	}
-
-	protected void angleULRecActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.angle = Double.parseDouble(angleULRec.getText());
-	}
-
-	protected void leftyULRecActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.lefty = leftyULRec.isSelected();
-	}
-
-	protected void heightLActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.height = Double.parseDouble(heightL.getText());
-	}
-
-	protected void linRecActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.lin = Double.parseDouble(linRec.getText());
-	}
-
-	protected void leftyLRecActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.lefty = leftyLRec.isSelected();
-	}
-
-	protected void diameterLActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.diameter = Double.parseDouble(diameterL.getText());
-	}
-
-	protected void linCylActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.lin = Double.parseDouble(linCyl.getText());
-	}
-
-	protected void leftyLCylActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.lefty = leftyLCyl.isSelected();
-	}
-
-	protected void diameterULActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.diameter = Double.parseDouble(diameterUL.getText());
-	}
-
-	protected void angleCylActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.angle = Double.parseDouble(angleCyl.getText());
-	}
-
-	protected void leftyCylULActionPerformed(java.awt.event.ActionEvent evt) {
-		gripFab.lefty = leftyCylUL.isSelected();
-	}
-
-	protected void extensionBoxBActionPerformed(ActionEvent evt) {
-		gripFab.position = (String) extensionBoxB.getSelectedItem();
-	}
-
 	protected void cylThroughCheckActionPerformed(ActionEvent evt) {
 		if (cylThroughCheck.isSelected()) {
 			cylHoleLin.setText("60");
 			cylHoleLin.setEditable(false);
 			gripFab.lin = 60.0;
 		}
-	}
-
-	protected void leftyCylHoleActionPerformed(ActionEvent evt) {
-		gripFab.lefty = leftyCylHole.isSelected();
-	}
-
-	protected void holeDiameterActionPerformed(ActionEvent evt) {
-		gripFab.diameter = Double.parseDouble(holeDiameter.getText());
-	}
-
-	protected void recHoleLinCheckActionPerformed(ActionEvent evt) {
-		gripFab.lin = Double.parseDouble(recHoleLin.getText());
-	}
-
-	protected void holeHeightActionPerformed(ActionEvent evt) {
-		gripFab.height = Double.parseDouble(holeHeight.getText());
+		else{
+			cylHoleLin.setEditable(true);
+		}
 	}
 
 	protected void recThroughCheckActionPerformed(ActionEvent evt) {
@@ -405,30 +292,24 @@ public class GripApp extends javax.swing.JApplet {
 			recHoleLin.setEditable(false);
 			gripFab.lin = 60.0;
 		}
-	}
-
-	protected void leftyRecHoleActionPerformed(ActionEvent evt) {
-		gripFab.lefty = leftyRecHole.isSelected();
-	}
-
-	protected void holeWidthActionPerformed(ActionEvent evt) {
-		gripFab.width = Double.parseDouble(holeWidth.getText());
+		else{
+			recHoleLin.setEditable(true);
+		}
 	}
 
 	protected void chooseGripsActionPerformed(java.awt.event.ActionEvent evt)
 			throws GripNotFoundException {
 		gripFab.stlTitle = (String) gripsBox.getSelectedItem();
-		if (gripFab.stlTitle.equals("gripA.stl")){
+		if (gripFab.stlTitle.equals("gripA.stl")) {
 			extrusionPanel();
 			showStatus("gripA selected");
 		}
-		if (gripFab.stlTitle.equals("gripB.stl")){
+		if (gripFab.stlTitle.equals("gripB.stl")) {
 			extrusionPanelB();
 			showStatus("gripB selected");
-		}
-		else
+		} else
 			showStatus("gripnotfound");
-			//throw new GripNotFoundException();
+		// throw new GripNotFoundException();
 	}
 
 	protected void chooseExtensionActionPerformed(ActionEvent evt)
@@ -460,7 +341,24 @@ public class GripApp extends javax.swing.JApplet {
 		else
 			throw new PositionNotSupportedException();
 	}
-
+	
+	protected void submitRecHoleActionPerformed(ActionEvent evt) {
+		showStatus("submitting height...");
+		gripFab.height = Double.parseDouble(holeHeight.getText());
+		showStatus("submitting width...");
+		gripFab.width = Double.parseDouble(holeWidth.getText());
+		showStatus("submitting protrusion length...");
+		gripFab.lin = Double.parseDouble(recHoleLin.getText());
+		showStatus("submitting lefty...");
+		gripFab.lefty = leftyRecHole.isSelected();
+		showStatus("Altering unused settings...");
+		gripFab.angle = 0;
+		gripFab.diameter = 0;
+		gripFab.lout = 0;
+		showStatus("Settings Submitted: Please select File for printing");
+		finishPanel();
+	}
+	
 	protected void submitULRecActionPerformed(ActionEvent evt) {
 		showStatus("submitting height...");
 		gripFab.height = Double.parseDouble(heightUL.getText());
@@ -547,23 +445,6 @@ public class GripApp extends javax.swing.JApplet {
 		finishPanel();
 	}
 
-	protected void submitRecHoleCheckActionPerformed(ActionEvent evt) {
-		showStatus("submitting height...");
-		gripFab.height = Double.parseDouble(holeHeight.getText());
-		showStatus("submitting width...");
-		gripFab.width = Double.parseDouble(holeWidth.getText());
-		showStatus("submitting protrusion length...");
-		gripFab.lin = Double.parseDouble(recHoleLin.getText());
-		showStatus("submitting lefty...");
-		gripFab.lefty = leftyRecHole.isSelected();
-		showStatus("Altering unused settings...");
-		gripFab.angle = 0;
-		gripFab.diameter = 0;
-		gripFab.lout = 0;
-		showStatus("Settings Submitted: Please select File for printing");
-		finishPanel();
-	}
-
 	protected void submitFileActionPerformed(ActionEvent evt)
 			throws FileNotFoundException, PositionNotSupportedException,
 			invalidDiameterException, STLNotPresentException {
@@ -580,11 +461,6 @@ public class GripApp extends javax.swing.JApplet {
 		gripLabel.setText("Grip:");
 
 		gripsBox.setModel(new javax.swing.DefaultComboBoxModel(grips));
-		gripsBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				gripsBoxActionPerformed(evt);
-			}
-		});
 
 		chooseGrips.setText("Choose");
 		chooseGrips.addActionListener(new java.awt.event.ActionListener() {
@@ -592,11 +468,12 @@ public class GripApp extends javax.swing.JApplet {
 				try {
 					chooseGripsActionPerformed(evt);
 				} catch (GripNotFoundException e) {
-					showStatus("Grip option not found, faital code error.");
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
+
 		javax.swing.GroupLayout gripPanelLayout = new javax.swing.GroupLayout(
 				gripPanel.getContentPane());
 		gripPanel.getContentPane().setLayout(gripPanelLayout);
@@ -611,15 +488,10 @@ public class GripApp extends javax.swing.JApplet {
 										.addComponent(gripLabel)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												gripsBox,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												139,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
+										.addComponent(gripsBox, 0, 442,
 												Short.MAX_VALUE)
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(chooseGrips)
 										.addContainerGap()));
 		gripPanelLayout
@@ -629,7 +501,7 @@ public class GripApp extends javax.swing.JApplet {
 						.addGroup(
 								gripPanelLayout
 										.createSequentialGroup()
-										.addGap(52, 52, 52)
+										.addContainerGap()
 										.addGroup(
 												gripPanelLayout
 														.createParallelGroup(
@@ -642,8 +514,10 @@ public class GripApp extends javax.swing.JApplet {
 																javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(
 																chooseGrips))
-										.addContainerGap(60, Short.MAX_VALUE)));
-		Panel.addTab("Grip", gripPanel);// add gripPanel
+										.addContainerGap(309, Short.MAX_VALUE)));
+
+		Panel.addTab("Grip", gripPanel);
+		Panel.setSelectedIndex(Panel.indexOfTab("Grip"));
 	}
 
 	private void extrusionPanel() {
@@ -652,24 +526,9 @@ public class GripApp extends javax.swing.JApplet {
 		ExtensionLabel.setText("Extension:");
 
 		extensionBox.setModel(new javax.swing.DefaultComboBoxModel(extensions));
-		extensionBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				extensionBoxActionPerformed(evt);
-			}
-		});
 
 		chooseExtension.setText("Choose");
-		chooseExtension.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				try {
-					chooseExtensionActionPerformed(evt);
-				} catch (PositionNotSupportedException e) {
-					showStatus("Position Not Supported. Please choose a different position.");
-					e.printStackTrace();
-				}
-			}
-		});
-		// configure extrusion Panel
+
 		javax.swing.GroupLayout extrusionPanelLayout = new javax.swing.GroupLayout(
 				extrusionPanel.getContentPane());
 		extrusionPanel.getContentPane().setLayout(extrusionPanelLayout);
@@ -684,7 +543,7 @@ public class GripApp extends javax.swing.JApplet {
 										.addComponent(ExtensionLabel)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(extensionBox, 0, 108,
+										.addComponent(extensionBox, 0, 411,
 												Short.MAX_VALUE)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -697,41 +556,35 @@ public class GripApp extends javax.swing.JApplet {
 						.addGroup(
 								extrusionPanelLayout
 										.createSequentialGroup()
-										.addGap(50, 50, 50)
+										.addContainerGap()
 										.addGroup(
 												extrusionPanelLayout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																ExtensionLabel)
 														.addComponent(
 																extensionBox,
 																javax.swing.GroupLayout.PREFERRED_SIZE,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																ExtensionLabel)
-														.addComponent(
 																chooseExtension))
-										.addContainerGap(62, Short.MAX_VALUE)));
-		// ^configure Extrusion Panel
+										.addContainerGap(309, Short.MAX_VALUE)));
+
+		Panel.addTab("Extrusion", extrusionPanel);
 		Panel.remove(extrusionPanelB);
 		extenstionBTab = false;
-		Panel.addTab("Extrusion", extrusionPanel);
 		extenstionTab = true;
+		Panel.setSelectedIndex(Panel.indexOfTab("Extrusion"));
 	}
 
 	private void extrusionPanelB() {
-
 		extrusionPanelB.setVisible(true);
 
 		ExtensionLabelB.setText("Extension:");
 
-		extensionBoxB
-				.setModel(new javax.swing.DefaultComboBoxModel(extensionsB));
-		extensionBoxB.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				extensionBoxBActionPerformed(evt);
-			}
-		});
+		extensionBoxB.setModel(new javax.swing.DefaultComboBoxModel(extensionsB));
 
 		chooseExtensionB.setText("Choose");
 		chooseExtensionB.addActionListener(new java.awt.event.ActionListener() {
@@ -739,7 +592,7 @@ public class GripApp extends javax.swing.JApplet {
 				try {
 					chooseExtensionBActionPerformed(evt);
 				} catch (PositionNotSupportedException e) {
-					showStatus("Position chosen is not supported, Please try a different Position.");
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -759,8 +612,11 @@ public class GripApp extends javax.swing.JApplet {
 										.addComponent(ExtensionLabelB)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(extensionBoxB, 0, 108,
-												Short.MAX_VALUE)
+										.addComponent(
+												extensionBoxB,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												411,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(chooseExtensionB)
@@ -772,26 +628,27 @@ public class GripApp extends javax.swing.JApplet {
 						.addGroup(
 								extrusionPanelBLayout
 										.createSequentialGroup()
-										.addGap(50, 50, 50)
+										.addGap(12, 12, 12)
 										.addGroup(
 												extrusionPanelBLayout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																ExtensionLabelB)
 														.addComponent(
 																extensionBoxB,
 																javax.swing.GroupLayout.PREFERRED_SIZE,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																ExtensionLabelB)
-														.addComponent(
 																chooseExtensionB))
-										.addContainerGap(62, Short.MAX_VALUE)));
+										.addContainerGap(310, Short.MAX_VALUE)));
 
+		Panel.addTab("Extrusion", extrusionPanelB);
 		Panel.remove(extrusionPanel);
 		extenstionTab = false;
-		Panel.addTab("Extrusion", extrusionPanelB);
 		extenstionBTab = true;
+		Panel.setSelectedIndex(Panel.indexOfTab("Extrusion"));
 	}
 
 	private void recULSetPanel() {
@@ -806,39 +663,15 @@ public class GripApp extends javax.swing.JApplet {
 		jLabel4.setText("Angle:");
 
 		loutULRec.setText("000");
-		loutULRec.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				loutULRecActionPerformed(evt);
-			}
-		});
 
 		widthUL.setText("00");
-		widthUL.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				widthULActionPerformed(evt);
-			}
-		});
 
 		heightUL.setText("00");
-		heightUL.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				heightULActionPerformed(evt);
-			}
-		});
+		
 
 		angleULRec.setText("00");
-		angleULRec.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				angleULRecActionPerformed(evt);
-			}
-		});
 
 		leftyULRec.setText("Left handed");
-		leftyULRec.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				leftyULRecActionPerformed(evt);
-			}
-		});
 
 		submitULRec.setText("Submit");
 		submitULRec.addActionListener(new java.awt.event.ActionListener() {
@@ -846,7 +679,7 @@ public class GripApp extends javax.swing.JApplet {
 				submitULRecActionPerformed(evt);
 			}
 		});
-		// configure recULSetPanel
+
 		javax.swing.GroupLayout recUnlockSetPanelLayout = new javax.swing.GroupLayout(
 				recUnlockSetPanel.getContentPane());
 		recUnlockSetPanel.getContentPane().setLayout(recUnlockSetPanelLayout);
@@ -861,17 +694,20 @@ public class GripApp extends javax.swing.JApplet {
 										.addGroup(
 												recUnlockSetPanelLayout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(jLabel3)
-														.addComponent(
-																jLabel1,
 																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																jLabel2,
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																jLabel4,
-																javax.swing.GroupLayout.Alignment.TRAILING))
+														.addGroup(
+																recUnlockSetPanelLayout
+																		.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																		.addComponent(
+																				jLabel3)
+																		.addComponent(
+																				jLabel1,
+																				javax.swing.GroupLayout.Alignment.TRAILING)
+																		.addComponent(
+																				jLabel2,
+																				javax.swing.GroupLayout.Alignment.TRAILING))
+														.addComponent(jLabel4))
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(
@@ -896,18 +732,18 @@ public class GripApp extends javax.swing.JApplet {
 																						.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.LEADING)
 																						.addComponent(
-																								heightUL,
+																								angleULRec,
 																								javax.swing.GroupLayout.PREFERRED_SIZE,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
 																								javax.swing.GroupLayout.PREFERRED_SIZE)
 																						.addComponent(
-																								angleULRec,
+																								heightUL,
 																								javax.swing.GroupLayout.PREFERRED_SIZE,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
 																								javax.swing.GroupLayout.PREFERRED_SIZE))
-																		.addGap(36,
-																				36,
-																				36)
+																		.addGap(45,
+																				45,
+																				45)
 																		.addGroup(
 																				recUnlockSetPanelLayout
 																						.createParallelGroup(
@@ -916,7 +752,7 @@ public class GripApp extends javax.swing.JApplet {
 																								submitULRec)
 																						.addComponent(
 																								leftyULRec))))
-										.addContainerGap(11, Short.MAX_VALUE)));
+										.addContainerGap(305, Short.MAX_VALUE)));
 		recUnlockSetPanelLayout
 				.setVerticalGroup(recUnlockSetPanelLayout
 						.createParallelGroup(
@@ -953,8 +789,7 @@ public class GripApp extends javax.swing.JApplet {
 																javax.swing.GroupLayout.PREFERRED_SIZE,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGap(10, 10, 10)
 										.addGroup(
 												recUnlockSetPanelLayout
 														.createParallelGroup(
@@ -966,23 +801,27 @@ public class GripApp extends javax.swing.JApplet {
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.PREFERRED_SIZE))
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 										.addGroup(
 												recUnlockSetPanelLayout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(jLabel4)
+																javax.swing.GroupLayout.Alignment.LEADING)
 														.addComponent(
-																angleULRec,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																submitULRec))
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
-		// ^configure RecULSetPanel
+																submitULRec)
+														.addGroup(
+																recUnlockSetPanelLayout
+																		.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.BASELINE)
+																		.addComponent(
+																				jLabel4)
+																		.addComponent(
+																				angleULRec,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)))
+										.addContainerGap(213, Short.MAX_VALUE)));
+
+		Panel.addTab("Settings", recUnlockSetPanel);
 		Panel.remove(cylHoleSetPanel);
 		cylHoleTab = false;
 		Panel.remove(recHoleSetPanel);
@@ -993,8 +832,8 @@ public class GripApp extends javax.swing.JApplet {
 		recLTab = false;
 		Panel.remove(cylULSetPanel);
 		cylUlTab = false;
-		Panel.addTab("Settings", recUnlockSetPanel);
 		recULTab = true;
+		Panel.setSelectedIndex(Panel.indexOfTab("Settings"));
 	}
 
 	private void recLSetPanel() {
@@ -1009,39 +848,14 @@ public class GripApp extends javax.swing.JApplet {
 		linRecLabel.setText("Protrusion Length:");
 
 		loutLRec.setText("000");
-		loutLRec.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				loutLRecActionPerformed(evt);
-			}
-		});
 
 		widthL.setText("00");
-		widthL.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				widthLActionPerformed(evt);
-			}
-		});
 
 		heightL.setText("00");
-		heightL.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				heightLActionPerformed(evt);
-			}
-		});
 
 		linRec.setText("000");
-		linRec.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				linRecActionPerformed(evt);
-			}
-		});
 
 		leftyLRec.setText("Left handed");
-		leftyLRec.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				leftyLRecActionPerformed(evt);
-			}
-		});
 
 		submitLRec.setText("Submit");
 		submitLRec.addActionListener(new java.awt.event.ActionListener() {
@@ -1110,19 +924,19 @@ public class GripApp extends javax.swing.JApplet {
 																								javax.swing.GroupLayout.PREFERRED_SIZE,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
 																								javax.swing.GroupLayout.PREFERRED_SIZE))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				20,
-																				Short.MAX_VALUE)
+																		.addGap(38,
+																				38,
+																				38)
 																		.addGroup(
 																				recLocSetPanelLayout
 																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
+																								javax.swing.GroupLayout.Alignment.LEADING,
+																								false)
 																						.addComponent(
-																								leftyLRec)
+																								submitLRec)
 																						.addComponent(
-																								submitLRec))))
-										.addContainerGap(14, Short.MAX_VALUE)));
+																								leftyLRec))))
+										.addContainerGap(299, Short.MAX_VALUE)));
 		recLocSetPanelLayout
 				.setVerticalGroup(recLocSetPanelLayout
 						.createParallelGroup(
@@ -1190,6 +1004,7 @@ public class GripApp extends javax.swing.JApplet {
 										.addContainerGap(
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
+
 		Panel.remove(cylLSetPanel);
 		cylHoleTab = false;
 		Panel.remove(recHoleSetPanel);
@@ -1202,6 +1017,7 @@ public class GripApp extends javax.swing.JApplet {
 		cylUlTab = false;
 		Panel.addTab("Settings", recLocSetPanel);
 		recLTab = false;
+		Panel.setSelectedIndex(Panel.indexOfTab("Settings"));
 	}
 
 	private void cylLSetPanel() {
@@ -1214,32 +1030,12 @@ public class GripApp extends javax.swing.JApplet {
 		linCylLabel.setText("Protrusion Length:");
 
 		loutLCyl.setText("000");
-		loutLCyl.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				loutLCylActionPerformed(evt);
-			}
-		});
 
 		diameterL.setText("00");
-		diameterL.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				diameterLActionPerformed(evt);
-			}
-		});
-
-		linCyl.setText("000");
-		linCyl.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				linCylActionPerformed(evt);
-			}
-		});
+		
+		linCyl.setText("00");
 
 		leftyLCyl.setText("Left handed");
-		leftyLCyl.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				leftyLCylActionPerformed(evt);
-			}
-		});
 
 		submitLCyl.setText("Submit");
 		submitLCyl.addActionListener(new java.awt.event.ActionListener() {
@@ -1247,7 +1043,7 @@ public class GripApp extends javax.swing.JApplet {
 				submitLCylActionPerformed(evt);
 			}
 		});
-		// configure cylLSetPanelLayout
+
 		javax.swing.GroupLayout cylLSetPanelLayout = new javax.swing.GroupLayout(
 				cylLSetPanel.getContentPane());
 		cylLSetPanel.getContentPane().setLayout(cylLSetPanelLayout);
@@ -1258,20 +1054,33 @@ public class GripApp extends javax.swing.JApplet {
 						.addGroup(
 								cylLSetPanelLayout
 										.createSequentialGroup()
-										.addContainerGap()
 										.addGroup(
 												cylLSetPanelLayout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																diameterLLabel,
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																linCylLabel,
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																loutLCylLabel,
-																javax.swing.GroupLayout.Alignment.TRAILING))
+														.addGroup(
+																cylLSetPanelLayout
+																		.createSequentialGroup()
+																		.addGap(18,
+																				18,
+																				18)
+																		.addComponent(
+																				linCylLabel))
+														.addGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																cylLSetPanelLayout
+																		.createSequentialGroup()
+																		.addContainerGap()
+																		.addGroup(
+																				cylLSetPanelLayout
+																						.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								diameterLLabel,
+																								javax.swing.GroupLayout.Alignment.TRAILING)
+																						.addComponent(
+																								loutLCylLabel,
+																								javax.swing.GroupLayout.Alignment.TRAILING))))
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(
@@ -1281,49 +1090,54 @@ public class GripApp extends javax.swing.JApplet {
 														.addGroup(
 																cylLSetPanelLayout
 																		.createSequentialGroup()
+																		.addComponent(
+																				loutLCyl,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addContainerGap(
+																				426,
+																				Short.MAX_VALUE))
+														.addGroup(
+																cylLSetPanelLayout
+																		.createSequentialGroup()
 																		.addGroup(
 																				cylLSetPanelLayout
 																						.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.LEADING)
 																						.addComponent(
-																								loutLCyl,
+																								diameterL,
 																								javax.swing.GroupLayout.PREFERRED_SIZE,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
 																								javax.swing.GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								linCyl,
+																								javax.swing.GroupLayout.PREFERRED_SIZE,
+																								javax.swing.GroupLayout.DEFAULT_SIZE,
+																								javax.swing.GroupLayout.PREFERRED_SIZE))
+																		.addGap(45,
+																				45,
+																				45)
+																		.addGroup(
+																				cylLSetPanelLayout
+																						.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING)
 																						.addGroup(
 																								cylLSetPanelLayout
 																										.createSequentialGroup()
 																										.addComponent(
-																												diameterL,
-																												javax.swing.GroupLayout.PREFERRED_SIZE,
+																												submitLCyl)
+																										.addGap(0,
+																												0,
+																												Short.MAX_VALUE))
+																						.addGroup(
+																								cylLSetPanelLayout
+																										.createSequentialGroup()
+																										.addComponent(
+																												leftyLCyl)
+																										.addContainerGap(
 																												javax.swing.GroupLayout.DEFAULT_SIZE,
-																												javax.swing.GroupLayout.PREFERRED_SIZE)
-																										.addPreferredGap(
-																												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																												17,
-																												Short.MAX_VALUE)
-																										.addGroup(
-																												cylLSetPanelLayout
-																														.createParallelGroup(
-																																javax.swing.GroupLayout.Alignment.LEADING)
-																														.addComponent(
-																																leftyLCyl)
-																														.addComponent(
-																																submitLCyl))))
-																		.addContainerGap(
-																				24,
-																				Short.MAX_VALUE))
-														.addGroup(
-																cylLSetPanelLayout
-																		.createSequentialGroup()
-																		.addComponent(
-																				linCyl,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addContainerGap(
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)))));
+																												Short.MAX_VALUE)))))));
 		cylLSetPanelLayout
 				.setVerticalGroup(cylLSetPanelLayout
 						.createParallelGroup(
@@ -1347,56 +1161,37 @@ public class GripApp extends javax.swing.JApplet {
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(leftyLCyl))
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(
 												cylLSetPanelLayout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																cylLSetPanelLayout
-																		.createSequentialGroup()
-																		.addGap(69,
-																				69,
-																				69)
-																		.addComponent(
-																				submitLCyl)
-																		.addContainerGap(
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE))
-														.addGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																cylLSetPanelLayout
-																		.createSequentialGroup()
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				cylLSetPanelLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								loutLCylLabel)
-																						.addComponent(
-																								loutLCyl,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				cylLSetPanelLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								linCylLabel)
-																						.addComponent(
-																								linCyl,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE))
-																		.addGap(74,
-																				74,
-																				74)))));
-		// ^configure cylLSetPanel
+																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																loutLCylLabel)
+														.addComponent(
+																loutLCyl,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(
+												cylLSetPanelLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																linCylLabel)
+														.addComponent(
+																linCyl,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																submitLCyl))
+										.addGap(74, 251, Short.MAX_VALUE)));
+
+		Panel.addTab("Settings", cylLSetPanel);
 		Panel.remove(recLocSetPanel);
 		recLTab = false;
 		Panel.remove(recUnlockSetPanel);
@@ -1407,8 +1202,8 @@ public class GripApp extends javax.swing.JApplet {
 		recHoleTab = false;
 		Panel.remove(cylHoleSetPanel);
 		cylHoleTab = false;
-		Panel.addTab("Settings", cylLSetPanel);
 		cylLTab = true;
+		Panel.setSelectedIndex(Panel.indexOfTab("Settings"));
 	}
 
 	private void cylHoleSetPanel() {
@@ -1421,19 +1216,9 @@ public class GripApp extends javax.swing.JApplet {
 		cylHoleLin.setText("00");
 
 		holeDiameter.setText("00");
-		holeDiameter.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				holeDiameterActionPerformed(evt);
-			}
-		});
 
 		leftyCylHole.setText("left handed");
-		leftyCylHole.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				leftyCylHoleActionPerformed(evt);
-			}
-		});
-
+		
 		submitCylHole.setText("Submit");
 		submitCylHole.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1464,46 +1249,53 @@ public class GripApp extends javax.swing.JApplet {
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.TRAILING)
 														.addComponent(
-																cylThroughCheck)
+																holeDiameterLabel)
+														.addComponent(
+																cylHoleLinLabel))
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(
+												cylHoleSetPanelLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING)
 														.addGroup(
 																cylHoleSetPanelLayout
 																		.createSequentialGroup()
-																		.addGroup(
-																				cylHoleSetPanelLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING)
-																						.addComponent(
-																								holeDiameterLabel)
-																						.addComponent(
-																								cylHoleLinLabel))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addComponent(
+																				holeDiameter,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addGap(45,
+																				45,
+																				45)
+																		.addComponent(
+																				leftyCylHole)
+																		.addContainerGap(
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE))
+														.addGroup(
+																cylHoleSetPanelLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				cylHoleLin,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addGap(45,
+																				45,
+																				45)
 																		.addGroup(
 																				cylHoleSetPanelLayout
 																						.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.LEADING)
 																						.addComponent(
-																								holeDiameter,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
+																								submitCylHole)
 																						.addComponent(
-																								cylHoleLin,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE))))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-												35, Short.MAX_VALUE)
-										.addGroup(
-												cylHoleSetPanelLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																leftyCylHole)
-														.addComponent(
-																submitCylHole))
-										.addContainerGap()));
+																								cylThroughCheck))
+																		.addGap(317,
+																				317,
+																				317)))));
 		cylHoleSetPanelLayout
 				.setVerticalGroup(cylHoleSetPanelLayout
 						.createParallelGroup(
@@ -1515,16 +1307,21 @@ public class GripApp extends javax.swing.JApplet {
 										.addGroup(
 												cylHoleSetPanelLayout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
+																javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(
+																cylHoleSetPanelLayout
+																		.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.BASELINE)
+																		.addComponent(
+																				holeDiameterLabel)
+																		.addComponent(
+																				holeDiameter,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				javax.swing.GroupLayout.PREFERRED_SIZE))
 														.addComponent(
-																holeDiameterLabel)
-														.addComponent(
-																holeDiameter,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																leftyCylHole))
+																leftyCylHole,
+																javax.swing.GroupLayout.Alignment.TRAILING))
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(
@@ -1539,11 +1336,13 @@ public class GripApp extends javax.swing.JApplet {
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																submitCylHole))
+																cylThroughCheck))
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(cylThroughCheck)
-										.addContainerGap(42, Short.MAX_VALUE)));
+										.addComponent(submitCylHole)
+										.addContainerGap(251, Short.MAX_VALUE)));
+
+		Panel.addTab("Settings", cylHoleSetPanel);
 		Panel.remove(recLocSetPanel);
 		recLTab = false;
 		Panel.remove(recUnlockSetPanel);
@@ -1554,8 +1353,8 @@ public class GripApp extends javax.swing.JApplet {
 		recHoleTab = false;
 		Panel.remove(cylLSetPanel);
 		cylLTab = false;
-		Panel.addTab("Settings", cylHoleSetPanel);
 		cylHoleTab = true;
+		Panel.setSelectedIndex(Panel.indexOfTab("Settings"));
 	}
 
 	private void recHoleSetPanel() {
@@ -1566,30 +1365,15 @@ public class GripApp extends javax.swing.JApplet {
 		recHoleLinLabel.setText("Protrusion Length:");
 
 		recHoleLin.setText("00");
-		recHoleLin.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				recHoleLinCheckActionPerformed(evt);
-			}
-		});
 
 		holeWidth.setText("00");
-		holeWidth.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				holeWidthActionPerformed(evt);
-			}
-		});
 
 		leftyRecHole.setText("left handed");
-		leftyRecHole.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				leftyRecHoleActionPerformed(evt);
-			}
-		});
 
 		submitRecHole.setText("Submit");
 		submitRecHole.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				submitRecHoleCheckActionPerformed(evt);
+				submitRecHoleActionPerformed(evt);
 			}
 		});
 
@@ -1603,11 +1387,6 @@ public class GripApp extends javax.swing.JApplet {
 		holeHeightLabel.setText("Height:");
 
 		holeHeight.setText("00");
-		holeHeight.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				holeHeightActionPerformed(evt);
-			}
-		});
 
 		javax.swing.GroupLayout recHoleSetPanelLayout = new javax.swing.GroupLayout(
 				recHoleSetPanel.getContentPane());
@@ -1660,18 +1439,16 @@ public class GripApp extends javax.swing.JApplet {
 																								javax.swing.GroupLayout.PREFERRED_SIZE,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
 																								javax.swing.GroupLayout.PREFERRED_SIZE))))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-												35, Short.MAX_VALUE)
+										.addGap(45, 45, 45)
 										.addGroup(
 												recHoleSetPanelLayout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.LEADING)
 														.addComponent(
-																submitRecHole)
+																leftyRecHole)
 														.addComponent(
-																leftyRecHole))
-										.addContainerGap()));
+																submitRecHole))
+										.addContainerGap(301, Short.MAX_VALUE)));
 		recHoleSetPanelLayout
 				.setVerticalGroup(recHoleSetPanelLayout
 						.createParallelGroup(
@@ -1723,7 +1500,9 @@ public class GripApp extends javax.swing.JApplet {
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(recThroughCheck)
-										.addContainerGap(11, Short.MAX_VALUE)));
+										.addContainerGap(221, Short.MAX_VALUE)));
+
+		Panel.addTab("Settings", recHoleSetPanel);
 		Panel.remove(recLocSetPanel);
 		recLTab = false;
 		Panel.remove(recUnlockSetPanel);
@@ -1734,12 +1513,11 @@ public class GripApp extends javax.swing.JApplet {
 		cylHoleTab = false;
 		Panel.remove(cylLSetPanel);
 		cylLTab = false;
-		Panel.addTab("Settings", recHoleSetPanel);
 		recHoleTab = true;
+		Panel.setSelectedIndex(Panel.indexOfTab("Settings"));
 	}
 
 	private void cylULSetPanel() {
-
 		cylULSetPanel.setVisible(true);
 
 		diameterULLabel.setText("Diameter:");
@@ -1749,32 +1527,12 @@ public class GripApp extends javax.swing.JApplet {
 		angleCylLabel.setText("Angle:");
 
 		loutULCyl.setText("000");
-		loutULCyl.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				loutULCylActionPerformed(evt);
-			}
-		});
 
 		diameterUL.setText("00");
-		diameterUL.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				diameterULActionPerformed(evt);
-			}
-		});
 
 		angleCyl.setText("00");
-		angleCyl.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				angleCylActionPerformed(evt);
-			}
-		});
 
 		leftyCylUL.setText("Left handed");
-		leftyCylUL.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				leftyCylULActionPerformed(evt);
-			}
-		});
 
 		submitULCyl.setText("Submit");
 		submitULCyl.addActionListener(new java.awt.event.ActionListener() {
@@ -1782,7 +1540,7 @@ public class GripApp extends javax.swing.JApplet {
 				submitULCylActionPerformed(evt);
 			}
 		});
-		// configure cylUlSetPanel
+
 		javax.swing.GroupLayout cylULSetPanelLayout = new javax.swing.GroupLayout(
 				cylULSetPanel.getContentPane());
 		cylULSetPanel.getContentPane().setLayout(cylULSetPanelLayout);
@@ -1793,20 +1551,6 @@ public class GripApp extends javax.swing.JApplet {
 						.addGroup(
 								cylULSetPanelLayout
 										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												cylULSetPanelLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																diameterULLabel)
-														.addComponent(
-																angleCylLabel)
-														.addComponent(
-																loutCylULLabel)
-														.addComponent(jLabel5))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(
 												cylULSetPanelLayout
 														.createParallelGroup(
@@ -1814,49 +1558,57 @@ public class GripApp extends javax.swing.JApplet {
 														.addGroup(
 																cylULSetPanelLayout
 																		.createSequentialGroup()
+																		.addGap(54,
+																				54,
+																				54)
 																		.addGroup(
 																				cylULSetPanelLayout
 																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
+																								javax.swing.GroupLayout.Alignment.TRAILING)
 																						.addComponent(
-																								loutULCyl,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addGroup(
-																								cylULSetPanelLayout
-																										.createSequentialGroup()
-																										.addComponent(
-																												diameterUL,
-																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																												javax.swing.GroupLayout.DEFAULT_SIZE,
-																												javax.swing.GroupLayout.PREFERRED_SIZE)
-																										.addPreferredGap(
-																												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																												20,
-																												Short.MAX_VALUE)
-																										.addGroup(
-																												cylULSetPanelLayout
-																														.createParallelGroup(
-																																javax.swing.GroupLayout.Alignment.LEADING)
-																														.addComponent(
-																																leftyCylUL)
-																														.addComponent(
-																																submitULCyl))))
-																		.addContainerGap(
-																				27,
-																				Short.MAX_VALUE))
+																								angleCylLabel)
+																						.addComponent(
+																								jLabel5)
+																						.addComponent(
+																								diameterULLabel)))
 														.addGroup(
 																cylULSetPanelLayout
 																		.createSequentialGroup()
+																		.addContainerGap()
 																		.addComponent(
-																				angleCyl,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addContainerGap(
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)))));
+																				loutCylULLabel)))
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(
+												cylULSetPanelLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(
+																diameterUL,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																loutULCyl,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																angleCyl,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGap(38, 38, 38)
+										.addGroup(
+												cylULSetPanelLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.LEADING,
+																false)
+														.addComponent(
+																submitULCyl)
+														.addComponent(
+																leftyCylUL))
+										.addContainerGap(305, Short.MAX_VALUE)));
 		cylULSetPanelLayout
 				.setVerticalGroup(cylULSetPanelLayout
 						.createParallelGroup(
@@ -1875,68 +1627,51 @@ public class GripApp extends javax.swing.JApplet {
 																16,
 																javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(
+																leftyCylUL)
+														.addComponent(
 																diameterUL,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(
+												cylULSetPanelLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																loutCylULLabel)
+														.addComponent(
+																loutULCyl,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(
+												cylULSetPanelLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																angleCylLabel)
+														.addComponent(
+																angleCyl,
 																javax.swing.GroupLayout.PREFERRED_SIZE,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																leftyCylUL))
-										.addGroup(
-												cylULSetPanelLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																cylULSetPanelLayout
-																		.createSequentialGroup()
-																		.addGap(69,
-																				69,
-																				69)
-																		.addComponent(
-																				submitULCyl)
-																		.addContainerGap(
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE))
-														.addGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																cylULSetPanelLayout
-																		.createSequentialGroup()
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)
-																		.addGroup(
-																				cylULSetPanelLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								loutCylULLabel)
-																						.addComponent(
-																								loutULCyl,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				cylULSetPanelLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								angleCylLabel)
-																						.addComponent(
-																								angleCyl,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				jLabel5)
-																		.addGap(51,
-																				51,
-																				51)))));
-		// ^Configure cylUlSetPanel
+																submitULCyl))
+										.addContainerGap(251, Short.MAX_VALUE))
+						.addGroup(
+								javax.swing.GroupLayout.Alignment.TRAILING,
+								cylULSetPanelLayout
+										.createSequentialGroup()
+										.addContainerGap(
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addComponent(jLabel5)
+										.addGap(51, 51, 51)));
+
 		Panel.remove(cylHoleSetPanel);
 		cylHoleTab = false;
 		Panel.remove(recHoleSetPanel);
@@ -1949,6 +1684,7 @@ public class GripApp extends javax.swing.JApplet {
 		recULTab = false;
 		Panel.addTab("Settings", cylULSetPanel);
 		cylUlTab = true;
+		Panel.setSelectedIndex(Panel.indexOfTab("Settings"));
 	}
 
 	private void finishPanel() {
@@ -1957,11 +1693,6 @@ public class GripApp extends javax.swing.JApplet {
 		fileLabel.setText("File:");
 
 		fileLocation.setText("file location");
-		fileLocation.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				fileLocationActionPerformed(evt);
-			}
-		});
 
 		submitFile.setText("Finish");
 		submitFile.addActionListener(new java.awt.event.ActionListener() {
@@ -1969,20 +1700,24 @@ public class GripApp extends javax.swing.JApplet {
 				try {
 					submitFileActionPerformed(evt);
 				} catch (FileNotFoundException e) {
-					showStatus("File Not found error");
+					showStatus("File not found error");
 					e.printStackTrace();
 				} catch (PositionNotSupportedException e) {
-					showStatus("Position Was not Supported please choose new position.");
+					showStatus("Position Was not supported, how did you even get this button?");
 					e.printStackTrace();
 				} catch (invalidDiameterException e) {
-					showStatus("Diameter was not supported, please reset diameter.");
+					showStatus("invalid diameter, how did you get this button?");
 					e.printStackTrace();
 				} catch (STLNotPresentException e) {
-					showStatus("STL not present, check folders or select new STL");
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
+
+		FileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+		FileChooser.setCurrentDirectory(new java.io.File(
+				"C:\\Users\\Megan\\Desktop\\LittlefootPrints"));
 
 		javax.swing.GroupLayout finishPanelLayout = new javax.swing.GroupLayout(
 				finishPanel.getContentPane());
@@ -1994,15 +1729,14 @@ public class GripApp extends javax.swing.JApplet {
 						.addGroup(
 								finishPanelLayout
 										.createSequentialGroup()
-										.addContainerGap()
 										.addGroup(
 												finishPanelLayout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.LEADING)
 														.addGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
 																finishPanelLayout
 																		.createSequentialGroup()
+																		.addContainerGap()
 																		.addComponent(
 																				fileLabel)
 																		.addPreferredGap(
@@ -2011,18 +1745,17 @@ public class GripApp extends javax.swing.JApplet {
 																				fileLocation,
 																				javax.swing.GroupLayout.PREFERRED_SIZE,
 																				224,
-																				javax.swing.GroupLayout.PREFERRED_SIZE))
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addComponent(
+																				submitFile))
 														.addComponent(
-																submitFile,
-																javax.swing.GroupLayout.Alignment.TRAILING))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												jFileChooser1,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap()));
+																FileChooser,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																581,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGap(408, 408, 408)));
 		finishPanelLayout
 				.setVerticalGroup(finishPanelLayout
 						.createParallelGroup(
@@ -2030,7 +1763,7 @@ public class GripApp extends javax.swing.JApplet {
 						.addGroup(
 								finishPanelLayout
 										.createSequentialGroup()
-										.addGap(47, 47, 47)
+										.addContainerGap()
 										.addGroup(
 												finishPanelLayout
 														.createParallelGroup(
@@ -2040,28 +1773,22 @@ public class GripApp extends javax.swing.JApplet {
 																fileLocation,
 																javax.swing.GroupLayout.PREFERRED_SIZE,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(submitFile)
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE))
-						.addGroup(
-								javax.swing.GroupLayout.Alignment.TRAILING,
-								finishPanelLayout
-										.createSequentialGroup()
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																submitFile))
+										.addGap(18, 18, 18)
 										.addComponent(
-												jFileChooser1,
+												FileChooser,
 												javax.swing.GroupLayout.PREFERRED_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
+												288,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap()));
+										.addContainerGap(
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
 
 		Panel.addTab("Finish", finishPanel);
+		Panel.setSelectedIndex(Panel.indexOfTab("Finish"));
+
 	}
 
 }
