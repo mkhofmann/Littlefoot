@@ -1,4 +1,5 @@
 
+
 public class PositionNotSupportedException extends Exception{
 
 	public PositionNotSupportedException() {
