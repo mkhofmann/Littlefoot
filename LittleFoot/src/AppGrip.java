@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 
-
-
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
-
+import java.io.IOException;
 
 /**
  * 
@@ -16,15 +14,18 @@ import java.io.FileNotFoundException;
  */
 public class AppGrip extends javax.swing.JApplet {
 	// my variables
-	private String[] gripList = { "gripA.stl", "gripB.stl" };
+	private String[] gripList = { "contracture" };
 	private String[] extensions = { "Protruded Cylinder Hole",
 			"Protruded Rectangular Hole", "Angled Cylinder Barrel",
-			"Angled Rectangular Barrel" };
-	private String[] extensionsB = { "Straight Cylinder Barrel",
+			"Angled Rectangular Barrel", "Straight Cylinder Barrel",
 			"Straight Rectangular Barrel" };
 	private GripFab gripFab = new GripFab();
+
+	private boolean writingProfile = false;
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JTabbedPane Panel;
+	private javax.swing.JTextField alterFile;
+	private javax.swing.ButtonGroup buttonGroup1;
 	private javax.swing.JPanel cH;
 	private javax.swing.JTextField cHDiameter;
 	private javax.swing.JCheckBox cHLefty;
@@ -41,15 +42,12 @@ public class AppGrip extends javax.swing.JApplet {
 	private javax.swing.JCheckBox cULefty;
 	private javax.swing.JTextField cULout;
 	private javax.swing.JButton chooseExtension;
-	private javax.swing.JButton chooseExtensionB;
 	private javax.swing.JButton chooseGrip;
 	private javax.swing.JPanel eA;
-	private javax.swing.JPanel eB;
-	private javax.swing.JComboBox extensionBBox;
 	private javax.swing.JComboBox extensionsBox;
 	private javax.swing.JFileChooser fileChooser;
-	private javax.swing.JTextField fileLocation;
 	private javax.swing.JPanel finish;
+	private javax.swing.JPanel finishProfile;
 	private javax.swing.JComboBox gripBox;
 	private javax.swing.JPanel grips;
 	private javax.swing.JLabel jLabel1;
@@ -61,7 +59,10 @@ public class AppGrip extends javax.swing.JApplet {
 	private javax.swing.JLabel jLabel15;
 	private javax.swing.JLabel jLabel16;
 	private javax.swing.JLabel jLabel17;
-	private javax.swing.JLabel jLabel2;
+	private javax.swing.JLabel jLabel18;
+	private javax.swing.JLabel jLabel19;
+	private javax.swing.JLabel jLabel20;
+	private javax.swing.JLabel jLabel21;
 	private javax.swing.JLabel jLabel22;
 	private javax.swing.JLabel jLabel23;
 	private javax.swing.JLabel jLabel24;
@@ -70,12 +71,16 @@ public class AppGrip extends javax.swing.JApplet {
 	private javax.swing.JLabel jLabel27;
 	private javax.swing.JLabel jLabel29;
 	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
 	private javax.swing.JLabel jLabel5;
 	private javax.swing.JLabel jLabel6;
 	private javax.swing.JLabel jLabel7;
 	private javax.swing.JLabel jLabel8;
 	private javax.swing.JLabel jLabel9;
+	private javax.swing.JRadioButton newCheck;
+	private javax.swing.JTextField profile;
+	private javax.swing.JRadioButton profileCheck;
+	private javax.swing.JFileChooser profileChooser;
+	private javax.swing.JFileChooser profileLocChooser;
 	private javax.swing.JPanel rH;
 	private javax.swing.JTextField rHHeight;
 	private javax.swing.JCheckBox rHLefty;
@@ -94,13 +99,23 @@ public class AppGrip extends javax.swing.JApplet {
 	private javax.swing.JCheckBox rULefty;
 	private javax.swing.JTextField rULout;
 	private javax.swing.JTextField rUWidth;
+	private javax.swing.JCheckBox saveModel;
+	private javax.swing.JCheckBox saveProfile;
+	private javax.swing.JRadioButton savedCheck;
 	private javax.swing.JButton submitCH;
+	private javax.swing.JButton submitCHP;
 	private javax.swing.JButton submitCL;
+	private javax.swing.JButton submitCLP;
 	private javax.swing.JButton submitCU;
+	private javax.swing.JButton submitCUP;
 	private javax.swing.JButton submitFile;
+	private javax.swing.JButton submitProfile;
 	private javax.swing.JButton submitRH;
+	private javax.swing.JButton submitRHP;
 	private javax.swing.JButton submitRL;
+	private javax.swing.JButton submitRLP;
 	private javax.swing.JButton submitRU;
+	private javax.swing.JButton submitRUP;
 
 	// End of variables declaration//GEN-END:variables
 	/**
@@ -163,15 +178,23 @@ public class AppGrip extends javax.swing.JApplet {
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
+		buttonGroup1 = new javax.swing.ButtonGroup();
 		Panel = new javax.swing.JTabbedPane();
 		grips = new javax.swing.JPanel();
 		jLabel1 = new javax.swing.JLabel();
 		gripBox = new javax.swing.JComboBox();
 		chooseGrip = new javax.swing.JButton();
-		eB = new javax.swing.JPanel();
-		jLabel2 = new javax.swing.JLabel();
-		extensionBBox = new javax.swing.JComboBox();
-		chooseExtensionB = new javax.swing.JButton();
+		jLabel18 = new javax.swing.JLabel();
+		jLabel19 = new javax.swing.JLabel();
+		jLabel20 = new javax.swing.JLabel();
+		jLabel21 = new javax.swing.JLabel();
+		alterFile = new javax.swing.JTextField();
+		profile = new javax.swing.JTextField();
+		profileChooser = new javax.swing.JFileChooser();
+		newCheck = new javax.swing.JRadioButton();
+		profileCheck = new javax.swing.JRadioButton();
+		savedCheck = new javax.swing.JRadioButton();
+		new javax.swing.JLabel();
 		cH = new javax.swing.JPanel();
 		jLabel5 = new javax.swing.JLabel();
 		jLabel6 = new javax.swing.JLabel();
@@ -180,11 +203,11 @@ public class AppGrip extends javax.swing.JApplet {
 		cHThrough = new javax.swing.JCheckBox();
 		cHLefty = new javax.swing.JCheckBox();
 		submitCH = new javax.swing.JButton();
+		submitCHP = new javax.swing.JButton();
 		finish = new javax.swing.JPanel();
-		jLabel4 = new javax.swing.JLabel();
-		fileLocation = new javax.swing.JTextField();
 		submitFile = new javax.swing.JButton();
 		fileChooser = new javax.swing.JFileChooser();
+		saveProfile = new javax.swing.JCheckBox();
 		eA = new javax.swing.JPanel();
 		jLabel3 = new javax.swing.JLabel();
 		extensionsBox = new javax.swing.JComboBox();
@@ -199,6 +222,7 @@ public class AppGrip extends javax.swing.JApplet {
 		submitRH = new javax.swing.JButton();
 		jLabel9 = new javax.swing.JLabel();
 		rHWidth = new javax.swing.JTextField();
+		submitRHP = new javax.swing.JButton();
 		rL = new javax.swing.JPanel();
 		jLabel10 = new javax.swing.JLabel();
 		jLabel11 = new javax.swing.JLabel();
@@ -210,6 +234,7 @@ public class AppGrip extends javax.swing.JApplet {
 		rLWidth = new javax.swing.JTextField();
 		jLabel13 = new javax.swing.JLabel();
 		rLLout = new javax.swing.JTextField();
+		submitRLP = new javax.swing.JButton();
 		cL = new javax.swing.JPanel();
 		jLabel14 = new javax.swing.JLabel();
 		jLabel15 = new javax.swing.JLabel();
@@ -220,6 +245,7 @@ public class AppGrip extends javax.swing.JApplet {
 		jLabel16 = new javax.swing.JLabel();
 		jLabel17 = new javax.swing.JLabel();
 		cLLout = new javax.swing.JTextField();
+		submitCLP = new javax.swing.JButton();
 		rU = new javax.swing.JPanel();
 		jLabel22 = new javax.swing.JLabel();
 		jLabel23 = new javax.swing.JLabel();
@@ -231,6 +257,7 @@ public class AppGrip extends javax.swing.JApplet {
 		rUWidth = new javax.swing.JTextField();
 		jLabel25 = new javax.swing.JLabel();
 		rULout = new javax.swing.JTextField();
+		submitRUP = new javax.swing.JButton();
 		cU = new javax.swing.JPanel();
 		jLabel26 = new javax.swing.JLabel();
 		jLabel27 = new javax.swing.JLabel();
@@ -240,7 +267,11 @@ public class AppGrip extends javax.swing.JApplet {
 		submitCU = new javax.swing.JButton();
 		jLabel29 = new javax.swing.JLabel();
 		cULout = new javax.swing.JTextField();
-
+		submitCUP = new javax.swing.JButton();
+		finishProfile = new javax.swing.JPanel();
+		profileLocChooser = new javax.swing.JFileChooser();
+		saveModel = new javax.swing.JCheckBox();
+		submitProfile = new javax.swing.JButton();
 		grips();
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
@@ -254,9 +285,9 @@ public class AppGrip extends javax.swing.JApplet {
 
 	private void cHThroughActionPerformed(java.awt.event.ActionEvent evt) {
 		if (cHThrough.isSelected()) {
-			cHLin.setText("60");
+			cHLin.setText("70");
 			cHLin.setEditable(false);
-			gripFab.lin = 60.0;
+			gripFab.lin = 70.0;
 		} else {
 			cHLin.setEditable(true);
 		}
@@ -264,9 +295,9 @@ public class AppGrip extends javax.swing.JApplet {
 
 	private void rHThroughActionPerformed(java.awt.event.ActionEvent evt) {
 		if (rHThrough.isSelected()) {
-			rHLin.setText("60");
+			rHLin.setText("70");
 			rHLin.setEditable(false);
-			gripFab.lin = 60.0;
+			gripFab.lin = 70.0;
 		} else {
 			rHLin.setEditable(true);
 		}
@@ -274,17 +305,68 @@ public class AppGrip extends javax.swing.JApplet {
 
 	protected void chooseGripActionPerformed(ActionEvent evt)
 			throws GripNotFoundException {
-		gripFab.stlTitle = (String) gripBox.getSelectedItem();
-		if (gripFab.stlTitle.equals("gripA.stl")) {
-			eA();
-			showStatus("gripA selected");
-		}
-		if (gripFab.stlTitle.equals("gripB.stl")) {
-			eB();
-			showStatus("gripB selected");
+		if (newCheck.isSelected()) {
+			gripFab.stlTitle = gripBox.getSelectedItem() + ".stl";
+			if (gripFab.stlTitle.equals("contracture.stl")) {
+				eA();
+				showStatus("contrature selected");
+			} else
+				throw new GripNotFoundException();
+		} else if (profileCheck.isSelected()) {
+			try {
+				gripFab.readProfile(profileChooser.getSelectedFile());
+				if (gripFab.position.equals("Protruded Cylinder Hole"))
+					cH();
+				else if (gripFab.position.equals("Protruded Rectangular Hole"))
+					rH();
+				else if (gripFab.position.equals("Angled Cylinder Barrel"))
+					cU();
+				else if (gripFab.position.equals("Angled Rectangular Barrel"))
+					rU();
+				else if (gripFab.position.equals("Straight Cylinder Barrel"))
+					cL();
+				else if (gripFab.position.equals("Straight Rectangular Barrel"))
+					rL();
+				else
+					throw new PositionNotSupportedException();
+				showStatus("profile selected");
+			} catch (NumberFormatException e) {
+				showStatus("NumberFormatException, contact developer.");
+				e.printStackTrace();
+			} catch (IOException e) {
+				showStatus("IOException, file not located");
+				e.printStackTrace();
+			} catch (PositionNotSupportedException e) {
+				showStatus("Position in profile is not supported");
+				e.printStackTrace();
+			}
+		} else if (savedCheck.isSelected()) {
+			try {
+				gripFab.readScad(profileChooser.getSelectedFile());
+				if (gripFab.position.equals("Protruded Cylinder Hole"))
+					cH();
+				else if (gripFab.position.equals("Protruded Rectangular Hole"))
+					rH();
+				else if (gripFab.position.equals("Angled Cylinder Barrel"))
+					cU();
+				else if (gripFab.position.equals("Angled Rectangular Barrel"))
+					rU();
+				else if (gripFab.position.equals("Straight Cylinder Barrel"))
+					cL();
+				else if (gripFab.position.equals("Straight Rectangular Barrel"))
+					rL();
+				else
+					throw new PositionNotSupportedException();
+				showStatus("saved Scad selected");
+			} catch (FileNotFoundException e) {
+				showStatus("File was not found, please select another.");
+				e.printStackTrace();
+			} catch (PositionNotSupportedException e) {
+				showStatus("position in file is not supported");
+				e.printStackTrace();
+			}
 		} else
-			;
-		throw new GripNotFoundException();
+			showStatus("please select an option.");
 	}
 
 	protected void chooseExtensionActionPerformed(ActionEvent evt)
@@ -299,17 +381,6 @@ public class AppGrip extends javax.swing.JApplet {
 		else if (gripFab.position.equals("Angled Rectangular Barrel"))
 			rU();
 		else if (gripFab.position.equals("Straight Cylinder Barrel"))
-			cL();
-		else if (gripFab.position.equals("Straight Rectangular Barrel"))
-			rL();
-		else
-			throw new PositionNotSupportedException();
-	}
-
-	protected void chooseExtensionBActionPerformed(ActionEvent evt)
-			throws PositionNotSupportedException {
-		gripFab.position = (String) extensionBBox.getSelectedItem();
-		if (gripFab.position.equals("Straight Cylinder Barrel"))
 			cL();
 		else if (gripFab.position.equals("Straight Rectangular Barrel"))
 			rL();
@@ -387,7 +458,7 @@ public class AppGrip extends javax.swing.JApplet {
 		finish();
 	}
 
-	protected void submitCUhActionPerformed(ActionEvent evt) {
+	protected void submitCUActionPerformed(ActionEvent evt) {
 		showStatus("submitting diameter...");
 		gripFab.diameter = Double.parseDouble(cUDiameter.getText());
 		showStatus("submitting extrusion length...");
@@ -423,23 +494,176 @@ public class AppGrip extends javax.swing.JApplet {
 	}
 
 	protected void submitFileActionPerformed(ActionEvent evt) {
-		fileLocation.setText(fileChooser.getSelectedFile().getAbsolutePath());
-		gripFab.filename = fileLocation.getText();
+		gripFab.filename = fileChooser.getSelectedFile().getAbsolutePath();
 		try {
 			gripFab.writefile();
 		} catch (FileNotFoundException e) {
 			showStatus("File not found error present");
 			e.printStackTrace();
 		} catch (PositionNotSupportedException e) {
-			showStatus("Position Was not supported, this should never be reached.");
+			showStatus("position was not supported");
 			e.printStackTrace();
 		} catch (invalidDiameterException e) {
-			showStatus("You gave an invalid Diameter. Please use less then 10mm");
+			showStatus("diameter was not supported");
 			e.printStackTrace();
 		} catch (STLNotPresentException e) {
-			showStatus("StL was not present. this should never be reached");
+			showStatus("STL was not present");
+			e.printStackTrace();
+		} catch (invalidDimmensionsException e) {
+			showStatus("Dimmensions not supported");
 			e.printStackTrace();
 		}
+		if (saveProfile.isSelected()) {
+			try {
+				gripFab.profileName = gripFab.filename.substring(0,
+						gripFab.filename.lastIndexOf(".")) + ".txt";
+				gripFab.writeProfile();
+			} catch (FileNotFoundException e) {
+				showStatus("File Not found");
+				e.printStackTrace();
+			}
+		}
+		showStatus("File was produced in selected folder");
+	}
+
+	protected void submitCHPActionPerformed(ActionEvent evt) {
+		showStatus("submitting diameter...");
+		gripFab.diameter = Double.parseDouble(cHDiameter.getText());
+		showStatus("submitting protrusion length...");
+		gripFab.lin = Double.parseDouble(cHLin.getText());
+		showStatus("submitting lefty...");
+		gripFab.lefty = cHLefty.isSelected();
+		showStatus("Altering unused settings...");
+		gripFab.angle = 0;
+		gripFab.height = 0;
+		gripFab.width = 0;
+		gripFab.lout = 0;
+		showStatus("Settings Submitted: Please select Profile Save Location");
+		finishProfile();
+
+	}
+
+	protected void submitRHPActionPerformed(ActionEvent evt) {
+		showStatus("submitting height...");
+		gripFab.height = Double.parseDouble(rHHeight.getText());
+		showStatus("submitting width...");
+		gripFab.width = Double.parseDouble(rHWidth.getText());
+		showStatus("submitting protrusion length...");
+		gripFab.lin = Double.parseDouble(rHLin.getText());
+		showStatus("submitting lefty...");
+		gripFab.lefty = rHLefty.isSelected();
+		showStatus("Altering unused settings...");
+		gripFab.angle = 0;
+		gripFab.diameter = 0;
+		gripFab.lout = 0;
+		showStatus("Settings Submitted: Please select Profilee Save Location");
+		finishProfile();
+	}
+
+	protected void submitCLPActionPerformed(ActionEvent evt) {
+		showStatus("submitting diameter...");
+		gripFab.diameter = Double.parseDouble(cLDiameter.getText());
+		showStatus("submitting protrusion length...");
+		gripFab.lin = Double.parseDouble(cLLin.getText());
+		showStatus("submitting extrusion length...");
+		gripFab.lout = Double.parseDouble(cLLout.getText());
+		showStatus("submitting lefty...");
+		gripFab.lefty = cLLefty.isSelected();
+		showStatus("Altering unused settings...");
+		gripFab.angle = 0;
+		gripFab.height = 0;
+		gripFab.width = 0;
+		showStatus("Settings Submitted: Please select Profilee Save Location");
+		finishProfile();
+	}
+
+	protected void submitRLPActionPerformed(ActionEvent evt) {
+		showStatus("submitting height...");
+		gripFab.height = Double.parseDouble(rLHeight.getText());
+		showStatus("submitting width...");
+		gripFab.width = Double.parseDouble(rLWidth.getText());
+		showStatus("submitting extrusion length...");
+		gripFab.lout = Double.parseDouble(rLLout.getText());
+		showStatus("submitting protrusion length...");
+		gripFab.lin = Double.parseDouble(rLLin.getText());
+		showStatus("submitting lefty...");
+		gripFab.lefty = rLLefty.isSelected();
+		showStatus("Altering unused settings...");
+		gripFab.angle = 0;
+		gripFab.diameter = 0;
+		showStatus("Settings Submitted: Please select Profilee Save Location");
+		finishProfile();
+	}
+
+	protected void submitRUPActionPerformed(ActionEvent evt) {
+		showStatus("submitting height...");
+		gripFab.height = Double.parseDouble(rUHeight.getText());
+		showStatus("submitting width...");
+		gripFab.width = Double.parseDouble(rUWidth.getText());
+		showStatus("submitting extrusion length...");
+		gripFab.lout = Double.parseDouble(rULout.getText());
+		showStatus("submitting angle...");
+		gripFab.angle = Double.parseDouble(rUAngle.getText());
+		showStatus("submitting lefty...");
+		gripFab.lefty = rULefty.isSelected();
+		showStatus("Altering unused settings...");
+		gripFab.lin = 0;
+		gripFab.diameter = 0;
+		showStatus("Settings Submitted: Please select Profilee Save Location");
+		finishProfile();
+	}
+
+	protected void submitCUPActionPerformed(ActionEvent evt) {
+		showStatus("submitting diameter...");
+		gripFab.diameter = Double.parseDouble(cUDiameter.getText());
+		showStatus("submitting extrusion length...");
+		gripFab.lout = Double.parseDouble(cULout.getText());
+		showStatus("submitting lefty...");
+		gripFab.lefty = cULefty.isSelected();
+		showStatus("submitting angle...");
+		gripFab.angle = Double.parseDouble(cUAngle.getText());
+		showStatus("Altering unused settings...");
+		gripFab.lin = 0;
+		gripFab.height = 0;
+		gripFab.width = 0;
+		showStatus("Settings Submitted: Please select Profilee Save Location");
+		finishProfile();
+	}
+
+	protected void submitProfileActionPerformed(ActionEvent evt) {
+		gripFab.profileName = profileLocChooser.getSelectedFile()
+				.getAbsolutePath();
+		try {
+			gripFab.writeProfile();
+		} catch (FileNotFoundException e) {
+			showStatus("File not found error present");
+			e.printStackTrace();
+		}
+		if (saveModel.isSelected()) {
+			try {
+				gripFab.filename = gripFab.profileName
+						.substring(gripFab.profileName.lastIndexOf("."))
+						+ ".scad";
+				gripFab.writefile();
+			} catch (FileNotFoundException e) {
+				showStatus("File Not found");
+				e.printStackTrace();
+			} catch (PositionNotSupportedException e) {
+				showStatus("position was not supported");
+				e.printStackTrace();
+			} catch (invalidDiameterException e) {
+				showStatus("diameter was not supported");
+				e.printStackTrace();
+			} catch (STLNotPresentException e) {
+				showStatus("STL was not present");
+				e.printStackTrace();
+			} catch (invalidDimmensionsException e) {
+				showStatus("Dimmensions not supported");
+				e.printStackTrace();
+			}
+		}
+		showStatus("File was produced in selected folder");
+
 	}
 
 	private void grips() {
@@ -453,11 +677,29 @@ public class AppGrip extends javax.swing.JApplet {
 				try {
 					chooseGripActionPerformed(evt);
 				} catch (GripNotFoundException e) {
-					showStatus("Grip was not found, please check file system for stl or use different grip.");
+					showStatus("grip was not found");
 					e.printStackTrace();
 				}
 			}
 		});
+
+		jLabel18.setText("or");
+
+		jLabel19.setText("Profile:");
+
+		jLabel20.setText("or");
+
+		jLabel21.setText("Alter Saved File:");
+
+		profileChooser.setCurrentDirectory(new java.io.File(
+				"C:\\Users\\Megan\\Desktop\\LittlefootPrints"));
+
+		buttonGroup1.add(newCheck);
+		newCheck.setSelected(true);
+
+		buttonGroup1.add(profileCheck);
+
+		buttonGroup1.add(savedCheck);
 
 		javax.swing.GroupLayout gripsLayout = new javax.swing.GroupLayout(grips);
 		grips.setLayout(gripsLayout);
@@ -469,14 +711,73 @@ public class AppGrip extends javax.swing.JApplet {
 								gripsLayout
 										.createSequentialGroup()
 										.addContainerGap()
-										.addComponent(jLabel1)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(gripBox, 0, 390,
-												Short.MAX_VALUE)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(chooseGrip)
+										.addGroup(
+												gripsLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(
+																profileChooser,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																574,
+																Short.MAX_VALUE)
+														.addGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																gripsLayout
+																		.createSequentialGroup()
+																		.addGroup(
+																				gripsLayout
+																						.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								jLabel18)
+																						.addGroup(
+																								gripsLayout
+																										.createSequentialGroup()
+																										.addComponent(
+																												jLabel19)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																										.addComponent(
+																												profileCheck)
+																										.addGap(14,
+																												14,
+																												14)
+																										.addComponent(
+																												jLabel20,
+																												javax.swing.GroupLayout.PREFERRED_SIZE,
+																												12,
+																												javax.swing.GroupLayout.PREFERRED_SIZE)
+																										.addGap(18,
+																												18,
+																												18)
+																										.addComponent(
+																												jLabel21)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												savedCheck))
+																						.addGroup(
+																								gripsLayout
+																										.createSequentialGroup()
+																										.addComponent(
+																												jLabel1)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												gripBox,
+																												0,
+																												javax.swing.GroupLayout.DEFAULT_SIZE,
+																												Short.MAX_VALUE)))
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addGroup(
+																				gripsLayout
+																						.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								newCheck)
+																						.addComponent(
+																								chooseGrip))))
 										.addContainerGap()));
 		gripsLayout
 				.setVerticalGroup(gripsLayout
@@ -489,17 +790,88 @@ public class AppGrip extends javax.swing.JApplet {
 										.addGroup(
 												gripsLayout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(jLabel1)
-														.addComponent(
-																gripBox,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																chooseGrip))
-										.addContainerGap(375, Short.MAX_VALUE)));
-
+																javax.swing.GroupLayout.Alignment.TRAILING)
+														.addComponent(newCheck)
+														.addGroup(
+																gripsLayout
+																		.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.BASELINE)
+																		.addComponent(
+																				jLabel1)
+																		.addComponent(
+																				gripBox,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)))
+										.addGroup(
+												gripsLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(
+																gripsLayout
+																		.createSequentialGroup()
+																		.addGap(7,
+																				7,
+																				7)
+																		.addComponent(
+																				jLabel18)
+																		.addGroup(
+																				gripsLayout
+																						.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING)
+																						.addGroup(
+																								javax.swing.GroupLayout.Alignment.TRAILING,
+																								gripsLayout
+																										.createSequentialGroup()
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																												javax.swing.GroupLayout.DEFAULT_SIZE,
+																												Short.MAX_VALUE)
+																										.addComponent(
+																												savedCheck))
+																						.addGroup(
+																								gripsLayout
+																										.createSequentialGroup()
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addGroup(
+																												gripsLayout
+																														.createParallelGroup(
+																																javax.swing.GroupLayout.Alignment.LEADING)
+																														.addComponent(
+																																profileCheck)
+																														.addGroup(
+																																gripsLayout
+																																		.createParallelGroup(
+																																				javax.swing.GroupLayout.Alignment.BASELINE)
+																																		.addComponent(
+																																				jLabel19)
+																																		.addComponent(
+																																				jLabel20)
+																																		.addComponent(
+																																				jLabel21)))))
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+														.addGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																gripsLayout
+																		.createSequentialGroup()
+																		.addGap(34,
+																				34,
+																				34)
+																		.addComponent(
+																				chooseGrip)
+																		.addGap(5,
+																				5,
+																				5)))
+										.addComponent(
+												profileChooser,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
 		Panel.addTab("Grips", grips);
 	}
 
@@ -553,63 +925,7 @@ public class AppGrip extends javax.swing.JApplet {
 														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addComponent(chooseExtension))
 								.addContainerGap(375, Short.MAX_VALUE)));
-		Panel.remove(eB);
 		Panel.addTab("Extension", eA);
-		Panel.setSelectedIndex(Panel.indexOfTab("Extension"));
-	}
-
-	private void eB() {
-		jLabel2.setText("Extension:");
-
-		extensionBBox
-				.setModel(new javax.swing.DefaultComboBoxModel(extensionsB));
-
-		chooseExtensionB.setText("Choose");
-		chooseExtensionB.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				try {
-					chooseExtensionBActionPerformed(evt);
-				} catch (PositionNotSupportedException e) {
-					showStatus("We are so sorry that this position is not supported? We were stupid to make it an option. Please try another.");
-					e.printStackTrace();
-				}
-			}
-		});
-
-		javax.swing.GroupLayout eBLayout = new javax.swing.GroupLayout(eB);
-		eB.setLayout(eBLayout);
-		eBLayout.setHorizontalGroup(eBLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						eBLayout.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(jLabel2)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(extensionBBox, 0, 359,
-										Short.MAX_VALUE)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(chooseExtensionB)
-								.addContainerGap()));
-		eBLayout.setVerticalGroup(eBLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						eBLayout.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(
-										eBLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(jLabel2)
-												.addComponent(
-														extensionBBox,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(chooseExtensionB))
-								.addContainerGap(375, Short.MAX_VALUE)));
-		Panel.remove(eA);
-		Panel.addTab("Extension", eB);
 		Panel.setSelectedIndex(Panel.indexOfTab("Extension"));
 	}
 
@@ -618,9 +934,9 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel6.setText("Protrusion Length:");
 
-		cHLin.setText("000");
+		cHLin.setText(gripFab.lin + "");
 
-		cHDiameter.setText("0");
+		cHDiameter.setText(gripFab.diameter + "");
 
 		cHThrough.setText("Through");
 		cHThrough.addActionListener(new java.awt.event.ActionListener() {
@@ -631,10 +947,17 @@ public class AppGrip extends javax.swing.JApplet {
 
 		cHLefty.setText("Lefty");
 
-		submitCH.setText("Submit");
+		submitCH.setText("Submit File");
 		submitCH.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				submitCHActionPerformed(evt);
+			}
+		});
+
+		submitCHP.setText("Submit Profile");
+		submitCHP.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				submitCHPActionPerformed(evt);
 			}
 		});
 
@@ -679,8 +1002,23 @@ public class AppGrip extends javax.swing.JApplet {
 																								.addComponent(
 																										cHThrough))))
 												.addComponent(cHLefty)
-												.addComponent(submitCH))
-								.addContainerGap(295, Short.MAX_VALUE)));
+												.addGroup(
+														cHLayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																false)
+																.addComponent(
+																		submitCH,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addComponent(
+																		submitCHP,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)))
+								.addContainerGap(345, Short.MAX_VALUE)));
 		cHLayout.setVerticalGroup(cHLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -713,7 +1051,11 @@ public class AppGrip extends javax.swing.JApplet {
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 								.addComponent(submitCH)
-								.addContainerGap(281, Short.MAX_VALUE)));
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(submitCHP)
+								.addContainerGap(351, Short.MAX_VALUE)));
+
 		Panel.remove(rH);
 		Panel.remove(cL);
 		Panel.remove(rL);
@@ -728,9 +1070,9 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel8.setText("Protrusion Length:");
 
-		rHLin.setText("00");
+		rHLin.setText(gripFab.lin + "");
 
-		rHHeight.setText("0");
+		rHHeight.setText(gripFab.height + "");
 
 		rHThrough.setText("Through");
 		rHThrough.addActionListener(new java.awt.event.ActionListener() {
@@ -741,7 +1083,7 @@ public class AppGrip extends javax.swing.JApplet {
 
 		rHLefty.setText("Lefty");
 
-		submitRH.setText("Submit");
+		submitRH.setText("Submit File");
 		submitRH.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				submitRHActionPerformed(evt);
@@ -750,7 +1092,14 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel9.setText("Width:");
 
-		rHWidth.setText("0");
+		rHWidth.setText(gripFab.width + "");
+
+		submitRHP.setText("Submit Profile");
+		submitRHP.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				submitRHPActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout rHLayout = new javax.swing.GroupLayout(rH);
 		rH.setLayout(rHLayout);
@@ -763,7 +1112,6 @@ public class AppGrip extends javax.swing.JApplet {
 										rHLayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
 												.addComponent(rHLefty)
-												.addComponent(submitRH)
 												.addGroup(
 														rHLayout.createSequentialGroup()
 																.addGroup(
@@ -800,8 +1148,24 @@ public class AppGrip extends javax.swing.JApplet {
 																								.addPreferredGap(
 																										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 																								.addComponent(
-																										rHThrough)))))
-								.addContainerGap(302, Short.MAX_VALUE)));
+																										rHThrough))))
+												.addGroup(
+														rHLayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																false)
+																.addComponent(
+																		submitRH,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addComponent(
+																		submitRHP,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)))
+								.addContainerGap(371, Short.MAX_VALUE)));
 		rHLayout.setVerticalGroup(rHLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -845,13 +1209,17 @@ public class AppGrip extends javax.swing.JApplet {
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 								.addComponent(submitRH)
-								.addContainerGap(258, Short.MAX_VALUE)));
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(submitRHP)
+								.addContainerGap(359, Short.MAX_VALUE)));
+
+		Panel.addTab("Settings", rH);
 		Panel.remove(cH);
 		Panel.remove(cL);
 		Panel.remove(rL);
 		Panel.remove(cU);
 		Panel.remove(rU);
-		Panel.addTab("Settings", rH);
 		Panel.setSelectedIndex(Panel.indexOfTab("Settings"));
 	}
 
@@ -860,13 +1228,13 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel15.setText("Protrusion Length:");
 
-		cLLin.setText("00");
+		cLLin.setText(gripFab.lin + "");
 
-		cLDiameter.setText("0");
+		cLDiameter.setText(gripFab.diameter + "");
 
 		cLLefty.setText("Lefty");
 
-		submitCL.setText("Submit");
+		submitCL.setText("Submit File");
 		submitCL.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				submitCLActionPerformed(evt);
@@ -875,7 +1243,14 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel17.setText("Extension Length:");
 
-		cLLout.setText("000");
+		cLLout.setText(gripFab.lout + "");
+
+		submitCLP.setText("Submit Profile");
+		submitCLP.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				submitCLPActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout cLLayout = new javax.swing.GroupLayout(cL);
 		cL.setLayout(cLLayout);
@@ -888,7 +1263,6 @@ public class AppGrip extends javax.swing.JApplet {
 										cLLayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
 												.addComponent(cLLefty)
-												.addComponent(submitCL)
 												.addGroup(
 														cLLayout.createSequentialGroup()
 																.addGroup(
@@ -921,8 +1295,24 @@ public class AppGrip extends javax.swing.JApplet {
 																						cLLout,
 																						javax.swing.GroupLayout.PREFERRED_SIZE,
 																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.PREFERRED_SIZE))))
-								.addContainerGap(380, Short.MAX_VALUE)));
+																						javax.swing.GroupLayout.PREFERRED_SIZE)))
+												.addGroup(
+														cLLayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																false)
+																.addComponent(
+																		submitCL,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addComponent(
+																		submitCLP,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)))
+								.addContainerGap(449, Short.MAX_VALUE)));
 		cLLayout.setVerticalGroup(cLLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -968,7 +1358,10 @@ public class AppGrip extends javax.swing.JApplet {
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 								.addComponent(submitCL)
-								.addContainerGap(245, Short.MAX_VALUE)));
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(submitCLP)
+								.addContainerGap(346, Short.MAX_VALUE)));
 
 		Panel.remove(cH);
 		Panel.remove(rH);
@@ -984,13 +1377,13 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel11.setText("Protrusion Length:");
 
-		rLLin.setText("00");
+		rLLin.setText(gripFab.lin + "");
 
-		rLHeight.setText("0");
+		rLHeight.setText(gripFab.height + "");
 
 		rLLefty.setText("Lefty");
 
-		submitRL.setText("Submit");
+		submitRL.setText("Submit File");
 		submitRL.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				submitRLActionPerformed(evt);
@@ -999,11 +1392,18 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel12.setText("Width:");
 
-		rLWidth.setText("0");
+		rLWidth.setText(gripFab.width + "");
 
 		jLabel13.setText("Extension Length:");
 
-		rLLout.setText("000");
+		rLLout.setText(gripFab.lout + "");
+
+		submitRLP.setText("Submit Profile");
+		submitRLP.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				submitRLPActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout rLLayout = new javax.swing.GroupLayout(rL);
 		rL.setLayout(rLLayout);
@@ -1062,8 +1462,23 @@ public class AppGrip extends javax.swing.JApplet {
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
 																		javax.swing.GroupLayout.DEFAULT_SIZE,
 																		javax.swing.GroupLayout.PREFERRED_SIZE))
-												.addComponent(submitRL))
-								.addContainerGap(377, Short.MAX_VALUE)));
+												.addGroup(
+														rLLayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																false)
+																.addComponent(
+																		submitRL,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addComponent(
+																		submitRLP,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)))
+								.addContainerGap(446, Short.MAX_VALUE)));
 		rLLayout.setVerticalGroup(rLLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -1117,14 +1532,17 @@ public class AppGrip extends javax.swing.JApplet {
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 								.addComponent(submitRL)
-								.addContainerGap(223, Short.MAX_VALUE)));
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(submitRLP)
+								.addContainerGap(324, Short.MAX_VALUE)));
 
+		Panel.addTab("Settings", rL);
 		Panel.remove(cH);
 		Panel.remove(rH);
 		Panel.remove(cL);
 		Panel.remove(rU);
 		Panel.remove(cU);
-		Panel.addTab("Settings", rL);
 		Panel.setSelectedIndex(Panel.indexOfTab("Settings"));
 	}
 
@@ -1133,22 +1551,29 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel27.setText("Angle:");
 
-		cUAngle.setText("00");
+		cUAngle.setText(gripFab.angle + "");
 
-		cUDiameter.setText("0");
+		cUDiameter.setText(gripFab.diameter + "");
 
 		cULefty.setText("Lefty");
 
-		submitCU.setText("Submit");
+		submitCU.setText("Submit File");
 		submitCU.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				submitCUhActionPerformed(evt);
+				submitCUActionPerformed(evt);
 			}
 		});
 
 		jLabel29.setText("Extension Length:");
 
-		cULout.setText("000");
+		cULout.setText(gripFab.lout + "");
+
+		submitCUP.setText("Submit Profile");
+		submitCUP.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				submitCUPActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout cULayout = new javax.swing.GroupLayout(cU);
 		cU.setLayout(cULayout);
@@ -1161,7 +1586,6 @@ public class AppGrip extends javax.swing.JApplet {
 										cULayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
 												.addComponent(cULefty)
-												.addComponent(submitCU)
 												.addGroup(
 														cULayout.createSequentialGroup()
 																.addComponent(
@@ -1196,8 +1620,24 @@ public class AppGrip extends javax.swing.JApplet {
 																						cULout,
 																						javax.swing.GroupLayout.PREFERRED_SIZE,
 																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.PREFERRED_SIZE))))
-								.addContainerGap(377, Short.MAX_VALUE)));
+																						javax.swing.GroupLayout.PREFERRED_SIZE)))
+												.addGroup(
+														cULayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																false)
+																.addComponent(
+																		submitCU,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addComponent(
+																		submitCUP,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)))
+								.addContainerGap(446, Short.MAX_VALUE)));
 		cULayout.setVerticalGroup(cULayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -1240,8 +1680,10 @@ public class AppGrip extends javax.swing.JApplet {
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(submitCU)
-								.addContainerGap(258, Short.MAX_VALUE)));
-
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(submitCUP)
+								.addContainerGap(359, Short.MAX_VALUE)));
 		Panel.remove(cH);
 		Panel.remove(rH);
 		Panel.remove(cL);
@@ -1256,13 +1698,13 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel23.setText("Angle:");
 
-		rUAngle.setText("00");
+		rUAngle.setText(gripFab.angle + "");
 
-		rUHeight.setText("0");
+		rUHeight.setText(gripFab.height + "");
 
 		rULefty.setText("Lefty");
 
-		submitRU.setText("Submit");
+		submitRU.setText("Submit File");
 		submitRU.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				submitRUActionPerformed(evt);
@@ -1271,11 +1713,18 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel24.setText("Width:");
 
-		rUWidth.setText("0");
+		rUWidth.setText(gripFab.width + "");
 
 		jLabel25.setText("Extension Length:");
 
-		rULout.setText("000");
+		rULout.setText(gripFab.lout + "");
+
+		submitRUP.setText("Submit Profile");
+		submitRUP.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				submitRUPActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout rULayout = new javax.swing.GroupLayout(rU);
 		rU.setLayout(rULayout);
@@ -1299,7 +1748,6 @@ public class AppGrip extends javax.swing.JApplet {
 																		javax.swing.GroupLayout.DEFAULT_SIZE,
 																		javax.swing.GroupLayout.PREFERRED_SIZE))
 												.addComponent(rULefty)
-												.addComponent(submitRU)
 												.addGroup(
 														rULayout.createSequentialGroup()
 																.addGroup(
@@ -1330,8 +1778,24 @@ public class AppGrip extends javax.swing.JApplet {
 																						rULout,
 																						javax.swing.GroupLayout.PREFERRED_SIZE,
 																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.PREFERRED_SIZE))))
-								.addContainerGap(377, Short.MAX_VALUE)));
+																						javax.swing.GroupLayout.PREFERRED_SIZE)))
+												.addGroup(
+														rULayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																false)
+																.addComponent(
+																		submitRU,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addComponent(
+																		submitRUP,
+																		javax.swing.GroupLayout.Alignment.LEADING,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)))
+								.addContainerGap(446, Short.MAX_VALUE)));
 		rULayout.setVerticalGroup(rULayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -1385,7 +1849,10 @@ public class AppGrip extends javax.swing.JApplet {
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 								.addComponent(submitRU)
-								.addContainerGap(223, Short.MAX_VALUE)));
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(submitRUP)
+								.addContainerGap(324, Short.MAX_VALUE)));
 
 		Panel.remove(cH);
 		Panel.remove(rH);
@@ -1397,10 +1864,6 @@ public class AppGrip extends javax.swing.JApplet {
 	}
 
 	private void finish() {
-		jLabel4.setText("FileLocation:");
-
-		fileLocation.setText("enter File Location");
-
 		submitFile.setText("Submit");
 		submitFile.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1411,6 +1874,8 @@ public class AppGrip extends javax.swing.JApplet {
 		fileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 		fileChooser.setCurrentDirectory(new java.io.File(
 				"C:\\Users\\Megan\\Desktop\\LittlefootPrints"));
+
+		saveProfile.setText("Save Profile In same Location?");
 
 		javax.swing.GroupLayout finishLayout = new javax.swing.GroupLayout(
 				finish);
@@ -1431,27 +1896,25 @@ public class AppGrip extends javax.swing.JApplet {
 																finishLayout
 																		.createSequentialGroup()
 																		.addComponent(
-																				jLabel4)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				fileLocation)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				submitFile))
+																				fileChooser,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				0,
+																				Short.MAX_VALUE)
+																		.addContainerGap())
 														.addGroup(
 																finishLayout
 																		.createSequentialGroup()
 																		.addComponent(
-																				fileChooser,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				505,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addGap(0,
-																				0,
-																				Short.MAX_VALUE)))
-										.addContainerGap()));
+																				saveProfile)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																				284,
+																				Short.MAX_VALUE)
+																		.addComponent(
+																				submitFile)
+																		.addGap(26,
+																				26,
+																				26)))));
 		finishLayout
 				.setVerticalGroup(finishLayout
 						.createParallelGroup(
@@ -1460,30 +1923,107 @@ public class AppGrip extends javax.swing.JApplet {
 								finishLayout
 										.createSequentialGroup()
 										.addContainerGap()
+										.addComponent(
+												fileChooser,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(
 												finishLayout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(jLabel4)
 														.addComponent(
-																fileLocation,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
+																submitFile)
 														.addComponent(
-																submitFile))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												fileChooser,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												355,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
-
+																saveProfile))
+										.addContainerGap()));
+		Panel.remove(finishProfile);
 		Panel.addTab("Finish", finish);
+		Panel.setSelectedIndex(Panel.indexOfTab("Finish"));
+	}
+
+	public void finishProfile() {
+		profileLocChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+		profileLocChooser.setCurrentDirectory(new java.io.File(
+				"C:\\Users\\Megan\\Desktop\\LittlefootPrints"));
+
+		saveModel.setText("save model file in same directory?");
+
+		submitProfile.setText("submit");
+		submitProfile.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				submitProfileActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout finishProfileLayout = new javax.swing.GroupLayout(
+				finishProfile);
+		finishProfile.setLayout(finishProfileLayout);
+		finishProfileLayout
+				.setHorizontalGroup(finishProfileLayout
+						.createParallelGroup(
+								javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(
+								finishProfileLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												finishProfileLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(
+																finishProfileLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				profileLocChooser,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				574,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addGap(0,
+																				0,
+																				Short.MAX_VALUE))
+														.addGroup(
+																finishProfileLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				saveModel)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE)
+																		.addComponent(
+																				submitProfile)))
+										.addContainerGap()));
+		finishProfileLayout
+				.setVerticalGroup(finishProfileLayout
+						.createParallelGroup(
+								javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(
+								finishProfileLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(
+												profileLocChooser,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												482, Short.MAX_VALUE)
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+										.addGroup(
+												finishProfileLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(
+																saveModel,
+																javax.swing.GroupLayout.Alignment.TRAILING)
+														.addComponent(
+																submitProfile,
+																javax.swing.GroupLayout.Alignment.TRAILING))
+										.addContainerGap()));
+
+		Panel.remove(finish);
+		Panel.addTab("Finish", finishProfile);
 		Panel.setSelectedIndex(Panel.indexOfTab("Finish"));
 	}
 
