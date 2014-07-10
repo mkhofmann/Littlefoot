@@ -1,8 +1,0 @@
-Protruded Cylinder Hole
-0.0
-0.0
-0.0
-0.0
-0.0
-0.0
-false

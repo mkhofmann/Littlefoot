@@ -5,15 +5,15 @@ Tool to apply a user interface to connect user predefined grips to variable shap
 Current Set UP:
 Place LittlefootPrints folder on Desktop as preffered or navigate to folder in finish tab. 
 Enter settings.
-GripA is for grips with no or angled barrels
-GripB is for grips with straight barrels.
 
-Follow tabs as opened to complete submit file. Scad file will be dropped into folder chosen but will not render if imported stl is not also present and properly named.
+Follow tabs as opened to complete submit file. Scad file and stl file will be dropped into this LittlefootPrints.
 
+Profiles can be saved as .txt files in same location.
 Further developement:
-Saving profiles.
-Automatic rendering to STL file not through OpenScad
-Implementation of invalid dimmensions exceptions and interfaced solutions for user.
-Possible protected saving for Ipad program.
+Completely variable install and drop locations
+diagrams of design
+variable diagrams of design
+sliding options for sizes to make boundries clear
+file chooser buttons as submit features
 
 for any errors that cannot be worked around or error messages that seem suspicious as to the cause please contact me at hofmann.megan@gmail.com.
