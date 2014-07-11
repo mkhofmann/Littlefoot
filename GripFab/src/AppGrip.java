@@ -165,16 +165,7 @@ public class AppGrip extends javax.swing.JApplet {
 	 */
 	@Override
 	public void init() {
-		/* Set the Nimbus look and feel */
-		// <editor-fold defaultstate="collapsed"
-		// desc=" Look and feel setting code (optional) ">
-		/*
-		 * If Nimbus (introduced in Java SE 6) is not available, stay with the
-		 * default look and feel. For details see
-		 * http://download.oracle.com/javase
-		 * /tutorial/uiswing/lookandfeel/plaf.html
-		 */
-		resize(825, 800);
+		resize(900, 650);
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
 					.getInstalledLookAndFeels()) {
@@ -429,6 +420,9 @@ public class AppGrip extends javax.swing.JApplet {
 			}
 		} else
 			showStatus("please select an option.");
+		profileChooser.rescanCurrentDirectory();
+		fileChooser.rescanCurrentDirectory();
+		profileChooser.rescanCurrentDirectory();
 	}
 
 	protected void chooseExtensionActionPerformed(ActionEvent evt)
@@ -592,6 +586,9 @@ public class AppGrip extends javax.swing.JApplet {
 			}
 		}
 		showStatus("File was produced in selected folder");
+		profileChooser.rescanCurrentDirectory();
+		fileChooser.rescanCurrentDirectory();
+		profileChooser.rescanCurrentDirectory();
 	}
 
 	protected void submitCHPActionPerformed(ActionEvent evt) {
@@ -737,6 +734,9 @@ public class AppGrip extends javax.swing.JApplet {
 			}
 		}
 		showStatus("File was produced in selected folder");
+		profileChooser.rescanCurrentDirectory();
+		fileChooser.rescanCurrentDirectory();
+		profileChooser.rescanCurrentDirectory();
 
 	}
 
@@ -936,6 +936,120 @@ public class AppGrip extends javax.swing.JApplet {
 		rUASlider.setValue((int) (text * 100 / 90));
 	}
 
+	protected void profileCheckActionPerformed(ActionEvent evt) {
+		if (profileCheck.isSelected()) {
+			profileChooser.setVisible(true);
+			chooseGrip.setVisible(false);
+		}
+	}
+
+	protected void newCheckActionPerformed(ActionEvent evt) {
+		if (newCheck.isSelected()) {
+			profileChooser.setVisible(false);
+			chooseGrip.setVisible(false);
+		}
+	}
+
+	protected void profileChooserActionPerformed(ActionEvent evt)
+			throws GripNotFoundException {
+		int result = profileChooser.showSaveDialog(this);
+		if (result == profileChooser.APPROVE_OPTION)
+			chooseGripActionPerformed(evt);
+
+	}
+
+	protected void fileChooserActionPerformed(ActionEvent evt) {
+		int result = fileChooser.showSaveDialog(this);
+		if (result == fileChooser.APPROVE_OPTION) {
+			gripFab.filename = fileChooser.getSelectedFile().getAbsolutePath();
+			try {
+				gripFab.writefile();
+			} catch (FileNotFoundException e) {
+				showStatus("File not found error present");
+				e.printStackTrace();
+			} catch (PositionNotSupportedException e) {
+				showStatus("position was not supported");
+				e.printStackTrace();
+			} catch (invalidDiameterException e) {
+				showStatus("diameter was not supported");
+				e.printStackTrace();
+			} catch (STLNotPresentException e) {
+				showStatus("STL was not present");
+				e.printStackTrace();
+			} catch (invalidDimmensionsException e) {
+				showStatus("Dimmensions not supported");
+				e.printStackTrace();
+			} catch (IOException e) {
+				showStatus("Files not in correct Directories");
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				showStatus("interruped Excpetion");
+				e.printStackTrace();
+			}
+			if (saveProfile.isSelected()) {
+				try {
+					gripFab.profileName = gripFab.filename.substring(0,
+							gripFab.filename.lastIndexOf(".")) + ".txt";
+					gripFab.writeProfile();
+				} catch (FileNotFoundException e) {
+					showStatus("File Not found");
+					e.printStackTrace();
+				}
+			}
+			showStatus("File was produced in selected folder");
+			profileChooser.rescanCurrentDirectory();
+			fileChooser.rescanCurrentDirectory();
+			profileChooser.rescanCurrentDirectory();
+		}
+	}
+
+	protected void profileLocChooserActionPerformed(ActionEvent evt) {
+		int result = profileLocChooser.showSaveDialog(this);
+		if (result == profileLocChooser.APPROVE_OPTION) {
+			gripFab.profileName = profileLocChooser.getSelectedFile()
+					.getAbsolutePath();
+			try {
+				gripFab.writeProfile();
+			} catch (FileNotFoundException e) {
+				showStatus("File not found error present");
+				e.printStackTrace();
+			}
+			if (saveModel.isSelected()) {
+				try {
+					gripFab.filename = gripFab.profileName
+							.substring(gripFab.profileName.lastIndexOf("."))
+							+ ".scad";
+					gripFab.writefile();
+				} catch (FileNotFoundException e) {
+					showStatus("File Not found");
+					e.printStackTrace();
+				} catch (PositionNotSupportedException e) {
+					showStatus("position was not supported");
+					e.printStackTrace();
+				} catch (invalidDiameterException e) {
+					showStatus("diameter was not supported");
+					e.printStackTrace();
+				} catch (STLNotPresentException e) {
+					showStatus("STL was not present");
+					e.printStackTrace();
+				} catch (invalidDimmensionsException e) {
+					showStatus("Dimmensions not supported");
+					e.printStackTrace();
+				} catch (IOException e) {
+					showStatus("Incorrect directories");
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					showStatus("InterrruptedException");
+					e.printStackTrace();
+				}
+			}
+			showStatus("File was produced in selected folder");
+			profileChooser.rescanCurrentDirectory();
+			fileChooser.rescanCurrentDirectory();
+			profileChooser.rescanCurrentDirectory();
+		}
+	}
+
 	private void grips() {
 		gripBox.setModel(new javax.swing.DefaultComboBoxModel(gripList));
 
@@ -953,15 +1067,36 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel18.setText("or");
 
+		profileChooser.setVisible(false);
 		profileChooser.setCurrentDirectory(new java.io.File(
 				"C:\\Users\\Megan\\Desktop\\LittlefootPrints"));
+		profileChooser.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				try {
+					profileChooserActionPerformed(evt);
+				} catch (GripNotFoundException e) {
+					showStatus("Please select a different profile");
+					e.printStackTrace();
+				}
+			}
+		});
 
 		buttonGroup1.add(newCheck);
 		newCheck.setSelected(true);
 		newCheck.setText("New Grip");
+		newCheck.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				newCheckActionPerformed(evt);
+			}
+		});
 
 		buttonGroup1.add(profileCheck);
 		profileCheck.setText("Grip From Profile:");
+		profileCheck.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				profileCheckActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout gripsLayout = new javax.swing.GroupLayout(grips);
 		grips.setLayout(gripsLayout);
@@ -3085,12 +3220,17 @@ public class AppGrip extends javax.swing.JApplet {
 	}
 
 	private void finish() {
-		submitFile.setText("Submit");
-		submitFile.addActionListener(new java.awt.event.ActionListener() {
+
+		fileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+		fileChooser.setCurrentDirectory(new java.io.File(
+				"C:\\Users\\Megan\\Desktop\\LittlefootPrints"));
+		fileChooser.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				submitFileActionPerformed(evt);
+				fileChooserActionPerformed(evt);
 			}
 		});
+
+		saveProfile.setText("Save Profile In same Location?");
 
 		fileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 		fileChooser.setCurrentDirectory(new java.io.File(
@@ -3117,25 +3257,24 @@ public class AppGrip extends javax.swing.JApplet {
 																finishLayout
 																		.createSequentialGroup()
 																		.addComponent(
-																				fileChooser,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				saveProfile)
+																		.addGap(0,
 																				0,
-																				Short.MAX_VALUE)
-																		.addContainerGap())
+																				Short.MAX_VALUE))
+														.addComponent(
+																fileChooser,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																885,
+																Short.MAX_VALUE)
 														.addGroup(
 																finishLayout
 																		.createSequentialGroup()
-																		.addComponent(
-																				saveProfile)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				284,
+																		.addGap(0,
+																				0,
 																				Short.MAX_VALUE)
 																		.addComponent(
-																				submitFile)
-																		.addGap(26,
-																				26,
-																				26)))));
+																				submitFile)))
+										.addContainerGap()));
 		finishLayout
 				.setVerticalGroup(finishLayout
 						.createParallelGroup(
@@ -3144,22 +3283,20 @@ public class AppGrip extends javax.swing.JApplet {
 								finishLayout
 										.createSequentialGroup()
 										.addContainerGap()
-										.addComponent(
-												fileChooser,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
+										.addComponent(saveProfile)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												finishLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																submitFile)
-														.addComponent(
-																saveProfile))
-										.addContainerGap()));
+										.addComponent(
+												fileChooser,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												613,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(submitFile)
+										.addContainerGap(
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
 		Panel.remove(finishProfile);
 		Panel.addTab("Finish", finish);
 		Panel.setSelectedIndex(Panel.indexOfTab("Finish"));
@@ -3169,15 +3306,19 @@ public class AppGrip extends javax.swing.JApplet {
 		profileLocChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 		profileLocChooser.setCurrentDirectory(new java.io.File(
 				"C:\\Users\\Megan\\Desktop\\LittlefootPrints"));
+		profileLocChooser
+				.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						profileLocChooserActionPerformed(evt);
+					}
+				});
 
 		saveModel.setText("save model file in same directory?");
+		profileLocChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+		profileLocChooser.setCurrentDirectory(new java.io.File(
+				"C:\\Users\\Megan\\Desktop\\LittlefootPrints"));
 
-		submitProfile.setText("submit");
-		submitProfile.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				submitProfileActionPerformed(evt);
-			}
-		});
+		saveModel.setText("save model file in same directory?");
 
 		javax.swing.GroupLayout finishProfileLayout = new javax.swing.GroupLayout(
 				finishProfile);
@@ -3194,29 +3335,15 @@ public class AppGrip extends javax.swing.JApplet {
 												finishProfileLayout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.LEADING)
-														.addGroup(
-																finishProfileLayout
-																		.createSequentialGroup()
-																		.addComponent(
-																				profileLocChooser,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				574,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addGap(0,
-																				0,
-																				Short.MAX_VALUE))
-														.addGroup(
-																finishProfileLayout
-																		.createSequentialGroup()
-																		.addComponent(
-																				saveModel)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)
-																		.addComponent(
-																				submitProfile)))
-										.addContainerGap()));
+														.addComponent(saveModel)
+														.addComponent(
+																profileLocChooser,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																889,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addContainerGap(
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
 		finishProfileLayout
 				.setVerticalGroup(finishProfileLayout
 						.createParallelGroup(
@@ -3225,24 +3352,17 @@ public class AppGrip extends javax.swing.JApplet {
 								finishProfileLayout
 										.createSequentialGroup()
 										.addContainerGap()
+										.addComponent(saveModel)
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
 												profileLocChooser,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												615,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(
 												javax.swing.GroupLayout.DEFAULT_SIZE,
-												482, Short.MAX_VALUE)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addGroup(
-												finishProfileLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																saveModel,
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																submitProfile,
-																javax.swing.GroupLayout.Alignment.TRAILING))
-										.addContainerGap()));
-
+												Short.MAX_VALUE)));
 		Panel.remove(finish);
 		Panel.addTab("Finish", finishProfile);
 		Panel.setSelectedIndex(Panel.indexOfTab("Finish"));
