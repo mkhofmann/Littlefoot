@@ -11,9 +11,7 @@ Follow tabs as opened to complete submit file. Scad file and stl file will be dr
 Profiles can be saved as .txt files in same location.
 Further developement:
 Completely variable install and drop locations
-diagrams of design
 variable diagrams of design
-sliding options for sizes to make boundries clear
 file chooser buttons as submit features
 
 for any errors that cannot be worked around or error messages that seem suspicious as to the cause please contact me at hofmann.megan@gmail.com.
