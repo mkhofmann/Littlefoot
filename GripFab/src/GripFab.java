@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,59 +28,50 @@ public class GripFab {
 	/**
 	 * directory selected for file outputs
 	 */
-	protected String directory;
+	protected String directory = "";
 	/**
 	 * name of files to be output
 	 */
-	protected String name;
+	protected String name = "";
 	/**
 	 * positions available for printing
 	 */
 	protected static String[] positions = { "Full Cylinder Hole",
 			"Protruded Cylinder Hole", "Straight Cylinder Barrel",
 			"Angled Cylinder Barrel" };
-	protected String stlTitle;
-	protected boolean lefty;
-	protected double diameter; // in mm
-	protected double lout; // length out of grip (in mm)
-	protected double lin; // length into grip (in mm)
-	protected String position; // a, b, c: add more as needed
-	protected String filename;// Concatenates .scad to end of given name
-	protected double angle;
-	protected double width;
-	protected double height;
+	protected boolean lefty = false;
+	protected double diameter = 0; // in mm
+	protected double lout = 0; // length out of grip (in mm)
+	protected double lin = 0; // length into grip (in mm)
+	protected String position = ""; // a, b, c: add more as needed
+	protected double angle = 0;
+	protected double width = 0;
+	protected double height = 0;
 
 	private boolean throwDiameter = false;
 	private boolean throwDims = false;
-	protected String profileName;
 
-	public GripFab() {
-		stlTitle = "gripA.stl";
-		lefty = false;
-		diameter = 0;
-		lout = 0;
-		lin = 0;
-		angle = 0;
-		width = 0;
-		height = 0;
-		position = "a";
-		filename = "grip.scad";
+	protected GripFab() {
+
 	}
 
 	@SuppressWarnings("resource")
-	public void writefile() throws PositionNotSupportedException,
+	protected void writefile() throws PositionNotSupportedException,
 			invalidDiameterException, STLNotPresentException,
 			invalidDimmensionsException, IOException, InterruptedException {
 		if (diameter > 16) {
 			diameter = 16;
 			throwDiameter = true;
 		}
-		if ((Math.sqrt(width * width + height * height) > 16)) {
-			width = 11;
-			height = 11;
+		if (width > 13) {
+			width = 13;
 			throwDims = true;
 		}
-		PrintWriter writer = new PrintWriter(filename);
+		if (height > 13) {
+			height = 13;
+			throwDims = true;
+		}
+		PrintWriter writer = new PrintWriter(directory + "\\" + name + ".scad");
 
 		// variables
 		writer.println("position = \"" + position + "\";");
@@ -152,7 +144,7 @@ public class GripFab {
 		writer.println("mirror([0,0,1]) translate([0,0,-10*sin(angle)]) rotate([0,angle,0]) barrelR(lout,x,y);");
 		writer.println("}}");
 
-		// writer.println("scale([2,2,2]){");
+		writer.println("render(1){");
 		if (position.equals("Protruded Cylinder Hole")) {
 			if (lefty)
 				writer.println("mirror([0,1,0]){");
@@ -192,22 +184,23 @@ public class GripFab {
 		} else {
 			throw new PositionNotSupportedException();
 		}
+		writer.println("}");
 
 		if (throwDiameter)
 			throw new invalidDiameterException();
 		if (throwDims)
 			throw new invalidDimmensionsException();
 		writer.close();
-		
-		processFileName();
+	}
+
+	protected void writeSTL() throws IOException {
 		Runtime.getRuntime().exec(
 				"cmd.exe /c start " + directory + "\\export.bat " + directory
 						+ " " + name + ".stl " + name + ".scad");
-
 	}
 
-	public void writeProfile() throws FileNotFoundException {
-		PrintWriter writer = new PrintWriter(profileName);
+	protected void writeProfile() throws FileNotFoundException {
+		PrintWriter writer = new PrintWriter(directory + "\\" + name + ".txt");
 		writer.println(position);
 		writer.flush();
 		writer.println(diameter);
@@ -228,7 +221,7 @@ public class GripFab {
 
 	}
 
-	public void readProfile(File profile) throws NumberFormatException,
+	protected void readProfile(File profile) throws NumberFormatException,
 			IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(profile));
 		position = reader.readLine();
@@ -242,7 +235,7 @@ public class GripFab {
 		reader.close();
 	}
 
-	public void printFromProfile(File profile) throws NumberFormatException,
+	protected void printFromProfile(File profile) throws NumberFormatException,
 			IOException, PositionNotSupportedException,
 			invalidDiameterException, STLNotPresentException,
 			invalidDimmensionsException {
@@ -250,11 +243,16 @@ public class GripFab {
 
 	}
 
-
-	private void processFileName() {
+	protected void processFileName(String filename) {
 		directory = filename.substring(0, filename.lastIndexOf("\\")) + "\\";
-		name = filename.substring(filename.lastIndexOf("\\") + 1,
+		name = filename.substring(filename.lastIndexOf("\\"),
 				filename.lastIndexOf("."));
 
 	}
+
+	// public static void main(String[] args){
+	// GripFab gripFab = new GripFab();
+	// grripFab.writeFile();
+	//
+	// }
 }
