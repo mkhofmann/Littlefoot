@@ -30,6 +30,8 @@ public class AppGrip extends javax.swing.JApplet {
 	private GripFab gripFab = new GripFab();
 
 	private DecimalFormat df = new DecimalFormat("###.##");
+
+	private int gripsMadeInSession = 0;
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JSlider CHLinSlide;
 	private javax.swing.JTabbedPane Panel;
@@ -65,8 +67,10 @@ public class AppGrip extends javax.swing.JApplet {
 	private javax.swing.JPanel eA;
 	private javax.swing.JComboBox extensionsBox;
 	private javax.swing.JPanel finish;
-	private javax.swing.JComboBox<?> gripBox;
+	private javax.swing.JComboBox gripBox;
+	private javax.swing.JTextField gripName;
 	private javax.swing.JPanel grips;
+	private javax.swing.JDialog jDialog1;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel10;
 	private javax.swing.JLabel jLabel11;
@@ -115,11 +119,31 @@ public class AppGrip extends javax.swing.JApplet {
 	private javax.swing.JLabel jLabel50;
 	private javax.swing.JLabel jLabel51;
 	private javax.swing.JLabel jLabel52;
+	private javax.swing.JLabel jLabel53;
+	private javax.swing.JLabel jLabel54;
+	private javax.swing.JLabel jLabel55;
+	private javax.swing.JLabel jLabel56;
+	private javax.swing.JLabel jLabel57;
+	private javax.swing.JLabel jLabel58;
+	private javax.swing.JLabel jLabel59;
 	private javax.swing.JLabel jLabel6;
+	private javax.swing.JLabel jLabel60;
+	private javax.swing.JLabel jLabel61;
+	private javax.swing.JLabel jLabel62;
+	private javax.swing.JLabel jLabel63;
+	private javax.swing.JLabel jLabel64;
+	private javax.swing.JLabel jLabel65;
+	private javax.swing.JLabel jLabel66;
+	private javax.swing.JLabel jLabel67;
+	private javax.swing.JLabel jLabel68;
+	private javax.swing.JLabel jLabel69;
 	private javax.swing.JLabel jLabel7;
+	private javax.swing.JLabel jLabel70;
+	private javax.swing.JLabel jLabel71;
+	private javax.swing.JLabel jLabel72;
+	private javax.swing.JLabel jLabel73;
 	private javax.swing.JLabel jLabel8;
 	private javax.swing.JLabel jLabel9;
-	private javax.swing.JSlider jSlider1;
 	private javax.swing.JRadioButton newCheck;
 	private javax.swing.JRadioButton profileCheck;
 	private javax.swing.JFileChooser profileChooser;
@@ -169,7 +193,7 @@ public class AppGrip extends javax.swing.JApplet {
 	 */
 	@Override
 	public void init() {
-		resize(850, 650);
+		resize(850, 700);
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
 					.getInstalledLookAndFeels()) {
@@ -217,6 +241,7 @@ public class AppGrip extends javax.swing.JApplet {
 	private void initComponents() {
 
 		buttonGroup1 = new javax.swing.ButtonGroup();
+		jDialog1 = new javax.swing.JDialog();
 		Panel = new javax.swing.JTabbedPane();
 		grips = new javax.swing.JPanel();
 		gripBox = new javax.swing.JComboBox();
@@ -225,42 +250,11 @@ public class AppGrip extends javax.swing.JApplet {
 		profileChooser = new javax.swing.JFileChooser();
 		newCheck = new javax.swing.JRadioButton();
 		profileCheck = new javax.swing.JRadioButton();
-		cH = new javax.swing.JPanel();
-		jLabel5 = new javax.swing.JLabel();
-		jLabel6 = new javax.swing.JLabel();
-		cHLin = new javax.swing.JTextField();
-		cHDiameter = new javax.swing.JTextField();
-		cHThrough = new javax.swing.JCheckBox();
-		cHLefty = new javax.swing.JCheckBox();
-		submitCH = new javax.swing.JButton();
-		jLabel1 = new javax.swing.JLabel();
-		jLabel28 = new javax.swing.JLabel();
-		CHLinSlide = new javax.swing.JSlider();
-		cHDSlide = new javax.swing.JSlider();
-		chImage = new javax.swing.JLabel();
 		eA = new javax.swing.JPanel();
 		jLabel3 = new javax.swing.JLabel();
 		extensionsBox = new javax.swing.JComboBox();
 		chooseExtension = new javax.swing.JButton();
 		jLabel30 = new javax.swing.JLabel();
-		cL = new javax.swing.JPanel();
-		jLabel14 = new javax.swing.JLabel();
-		jLabel15 = new javax.swing.JLabel();
-		cLLin = new javax.swing.JTextField();
-		cLDiameter = new javax.swing.JTextField();
-		cLLefty = new javax.swing.JCheckBox();
-		submitCL = new javax.swing.JButton();
-		jLabel16 = new javax.swing.JLabel();
-		jLabel17 = new javax.swing.JLabel();
-		cLLout = new javax.swing.JTextField();
-		jLabel36 = new javax.swing.JLabel();
-		jLabel37 = new javax.swing.JLabel();
-		jLabel38 = new javax.swing.JLabel();
-		cLLinSlider = new javax.swing.JSlider();
-		cLLoutSlider = new javax.swing.JSlider();
-		cLDSlider = new javax.swing.JSlider();
-		jLabel2 = new javax.swing.JLabel();
-		jSlider1 = new javax.swing.JSlider();
 		rU = new javax.swing.JPanel();
 		jLabel22 = new javax.swing.JLabel();
 		jLabel23 = new javax.swing.JLabel();
@@ -281,6 +275,10 @@ public class AppGrip extends javax.swing.JApplet {
 		rUWSlider = new javax.swing.JSlider();
 		rUHSlider = new javax.swing.JSlider();
 		jLabel43 = new javax.swing.JLabel();
+		jLabel59 = new javax.swing.JLabel();
+		jLabel60 = new javax.swing.JLabel();
+		jLabel61 = new javax.swing.JLabel();
+		jLabel62 = new javax.swing.JLabel();
 		cU = new javax.swing.JPanel();
 		jLabel26 = new javax.swing.JLabel();
 		jLabel27 = new javax.swing.JLabel();
@@ -297,6 +295,80 @@ public class AppGrip extends javax.swing.JApplet {
 		cUDSlider = new javax.swing.JSlider();
 		cUASlider = new javax.swing.JSlider();
 		jLabel47 = new javax.swing.JLabel();
+		jLabel63 = new javax.swing.JLabel();
+		jLabel64 = new javax.swing.JLabel();
+		jLabel65 = new javax.swing.JLabel();
+		jLabel73 = new javax.swing.JLabel();
+		rH = new javax.swing.JPanel();
+		jLabel7 = new javax.swing.JLabel();
+		jLabel8 = new javax.swing.JLabel();
+		rHLin = new javax.swing.JTextField();
+		rHHeight = new javax.swing.JTextField();
+		rHThrough = new javax.swing.JCheckBox();
+		rHLefty = new javax.swing.JCheckBox();
+		submitRH = new javax.swing.JButton();
+		jLabel9 = new javax.swing.JLabel();
+		rHWidth = new javax.swing.JTextField();
+		canvas1 = new java.awt.Canvas();
+		jLabel4 = new javax.swing.JLabel();
+		jLabel19 = new javax.swing.JLabel();
+		jLabel20 = new javax.swing.JLabel();
+		rHLinSlider = new javax.swing.JSlider();
+		rHHSlider = new javax.swing.JSlider();
+		jLabel21 = new javax.swing.JLabel();
+		rHWSlider = new javax.swing.JSlider();
+		jLabel67 = new javax.swing.JLabel();
+		jLabel68 = new javax.swing.JLabel();
+		jLabel69 = new javax.swing.JLabel();
+		directory = new javax.swing.JPanel();
+		directoryChooser = new javax.swing.JFileChooser();
+		jLabel48 = new javax.swing.JLabel();
+		finish = new javax.swing.JPanel();
+		jLabel49 = new javax.swing.JLabel();
+		selectProfile = new javax.swing.JCheckBox();
+		selectScad = new javax.swing.JCheckBox();
+		selectSTL = new javax.swing.JCheckBox();
+		submitFinish = new javax.swing.JButton();
+		jLabel50 = new javax.swing.JLabel();
+		jLabel51 = new javax.swing.JLabel();
+		jLabel52 = new javax.swing.JLabel();
+		gripName = new javax.swing.JTextField();
+		jLabel53 = new javax.swing.JLabel();
+		cH = new javax.swing.JPanel();
+		jLabel5 = new javax.swing.JLabel();
+		jLabel6 = new javax.swing.JLabel();
+		cHLin = new javax.swing.JTextField();
+		cHDiameter = new javax.swing.JTextField();
+		cHThrough = new javax.swing.JCheckBox();
+		cHLefty = new javax.swing.JCheckBox();
+		submitCH = new javax.swing.JButton();
+		jLabel1 = new javax.swing.JLabel();
+		jLabel28 = new javax.swing.JLabel();
+		CHLinSlide = new javax.swing.JSlider();
+		cHDSlide = new javax.swing.JSlider();
+		chImage = new javax.swing.JLabel();
+		jLabel55 = new javax.swing.JLabel();
+		jLabel56 = new javax.swing.JLabel();
+		cL = new javax.swing.JPanel();
+		jLabel14 = new javax.swing.JLabel();
+		jLabel15 = new javax.swing.JLabel();
+		cLLin = new javax.swing.JTextField();
+		cLDiameter = new javax.swing.JTextField();
+		cLLefty = new javax.swing.JCheckBox();
+		submitCL = new javax.swing.JButton();
+		jLabel16 = new javax.swing.JLabel();
+		jLabel17 = new javax.swing.JLabel();
+		cLLout = new javax.swing.JTextField();
+		jLabel36 = new javax.swing.JLabel();
+		jLabel37 = new javax.swing.JLabel();
+		jLabel38 = new javax.swing.JLabel();
+		cLLinSlider = new javax.swing.JSlider();
+		cLLoutSlider = new javax.swing.JSlider();
+		cLDSlider = new javax.swing.JSlider();
+		jLabel2 = new javax.swing.JLabel();
+		jLabel57 = new javax.swing.JLabel();
+		jLabel54 = new javax.swing.JLabel();
+		jLabel58 = new javax.swing.JLabel();
 		rL = new javax.swing.JPanel();
 		jLabel10 = new javax.swing.JLabel();
 		jLabel11 = new javax.swing.JLabel();
@@ -317,36 +389,10 @@ public class AppGrip extends javax.swing.JApplet {
 		rLHslider = new javax.swing.JSlider();
 		jLabel35 = new javax.swing.JLabel();
 		rLWSlidr = new javax.swing.JSlider();
-		rH = new javax.swing.JPanel();
-		jLabel7 = new javax.swing.JLabel();
-		jLabel8 = new javax.swing.JLabel();
-		rHLin = new javax.swing.JTextField();
-		rHHeight = new javax.swing.JTextField();
-		rHThrough = new javax.swing.JCheckBox();
-		rHLefty = new javax.swing.JCheckBox();
-		submitRH = new javax.swing.JButton();
-		jLabel9 = new javax.swing.JLabel();
-		rHWidth = new javax.swing.JTextField();
-		canvas1 = new java.awt.Canvas();
-		jLabel4 = new javax.swing.JLabel();
-		jLabel19 = new javax.swing.JLabel();
-		jLabel20 = new javax.swing.JLabel();
-		rHLinSlider = new javax.swing.JSlider();
-		rHHSlider = new javax.swing.JSlider();
-		jLabel21 = new javax.swing.JLabel();
-		rHWSlider = new javax.swing.JSlider();
-		directory = new javax.swing.JPanel();
-		directoryChooser = new javax.swing.JFileChooser();
-		jLabel48 = new javax.swing.JLabel();
-		finish = new javax.swing.JPanel();
-		jLabel49 = new javax.swing.JLabel();
-		selectProfile = new javax.swing.JCheckBox();
-		selectScad = new javax.swing.JCheckBox();
-		selectSTL = new javax.swing.JCheckBox();
-		submitFinish = new javax.swing.JButton();
-		jLabel50 = new javax.swing.JLabel();
-		jLabel51 = new javax.swing.JLabel();
-		jLabel52 = new javax.swing.JLabel();
+		jLabel66 = new javax.swing.JLabel();
+		jLabel70 = new javax.swing.JLabel();
+		jLabel71 = new javax.swing.JLabel();
+		jLabel72 = new javax.swing.JLabel();
 
 		directory();
 
@@ -566,21 +612,31 @@ public class AppGrip extends javax.swing.JApplet {
 			throws PositionNotSupportedException, invalidDiameterException,
 			STLNotPresentException, invalidDimmensionsException, IOException,
 			InterruptedException {
+		gripFab.name = gripName.getText();
 		if (selectProfile.isSelected())
 			gripFab.writeProfile();
 		if (selectScad.isSelected())
 			gripFab.writefile();
 		if (selectSTL.isSelected())
 			gripFab.writeSTL();
+		if (selectProfile.isSelected() || selectScad.isSelected()) {
+			gripsMadeInSession++;
+			if (Character.isDigit(gripName.getText().charAt(
+					gripName.getText().length() - 1)))
+				gripName.setText(gripName.getText().substring(0,
+						gripName.getText().length() - 1)
+						+ gripsMadeInSession);
+			else
+				gripName.setText(gripName.getText() + gripsMadeInSession);
+		}
 		showStatus("Files are Submitted: Please check your selected directory.");
 	}
-	
+
 	protected void selectSCADActionPerformed(ActionEvent evt) {
-		if(selectScad.isSelected())
+		if (selectScad.isSelected())
 			selectSTL.setVisible(true);
 		else
 			selectSTL.setVisible(false);
-		
 	}
 
 	protected void extensionsBoxActionPerformed(ActionEvent evt)
@@ -812,7 +868,6 @@ public class AppGrip extends javax.swing.JApplet {
 		if (result == JFileChooser.APPROVE_OPTION) {
 			gripFab.directory = directoryChooser.getSelectedFile()
 					.getAbsolutePath();
-			System.out.println(gripFab.directory);
 			gripFab.name = gripFab.directory.substring(gripFab.directory
 					.lastIndexOf("\\") + 1);
 			Path source = Paths
@@ -966,13 +1021,6 @@ public class AppGrip extends javax.swing.JApplet {
 			}
 		});
 
-		cHThrough.setText("Through");
-		cHThrough.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				cHThroughActionPerformed(evt);
-			}
-		});
-
 		submitCH.setText("Submit");
 		submitCH.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -998,9 +1046,16 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel5.setText("Diameter:");
 
-		jLabel6.setText("Protrusion Length:");
+		jLabel6.setText("Grip Depth:");
 
-		cHLefty.setText("Lefty");
+		cHThrough.setText("All the Way through grip?");
+		cHThrough.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				cHThroughActionPerformed(evt);
+			}
+		});
+
+		cHLefty.setText("Are you Left Handed?");
 
 		jLabel1.setText("mm");
 
@@ -1008,7 +1063,10 @@ public class AppGrip extends javax.swing.JApplet {
 
 		chImage.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/resources/gripCH.gif"))); // NOI18N
-		chImage.setText("");
+
+		jLabel55.setText("The Diameter should fit tightly around your cylindrical object");
+
+		jLabel56.setText("The protrusion length desides how far back the object will go into the grip. Suggested 50mm.");
 
 		setLayouts();
 		Panel.remove(rH);
@@ -1032,13 +1090,6 @@ public class AppGrip extends javax.swing.JApplet {
 		rHHeight.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				rHHeightActionPerformed(evt);
-			}
-		});
-
-		rHThrough.setText("Through");
-		rHThrough.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				rHThroughActionPerformed(evt);
 			}
 		});
 
@@ -1082,9 +1133,16 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel7.setText("Height:");
 
-		jLabel8.setText("Protrusion Length:");
+		jLabel8.setText("Grip Depth:");
 
-		rHLefty.setText("Lefty");
+		rHThrough.setText("All the way through grip?");
+		rHThrough.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				rHThroughActionPerformed(evt);
+			}
+		});
+
+		rHLefty.setText("Are you left handed?");
 
 		jLabel9.setText("Width:");
 
@@ -1096,7 +1154,12 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/resources/gripRH.gif"))); // NOI18N
-		jLabel21.setText("jLabel21");
+
+		jLabel67.setText("The protrusion length desides how far back the object will go into the grip. Suggested 50mm.");
+
+		jLabel68.setText("Width of rectangular hole");
+
+		jLabel69.setText("Heigth of rectangular hole");
 
 		setLayouts();
 
@@ -1164,11 +1227,11 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel14.setText("Diameter:");
 
-		jLabel15.setText("Protrusion Length:");
+		jLabel15.setText("Grip Depth:");
 
-		cLLefty.setText("Lefty");
+		cLLefty.setText("Are you Left Handed?");
 
-		jLabel17.setText("Extrusion Length:");
+		jLabel17.setText("Barrel Length:");
 
 		jLabel36.setText("mm");
 
@@ -1178,6 +1241,12 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/resources/gripCL.gif"))); // NOI18N
+
+		jLabel57.setText("The Diameter should fit tightly around your cylindrical object");
+
+		jLabel54.setText("The barrel provides support. The barrel length should run the length of the item it is supporting. ");
+
+		jLabel58.setText("The protrusion length desides how far back the object will go into the grip. Suggested 50mm.");
 
 		setLayouts();
 		Panel.remove(cH);
@@ -1259,13 +1328,13 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel10.setText("Height:");
 
-		jLabel11.setText("Protrusion Length:");
+		jLabel11.setText("Grip Depth");
 
-		rLLefty.setText("Lefty");
+		rLLefty.setText("Are you Left Handed?");
 
 		jLabel12.setText("Width:");
 
-		jLabel13.setText("Extrusion Length:");
+		jLabel13.setText("Barrel Length:");
 
 		jLabel31.setText("mm");
 
@@ -1277,7 +1346,14 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/resources/gripRL.gif"))); // NOI18N
-		jLabel35.setText("jLabel35");
+
+		jLabel66.setText("The protrusion length desides how far back the object will go into the grip. Suggested 50mm.");
+
+		jLabel70.setText("The barrel provides support. The barrel length should run the length of the item it is supporting. ");
+
+		jLabel71.setText("Width of rectangular hole");
+
+		jLabel72.setText("Height of rectangular hole");
 
 		setLayouts();
 		Panel.addTab("Settings", rL);
@@ -1290,6 +1366,13 @@ public class AppGrip extends javax.swing.JApplet {
 	}
 
 	private void cU() {
+		submitCU.setText("Submit");
+		submitCU.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				submitCUActionPerformed(evt);
+			}
+		});
+		
 		cUAngle.setText(gripFab.angle + "");
 		cUAngle.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1339,16 +1422,7 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel27.setText("Angle:");
 
-		cULefty.setText("Lefty");
-
-		submitCU.setText("Submit");
-		submitCU.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				submitCUActionPerformed(evt);
-			}
-		});
-
-		jLabel29.setText("Extrusion Length:");
+		cULefty.setText("Are you Left Handed?");
 
 		jLabel44.setText("mm");
 
@@ -1359,6 +1433,13 @@ public class AppGrip extends javax.swing.JApplet {
 		jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/resources/gripCU.gif"))); // NOI18N
 
+		jLabel63.setText("The angle at which you want the barrel to point");
+
+		jLabel64.setText("The barrel provides support. The barrel length should run the length of the item it is supporting. ");
+
+		jLabel65.setText("The Diameter should fit tightly around your cylindrical object");
+
+		jLabel73.setText("Barrel Length:");
 		setLayouts();
 		Panel.remove(cH);
 		Panel.remove(rH);
@@ -1437,15 +1518,13 @@ public class AppGrip extends javax.swing.JApplet {
 			}
 		});
 
+		rULefty.setText("Are you left handed?");
+
 		jLabel22.setText("Height:");
 
 		jLabel23.setText("Angle:");
 
-		rULefty.setText("Lefty");
-
-		jLabel24.setText("Width:");
-
-		jLabel25.setText("Extrusion Length:");
+		jLabel25.setText("Barrel Length:");
 
 		jLabel39.setText("mm");
 
@@ -1457,7 +1536,14 @@ public class AppGrip extends javax.swing.JApplet {
 
 		jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/resources/gripRU.gif"))); // NOI18N
-		jLabel43.setText("jLabel43");
+
+		jLabel59.setText("The angle at which you want the barrel to point");
+
+		jLabel60.setText("The barrel provides support. The barrel length should run the length of the item it is supporting. ");
+
+		jLabel61.setText("Width of rectanglular hole");
+
+		jLabel62.setText("Height of rectangular hole");
 
 		setLayouts();
 		Panel.remove(cH);
@@ -1475,8 +1561,8 @@ public class AppGrip extends javax.swing.JApplet {
 		selectProfile.setText("Profile");
 
 		selectScad.setText("OpenSCAD File");
-		selectScad.addActionListener( new ActionListener(){
-			public void actionPerformed( ActionEvent evt){
+		selectScad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				selectSCADActionPerformed(evt);
 			}
 		});
@@ -1511,6 +1597,9 @@ public class AppGrip extends javax.swing.JApplet {
 			}
 		});
 
+		gripName.setText("grip");
+		jLabel53.setText("Grip Name:");
+
 		jLabel50.setText("Once submitted all selected files wil appear in selected directory.");
 
 		jLabel51.setText("Profile and STL files can be moved from this location.");
@@ -1522,8 +1611,6 @@ public class AppGrip extends javax.swing.JApplet {
 		Panel.addTab("Finish", finish);
 		Panel.setSelectedIndex(Panel.indexOfTab("Finish"));
 	}
-
-	
 
 	private void setLayouts() {
 		// directory
@@ -1674,25 +1761,35 @@ public class AppGrip extends javax.swing.JApplet {
 				.addGroup(
 						eALayout.createSequentialGroup()
 								.addContainerGap()
-								.addComponent(jLabel3)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(extensionsBox, 0, 831,
-										Short.MAX_VALUE)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(chooseExtension)
-								.addContainerGap())
-				.addGroup(
-						eALayout.createSequentialGroup()
-								.addGap(118, 118, 118)
-								.addComponent(jLabel30,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
-										746,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)));
+								.addGroup(
+										eALayout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(
+														eALayout.createSequentialGroup()
+																.addComponent(
+																		jLabel3)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		extensionsBox,
+																		0,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		chooseExtension))
+												.addGroup(
+														eALayout.createSequentialGroup()
+																.addComponent(
+																		jLabel30,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		746,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addGap(0,
+																		0,
+																		Short.MAX_VALUE)))
+								.addContainerGap()));
 		eALayout.setVerticalGroup(eALayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -1708,8 +1805,10 @@ public class AppGrip extends javax.swing.JApplet {
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addComponent(chooseExtension))
-								.addGap(18, 18, 18).addComponent(jLabel30)
-								.addContainerGap(186, Short.MAX_VALUE)));
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+								.addComponent(jLabel30)
+								.addContainerGap(591, Short.MAX_VALUE)));
 		// cH
 		javax.swing.GroupLayout cHLayout = new javax.swing.GroupLayout(cH);
 		cH.setLayout(cHLayout);
@@ -1724,85 +1823,77 @@ public class AppGrip extends javax.swing.JApplet {
 												.addGroup(
 														cHLayout.createSequentialGroup()
 																.addComponent(
-																		cHLefty)
+																		submitCH)
 																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		Short.MAX_VALUE)
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
-																		cHThrough))
+																		chImage))
 												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
 														cHLayout.createSequentialGroup()
+																.addGap(2, 2, 2)
+																.addComponent(
+																		jLabel5)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addGroup(
 																		cHLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.TRAILING)
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						jLabel55)
 																				.addGroup(
 																						cHLayout.createSequentialGroup()
 																								.addGroup(
 																										cHLayout.createParallelGroup(
-																												javax.swing.GroupLayout.Alignment.LEADING)
+																												javax.swing.GroupLayout.Alignment.TRAILING)
 																												.addComponent(
-																														jLabel6)
-																												.addComponent(
-																														jLabel5))
+																														cHDSlide,
+																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														574,
+																														javax.swing.GroupLayout.PREFERRED_SIZE)
+																												.addGroup(
+																														cHLayout.createParallelGroup(
+																																javax.swing.GroupLayout.Alignment.LEADING)
+																																.addComponent(
+																																		jLabel56)
+																																.addComponent(
+																																		CHLinSlide,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																																		568,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE)))
 																								.addPreferredGap(
 																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																								.addGroup(
 																										cHLayout.createParallelGroup(
 																												javax.swing.GroupLayout.Alignment.LEADING)
+																												.addGroup(
+																														cHLayout.createSequentialGroup()
+																																.addComponent(
+																																		cHDiameter,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																																.addPreferredGap(
+																																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																																.addComponent(
+																																		jLabel1))
+																												.addGroup(
+																														cHLayout.createSequentialGroup()
+																																.addComponent(
+																																		cHLin,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																																.addPreferredGap(
+																																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																																.addComponent(
+																																		jLabel28))
 																												.addComponent(
-																														cHDSlide,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														Short.MAX_VALUE)
-																												.addComponent(
-																														CHLinSlide,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														Short.MAX_VALUE)))
-																				.addGroup(
-																						cHLayout.createSequentialGroup()
-																								.addComponent(
-																										submitCH)
-																								.addGap(85,
-																										85,
-																										85)
-																								.addComponent(
-																										chImage,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										569,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addGap(0,
-																										104,
-																										Short.MAX_VALUE)))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(
-																		cHLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						cHLin,
-																						javax.swing.GroupLayout.Alignment.TRAILING,
-																						javax.swing.GroupLayout.PREFERRED_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.PREFERRED_SIZE)
-																				.addComponent(
-																						cHDiameter,
-																						javax.swing.GroupLayout.Alignment.TRAILING,
-																						javax.swing.GroupLayout.PREFERRED_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.PREFERRED_SIZE))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(
-																		cHLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						jLabel28)
-																				.addComponent(
-																						jLabel1))))
-								.addContainerGap()));
+																														cHThrough)))))
+												.addComponent(cHLefty)
+												.addComponent(jLabel6))
+								.addContainerGap(
+										javax.swing.GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)));
 		cHLayout.setVerticalGroup(cHLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -1811,11 +1902,10 @@ public class AppGrip extends javax.swing.JApplet {
 								.addGroup(
 										cHLayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel5)
 												.addGroup(
 														cHLayout.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(
-																		jLabel5)
 																.addComponent(
 																		cHDiameter,
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -1828,53 +1918,57 @@ public class AppGrip extends javax.swing.JApplet {
 														javax.swing.GroupLayout.PREFERRED_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										cHLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
-												.addGroup(
-														cHLayout.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(
-																		jLabel6)
-																.addComponent(
-																		cHLin,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addComponent(
-																		jLabel28))
-												.addComponent(
-														CHLinSlide,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addGap(5, 5, 5)
+								.addComponent(jLabel55)
+								.addGap(18, 18, 18)
 								.addGroup(
 										cHLayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel6)
 												.addGroup(
 														cHLayout.createSequentialGroup()
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 																.addGroup(
 																		cHLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.BASELINE)
+																				javax.swing.GroupLayout.Alignment.LEADING)
 																				.addComponent(
-																						cHLefty)
-																				.addComponent(
-																						cHThrough))
+																						CHLinSlide,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.PREFERRED_SIZE)
+																				.addGroup(
+																						cHLayout.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.BASELINE)
+																								.addComponent(
+																										cHLin,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addComponent(
+																										jLabel28)))
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(
-																		submitCH))
-												.addGroup(
-														cHLayout.createSequentialGroup()
-																.addGap(22, 22,
-																		22)
-																.addComponent(
-																		chImage)))
-								.addContainerGap(213, Short.MAX_VALUE)));
+																.addGroup(
+																		cHLayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.TRAILING)
+																				.addComponent(
+																						cHThrough)
+																				.addComponent(
+																						jLabel56,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						31,
+																						javax.swing.GroupLayout.PREFERRED_SIZE))))
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(cHLefty)
+								.addGap(12, 12, 12)
+								.addGroup(
+										cHLayout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(submitCH)
+												.addComponent(chImage))
+								.addContainerGap(
+										javax.swing.GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)));
 		// rH
 		javax.swing.GroupLayout rHLayout = new javax.swing.GroupLayout(rH);
 		rH.setLayout(rHLayout);
@@ -1890,109 +1984,136 @@ public class AppGrip extends javax.swing.JApplet {
 														rHLayout.createSequentialGroup()
 																.addGroup(
 																		rHLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.TRAILING)
-																				.addComponent(
-																						jLabel7)
-																				.addComponent(
-																						jLabel9))
-																.addGap(69, 69,
-																		69)
-																.addGroup(
-																		rHLayout.createParallelGroup(
 																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addGroup(
+																						rHLayout.createSequentialGroup()
+																								.addGroup(
+																										rHLayout.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING)
+																												.addComponent(
+																														jLabel8)
+																												.addComponent(
+																														jLabel7)
+																												.addComponent(
+																														jLabel9))
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addGroup(
+																										rHLayout.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING,
+																												false)
+																												.addComponent(
+																														jLabel67)
+																												.addComponent(
+																														jLabel69)
+																												.addComponent(
+																														jLabel68)
+																												.addComponent(
+																														rHLinSlider,
+																														javax.swing.GroupLayout.DEFAULT_SIZE,
+																														649,
+																														Short.MAX_VALUE)
+																												.addComponent(
+																														rHWSlider,
+																														javax.swing.GroupLayout.DEFAULT_SIZE,
+																														javax.swing.GroupLayout.DEFAULT_SIZE,
+																														Short.MAX_VALUE)
+																												.addComponent(
+																														rHHSlider,
+																														javax.swing.GroupLayout.DEFAULT_SIZE,
+																														javax.swing.GroupLayout.DEFAULT_SIZE,
+																														Short.MAX_VALUE)))
 																				.addComponent(
-																						rHHSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)
-																				.addComponent(
-																						rHWSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																						rHLefty))
+																.addGap(8, 8, 8)
 																.addGroup(
 																		rHLayout.createParallelGroup(
 																				javax.swing.GroupLayout.Alignment.LEADING)
 																				.addGroup(
-																						javax.swing.GroupLayout.Alignment.TRAILING,
 																						rHLayout.createSequentialGroup()
-																								.addComponent(
-																										rHWidth,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																								.addComponent(
-																										jLabel19))
+																								.addGroup(
+																										rHLayout.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING)
+																												.addComponent(
+																														rHHeight,
+																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														javax.swing.GroupLayout.DEFAULT_SIZE,
+																														javax.swing.GroupLayout.PREFERRED_SIZE)
+																												.addComponent(
+																														rHWidth,
+																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														javax.swing.GroupLayout.DEFAULT_SIZE,
+																														javax.swing.GroupLayout.PREFERRED_SIZE)
+																												.addComponent(
+																														rHLin,
+																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														javax.swing.GroupLayout.DEFAULT_SIZE,
+																														javax.swing.GroupLayout.PREFERRED_SIZE))
+																								.addGroup(
+																										rHLayout.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING)
+																												.addGroup(
+																														rHLayout.createSequentialGroup()
+																																.addPreferredGap(
+																																		javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																																		Short.MAX_VALUE)
+																																.addComponent(
+																																		canvas1,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																																.addGap(44,
+																																		44,
+																																		44))
+																												.addGroup(
+																														rHLayout.createSequentialGroup()
+																																.addPreferredGap(
+																																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																																.addGroup(
+																																		rHLayout.createParallelGroup(
+																																				javax.swing.GroupLayout.Alignment.LEADING)
+																																				.addGroup(
+																																						rHLayout.createSequentialGroup()
+																																								.addComponent(
+																																										jLabel4)
+																																								.addContainerGap(
+																																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																																										Short.MAX_VALUE))
+																																				.addGroup(
+																																						rHLayout.createSequentialGroup()
+																																								.addGroup(
+																																										rHLayout.createParallelGroup(
+																																												javax.swing.GroupLayout.Alignment.LEADING)
+																																												.addComponent(
+																																														jLabel20)
+																																												.addComponent(
+																																														jLabel19))
+																																								.addGap(0,
+																																										0,
+																																										Short.MAX_VALUE))))))
 																				.addGroup(
-																						javax.swing.GroupLayout.Alignment.TRAILING,
 																						rHLayout.createSequentialGroup()
 																								.addComponent(
-																										rHHeight,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																								.addComponent(
-																										jLabel4))))
+																										rHThrough)
+																								.addGap(0,
+																										269,
+																										Short.MAX_VALUE))))
 												.addGroup(
 														rHLayout.createSequentialGroup()
-																.addComponent(
-																		jLabel8)
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(
-																		rHLinSlider,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		Short.MAX_VALUE)
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(
-																		rHLin,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(
-																		jLabel20))
-												.addGroup(
-														rHLayout.createSequentialGroup()
-																.addComponent(
-																		submitRH)
-																.addGap(58, 58,
-																		58)
-																.addComponent(
-																		jLabel21,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		569,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(
-																		canvas1,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addGroup(
+																		rHLayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						submitRH)
+																				.addComponent(
+																						jLabel21,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						569,
+																						javax.swing.GroupLayout.PREFERRED_SIZE))
 																.addGap(0,
-																		175,
-																		Short.MAX_VALUE))
-												.addGroup(
-														rHLayout.createSequentialGroup()
-																.addComponent(
-																		rHLefty)
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		Short.MAX_VALUE)
-																.addComponent(
-																		rHThrough)))
-								.addContainerGap()));
+																		0,
+																		Short.MAX_VALUE)))));
 		rHLayout.setVerticalGroup(rHLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -2001,142 +2122,148 @@ public class AppGrip extends javax.swing.JApplet {
 								.addGroup(
 										rHLayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														rHLayout.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-																.addGroup(
-																		rHLayout.createSequentialGroup()
-																				.addComponent(
-																						jLabel7)
-																				.addGap(10,
-																						10,
-																						10))
-																.addComponent(
-																		jLabel4,
-																		javax.swing.GroupLayout.Alignment.TRAILING,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		22,
-																		javax.swing.GroupLayout.PREFERRED_SIZE))
-												.addComponent(
-														rHHeight,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(jLabel7)
 												.addComponent(
 														rHHSlider,
 														javax.swing.GroupLayout.PREFERRED_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addGroup(
-										rHLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
-														rHLayout.createSequentialGroup()
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(
-																		rHWSlider,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE))
-												.addGroup(
-														rHLayout.createSequentialGroup()
-																.addGroup(
-																		rHLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addGroup(
-																						rHLayout.createSequentialGroup()
-																								.addGap(11,
-																										11,
-																										11)
-																								.addGroup(
-																										rHLayout.createParallelGroup(
-																												javax.swing.GroupLayout.Alignment.BASELINE)
-																												.addComponent(
-																														jLabel19)
-																												.addComponent(
-																														rHWidth,
-																														javax.swing.GroupLayout.PREFERRED_SIZE,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														javax.swing.GroupLayout.PREFERRED_SIZE)))
-																				.addGroup(
-																						rHLayout.createSequentialGroup()
-																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																								.addComponent(
-																										jLabel9)))
-																.addGap(1, 1, 1)))
-								.addGroup(
-										rHLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														rHLayout.createSequentialGroup()
-																.addGap(10, 10,
-																		10)
-																.addComponent(
-																		jLabel8))
+														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addGroup(
 														rHLayout.createSequentialGroup()
 																.addGap(4, 4, 4)
 																.addGroup(
 																		rHLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
+																				javax.swing.GroupLayout.Alignment.BASELINE)
 																				.addComponent(
-																						jLabel20)
+																						jLabel4,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						22,
+																						javax.swing.GroupLayout.PREFERRED_SIZE)
 																				.addComponent(
-																						rHLin,
+																						rHHeight,
 																						javax.swing.GroupLayout.PREFERRED_SIZE,
 																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.PREFERRED_SIZE)))
-												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
-														rHLayout.createSequentialGroup()
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(
-																		rHLinSlider,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)))
+																						javax.swing.GroupLayout.PREFERRED_SIZE))))
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										rHLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														rHLayout.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-																.addGroup(
-																		rHLayout.createSequentialGroup()
-																				.addComponent(
-																						rHLefty)
-																				.addGap(18,
-																						18,
-																						18)
-																				.addComponent(
-																						submitRH))
-																.addGroup(
-																		rHLayout.createSequentialGroup()
-																				.addGap(68,
-																						68,
-																						68)
-																				.addComponent(
-																						canvas1,
-																						javax.swing.GroupLayout.PREFERRED_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.PREFERRED_SIZE)))
+												javax.swing.GroupLayout.Alignment.TRAILING)
 												.addGroup(
 														rHLayout.createSequentialGroup()
-																.addGap(53, 53,
-																		53)
+																.addComponent(
+																		jLabel69)
+																.addGroup(
+																		rHLayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addGroup(
+																						rHLayout.createSequentialGroup()
+																								.addGap(7,
+																										7,
+																										7)
+																								.addComponent(
+																										jLabel9))
+																				.addGroup(
+																						rHLayout.createSequentialGroup()
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addComponent(
+																										rHWSlider,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.PREFERRED_SIZE)))
+																.addGap(2, 2, 2)
+																.addComponent(
+																		jLabel68,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		10,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addGap(18, 18,
+																		18)
+																.addGroup(
+																		rHLayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						rHLinSlider,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.PREFERRED_SIZE)
+																				.addComponent(
+																						jLabel8)))
+												.addGroup(
+														rHLayout.createSequentialGroup()
+																.addGroup(
+																		rHLayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.BASELINE)
+																				.addComponent(
+																						rHWidth,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.PREFERRED_SIZE)
+																				.addComponent(
+																						jLabel19))
+																.addGap(38, 38,
+																		38)
+																.addGroup(
+																		rHLayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.TRAILING)
+																				.addComponent(
+																						rHLin,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.PREFERRED_SIZE)
+																				.addComponent(
+																						jLabel20))))
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+								.addGroup(
+										rHLayout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(
+														rHLayout.createSequentialGroup()
+																.addGap(0,
+																		81,
+																		Short.MAX_VALUE)
+																.addComponent(
+																		canvas1,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addGap(718,
+																		718,
+																		718))
+												.addGroup(
+														rHLayout.createSequentialGroup()
+																.addGroup(
+																		rHLayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						rHThrough,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						34,
+																						javax.swing.GroupLayout.PREFERRED_SIZE)
+																				.addGroup(
+																						rHLayout.createSequentialGroup()
+																								.addComponent(
+																										jLabel67)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																								.addComponent(
+																										rHLefty)))
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		submitRH)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
 																		jLabel21,
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
 																		350,
-																		javax.swing.GroupLayout.PREFERRED_SIZE))
-												.addComponent(rHThrough))
-								.addContainerGap(121, Short.MAX_VALUE)));
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addContainerGap(
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)))));
 		// cL
 		javax.swing.GroupLayout cLLayout = new javax.swing.GroupLayout(cL);
 		cL.setLayout(cLLayout);
@@ -2153,35 +2280,18 @@ public class AppGrip extends javax.swing.JApplet {
 																.addGroup(
 																		cLLayout.createParallelGroup(
 																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						jLabel14)
-																				.addComponent(
-																						jLabel16)
-																				.addComponent(
-																						jLabel17))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																.addGroup(
-																		cLLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						cLLoutSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)
-																				.addComponent(
-																						cLDSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(
-																		cLLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
 																				.addGroup(
-																						javax.swing.GroupLayout.Alignment.TRAILING,
 																						cLLayout.createSequentialGroup()
+																								.addGap(88,
+																										88,
+																										88)
+																								.addComponent(
+																										cLLoutSlider,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										Short.MAX_VALUE)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																								.addComponent(
 																										cLLout,
 																										javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -2195,50 +2305,62 @@ public class AppGrip extends javax.swing.JApplet {
 																						javax.swing.GroupLayout.Alignment.TRAILING,
 																						cLLayout.createSequentialGroup()
 																								.addComponent(
+																										jLabel14)
+																								.addGap(31,
+																										31,
+																										31)
+																								.addComponent(
+																										cLDSlider,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										Short.MAX_VALUE)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addComponent(
 																										cLDiameter,
 																										javax.swing.GroupLayout.PREFERRED_SIZE,
 																										javax.swing.GroupLayout.DEFAULT_SIZE,
 																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addGap(18,
-																										18,
-																										18)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																								.addComponent(
-																										jLabel36))))
+																										jLabel36)))
+																.addGap(483,
+																		483,
+																		483))
 												.addGroup(
 														cLLayout.createSequentialGroup()
 																.addGroup(
 																		cLLayout.createParallelGroup(
 																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						jLabel15)
-																				.addComponent(
-																						cLLefty)
-																				.addComponent(
-																						submitCL))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																.addGroup(
-																		cLLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						cLLinSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)
 																				.addGroup(
 																						cLLayout.createSequentialGroup()
 																								.addComponent(
-																										jLabel2)
-																								.addGap(0,
-																										0,
-																										Short.MAX_VALUE))
+																										jLabel17)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addGroup(
+																										cLLayout.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING)
+																												.addComponent(
+																														jLabel58)
+																												.addComponent(
+																														jLabel57)
+																												.addComponent(
+																														jLabel54)
+																												.addComponent(
+																														cLLinSlider,
+																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														544,
+																														javax.swing.GroupLayout.PREFERRED_SIZE)))
 																				.addComponent(
-																						jSlider1,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE))
+																						jLabel15)
+																				.addComponent(
+																						jLabel16))
 																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
 																.addComponent(
 																		cLLin,
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -2247,8 +2369,24 @@ public class AppGrip extends javax.swing.JApplet {
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 																.addComponent(
-																		jLabel38)))
-								.addContainerGap()));
+																		jLabel38)
+																.addGap(476,
+																		476,
+																		476))
+												.addGroup(
+														cLLayout.createSequentialGroup()
+																.addGroup(
+																		cLLayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						cLLefty)
+																				.addComponent(
+																						submitCL)
+																				.addComponent(
+																						jLabel2))
+																.addGap(0,
+																		0,
+																		Short.MAX_VALUE)))));
 		cLLayout.setVerticalGroup(cLLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -2256,110 +2394,101 @@ public class AppGrip extends javax.swing.JApplet {
 								.addContainerGap()
 								.addGroup(
 										cLLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
-												.addGroup(
-														cLLayout.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(
-																		jLabel14)
-																.addComponent(
-																		cLDiameter,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addComponent(
-																		jLabel36))
+												javax.swing.GroupLayout.Alignment.LEADING)
 												.addComponent(
 														cLDSlider,
 														javax.swing.GroupLayout.PREFERRED_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(jLabel14)
+												.addGroup(
+														cLLayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+																.addComponent(
+																		jLabel36)
+																.addComponent(
+																		cLDiameter,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)))
+								.addGap(3, 3, 3)
+								.addComponent(jLabel57)
+								.addGap(11, 11, 11)
 								.addComponent(jLabel16)
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										cLLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
+												javax.swing.GroupLayout.Alignment.TRAILING)
 												.addGroup(
-														cLLayout.createSequentialGroup()
-																.addGroup(
-																		cLLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addGroup(
-																						cLLayout.createSequentialGroup()
-																								.addGap(4,
-																										4,
-																										4)
-																								.addGroup(
-																										cLLayout.createParallelGroup(
-																												javax.swing.GroupLayout.Alignment.BASELINE)
-																												.addComponent(
-																														cLLout,
-																														javax.swing.GroupLayout.PREFERRED_SIZE,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														javax.swing.GroupLayout.PREFERRED_SIZE)
-																												.addComponent(
-																														jLabel37)))
-																				.addComponent(
-																						jLabel17))
-																.addGroup(
-																		cLLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addGroup(
-																						cLLayout.createSequentialGroup()
-																								.addGap(11,
-																										11,
-																										11)
-																								.addGroup(
-																										cLLayout.createParallelGroup(
-																												javax.swing.GroupLayout.Alignment.BASELINE)
-																												.addComponent(
-																														cLLin,
-																														javax.swing.GroupLayout.PREFERRED_SIZE,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														javax.swing.GroupLayout.PREFERRED_SIZE)
-																												.addComponent(
-																														jLabel38)))
-																				.addGroup(
-																						cLLayout.createSequentialGroup()
-																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																								.addGroup(
-																										cLLayout.createParallelGroup(
-																												javax.swing.GroupLayout.Alignment.LEADING)
-																												.addComponent(
-																														jSlider1,
-																														javax.swing.GroupLayout.PREFERRED_SIZE,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														javax.swing.GroupLayout.PREFERRED_SIZE)
-																												.addComponent(
-																														jLabel15)))))
-												.addComponent(
-														cLLoutSlider,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(
-														cLLinSlider,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+														cLLayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+																.addComponent(
+																		cLLout,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addComponent(
+																		jLabel37))
+												.addGroup(
+														cLLayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.LEADING)
+																.addComponent(
+																		jLabel17)
+																.addComponent(
+																		cLLoutSlider,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)))
+								.addGap(3, 3, 3)
 								.addGroup(
 										cLLayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
 												.addGroup(
+														javax.swing.GroupLayout.Alignment.TRAILING,
 														cLLayout.createSequentialGroup()
 																.addComponent(
-																		cLLefty)
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		jLabel54)
+																.addGap(18, 18,
+																		18)
 																.addComponent(
-																		submitCL))
-												.addComponent(jLabel2))
+																		jLabel15))
+												.addGroup(
+														javax.swing.GroupLayout.Alignment.TRAILING,
+														cLLayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.LEADING)
+																.addGroup(
+																		cLLayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.BASELINE)
+																				.addComponent(
+																						cLLin,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.PREFERRED_SIZE)
+																				.addComponent(
+																						jLabel38))
+																.addComponent(
+																		cLLinSlider,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)))
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jLabel58,
+										javax.swing.GroupLayout.PREFERRED_SIZE,
+										26,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(13, 13, 13)
+								.addComponent(cLLefty)
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(submitCL)
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jLabel2,
+										javax.swing.GroupLayout.PREFERRED_SIZE,
+										331,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addContainerGap(
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)));
@@ -2374,128 +2503,115 @@ public class AppGrip extends javax.swing.JApplet {
 								.addGroup(
 										rLLayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(submitRL)
+												.addComponent(jLabel35)
 												.addGroup(
 														rLLayout.createSequentialGroup()
 																.addGroup(
 																		rLLayout.createParallelGroup(
 																				javax.swing.GroupLayout.Alignment.LEADING)
 																				.addComponent(
-																						jLabel13)
-																				.addComponent(
-																						jLabel12)
-																				.addComponent(
-																						jLabel10))
+																						jLabel10)
+																				.addGroup(
+																						rLLayout.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING)
+																								.addComponent(
+																										jLabel13,
+																										javax.swing.GroupLayout.Alignment.TRAILING)
+																								.addComponent(
+																										jLabel11)))
 																.addGap(18, 18,
 																		18)
 																.addGroup(
 																		rLLayout.createParallelGroup(
 																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						rLHslider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)
-																				.addComponent(
-																						rLLoutSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)
-																				.addComponent(
-																						rLWSlidr,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(
-																		rLLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
 																				.addGroup(
-																						javax.swing.GroupLayout.Alignment.TRAILING,
 																						rLLayout.createSequentialGroup()
-																								.addComponent(
-																										rLLout,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addGroup(
+																										rLLayout.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING)
+																												.addComponent(
+																														rLLoutSlider,
+																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														585,
+																														javax.swing.GroupLayout.PREFERRED_SIZE)
+																												.addComponent(
+																														rLWSlidr,
+																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														585,
+																														javax.swing.GroupLayout.PREFERRED_SIZE)
+																												.addComponent(
+																														rLHslider,
+																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														585,
+																														javax.swing.GroupLayout.PREFERRED_SIZE)
+																												.addComponent(
+																														rLLinSlider,
+																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														585,
+																														javax.swing.GroupLayout.PREFERRED_SIZE)
+																												.addComponent(
+																														jLabel70)
+																												.addComponent(
+																														jLabel66))
 																								.addPreferredGap(
 																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																								.addComponent(
-																										jLabel33))
-																				.addGroup(
-																						javax.swing.GroupLayout.Alignment.TRAILING,
-																						rLLayout.createSequentialGroup()
-																								.addComponent(
-																										rLWidth,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addGap(18,
-																										18,
-																										18)
-																								.addComponent(
-																										jLabel32))
-																				.addGroup(
-																						javax.swing.GroupLayout.Alignment.TRAILING,
-																						rLLayout.createSequentialGroup()
-																								.addComponent(
-																										rLHeight,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addGap(18,
-																										18,
-																										18)
-																								.addComponent(
-																										jLabel31))))
-												.addGroup(
-														rLLayout.createSequentialGroup()
-																.addGroup(
-																		rLLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
+																								.addGroup(
+																										rLLayout.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING)
+																												.addGroup(
+																														rLLayout.createSequentialGroup()
+																																.addComponent(
+																																		rLHeight,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																																.addPreferredGap(
+																																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																																.addComponent(
+																																		jLabel31))
+																												.addGroup(
+																														rLLayout.createSequentialGroup()
+																																.addComponent(
+																																		rLWidth,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																																.addPreferredGap(
+																																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																																.addComponent(
+																																		jLabel32))
+																												.addGroup(
+																														rLLayout.createSequentialGroup()
+																																.addComponent(
+																																		rLLin,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																																.addPreferredGap(
+																																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																																.addComponent(
+																																		jLabel34))
+																												.addGroup(
+																														rLLayout.createSequentialGroup()
+																																.addComponent(
+																																		rLLout,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																																.addPreferredGap(
+																																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																																.addComponent(
+																																		jLabel33))))
 																				.addComponent(
-																						jLabel11)
+																						jLabel71)
 																				.addComponent(
-																						rLLefty)
-																				.addComponent(
-																						submitRL))
-																.addGap(20, 20,
-																		20)
-																.addGroup(
-																		rLLayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addGroup(
-																						rLLayout.createSequentialGroup()
-																								.addComponent(
-																										rLLinSlider,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										Short.MAX_VALUE)
-																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																								.addComponent(
-																										rLLin,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																								.addComponent(
-																										jLabel34))
-																				.addGroup(
-																						rLLayout.createSequentialGroup()
-																								.addGap(10,
-																										10,
-																										10)
-																								.addComponent(
-																										jLabel35,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										745,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addGap(0,
-																										5,
-																										Short.MAX_VALUE)))))
-								.addContainerGap()));
+																						jLabel72)))
+												.addComponent(jLabel12)
+												.addComponent(rLLefty))
+								.addContainerGap(
+										javax.swing.GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)));
 		rLLayout.setVerticalGroup(rLLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -2523,14 +2639,15 @@ public class AppGrip extends javax.swing.JApplet {
 														javax.swing.GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jLabel72)
+								.addGap(6, 6, 6)
 								.addGroup(
 										rLLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel12)
 												.addGroup(
 														rLLayout.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(
-																		jLabel12)
 																.addComponent(
 																		rLWidth,
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -2545,69 +2662,78 @@ public class AppGrip extends javax.swing.JApplet {
 														javax.swing.GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jLabel71)
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										rLLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel13)
+												.addComponent(
+														rLLoutSlider,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addGroup(
 														rLLayout.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(
-																		jLabel13)
 																.addComponent(
 																		rLLout,
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
 																		javax.swing.GroupLayout.DEFAULT_SIZE,
 																		javax.swing.GroupLayout.PREFERRED_SIZE)
 																.addComponent(
-																		jLabel33))
-												.addComponent(
-														rLLoutSlider,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+																		jLabel33)))
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jLabel70)
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+										javax.swing.GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
 								.addGroup(
 										rLLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(
+														rLLayout.createSequentialGroup()
+																.addGroup(
+																		rLLayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						jLabel11)
+																				.addComponent(
+																						rLLinSlider,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.PREFERRED_SIZE))
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		jLabel66)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		rLLefty))
 												.addGroup(
 														rLLayout.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(
-																		jLabel11)
 																.addComponent(
 																		rLLin,
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
 																		javax.swing.GroupLayout.DEFAULT_SIZE,
 																		javax.swing.GroupLayout.PREFERRED_SIZE)
 																.addComponent(
-																		jLabel34))
-												.addComponent(
-														rLLinSlider,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+																		jLabel34)))
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										rLLayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														rLLayout.createSequentialGroup()
-																.addComponent(
-																		rLLefty)
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(
-																		submitRL))
-												.addComponent(
-														jLabel35,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														507,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addContainerGap(
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)));
+								.addComponent(submitRL)
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jLabel35,
+										javax.swing.GroupLayout.PREFERRED_SIZE,
+										507,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(164, 164, 164)));
 		// cU
 		javax.swing.GroupLayout cULayout = new javax.swing.GroupLayout(cU);
 		cU.setLayout(cULayout);
@@ -2620,98 +2746,99 @@ public class AppGrip extends javax.swing.JApplet {
 										cULayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
 												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
-														cULayout.createSequentialGroup()
+														cULayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING)
 																.addGroup(
-																		cULayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						jLabel29)
+																		cULayout.createSequentialGroup()
 																				.addComponent(
 																						jLabel26)
-																				.addComponent(
-																						jLabel27))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(
-																		cULayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						cULoutSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)
-																				.addComponent(
-																						cUDSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)
-																				.addComponent(
-																						cUASlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(
-																		cULayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addGroup(
-																						cULayout.createSequentialGroup()
-																								.addComponent(
-																										cUDiameter,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addGap(19,
-																										19,
-																										19)
-																								.addComponent(
-																										jLabel44))
+																				.addGap(29,
+																						29,
+																						29)
 																				.addGroup(
 																						cULayout.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.LEADING)
+																								.addComponent(
+																										jLabel65)
 																								.addGroup(
-																										javax.swing.GroupLayout.Alignment.TRAILING,
 																										cULayout.createSequentialGroup()
 																												.addComponent(
-																														cUAngle,
+																														cUDSlider,
 																														javax.swing.GroupLayout.PREFERRED_SIZE,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
+																														572,
 																														javax.swing.GroupLayout.PREFERRED_SIZE)
 																												.addPreferredGap(
-																														javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																														javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																												.addComponent(
-																														jLabel46))
-																								.addGroup(
-																										javax.swing.GroupLayout.Alignment.TRAILING,
-																										cULayout.createSequentialGroup()
-																												.addComponent(
-																														cULout,
+																														cUDiameter,
 																														javax.swing.GroupLayout.PREFERRED_SIZE,
 																														javax.swing.GroupLayout.DEFAULT_SIZE,
 																														javax.swing.GroupLayout.PREFERRED_SIZE)
 																												.addPreferredGap(
 																														javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																												.addComponent(
-																														jLabel45)))))
+																														jLabel44))))
+																.addGroup(
+																		cULayout.createSequentialGroup()
+																				.addComponent(
+																						jLabel27)
+																				.addGap(51,
+																						51,
+																						51)
+																				.addGroup(
+																						cULayout.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING,
+																								false)
+																								.addComponent(
+																										jLabel63)
+																								.addComponent(
+																										jLabel64,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										561,
+																										Short.MAX_VALUE)
+																								.addComponent(
+																										cUASlider,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										Short.MAX_VALUE))
+																				.addGap(16,
+																						16,
+																						16)
+																				.addComponent(
+																						cUAngle,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.PREFERRED_SIZE)
+																				.addPreferredGap(
+																						javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																				.addComponent(
+																						jLabel46)))
 												.addGroup(
 														cULayout.createSequentialGroup()
-																.addGroup(
-																		cULayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						cULefty)
-																				.addComponent(
-																						submitCU))
-																.addGap(52, 52,
-																		52)
 																.addComponent(
-																		jLabel47)
-																.addGap(0,
-																		37,
-																		Short.MAX_VALUE)))
-								.addContainerGap()));
+																		jLabel73)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		cULoutSlider,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		573,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		cULout,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		jLabel45))
+												.addComponent(cULefty)
+												.addComponent(submitCU)
+												.addComponent(jLabel47))
+								.addContainerGap(209, Short.MAX_VALUE)));
 		cULayout.setVerticalGroup(cULayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -2719,24 +2846,24 @@ public class AppGrip extends javax.swing.JApplet {
 								.addContainerGap()
 								.addGroup(
 										cULayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(
+														cULayout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+																.addComponent(
+																		cUDiameter,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addComponent(
+																		jLabel44))
 												.addGroup(
 														cULayout.createSequentialGroup()
 																.addGroup(
 																		cULayout.createParallelGroup(
 																				javax.swing.GroupLayout.Alignment.TRAILING)
-																				.addGroup(
-																						cULayout.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																								.addComponent(
-																										jLabel26)
-																								.addComponent(
-																										cUDiameter,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addComponent(
-																										jLabel44))
+																				.addComponent(
+																						jLabel26)
 																				.addComponent(
 																						cUDSlider,
 																						javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -2744,60 +2871,74 @@ public class AppGrip extends javax.swing.JApplet {
 																						javax.swing.GroupLayout.PREFERRED_SIZE))
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		jLabel65)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addGroup(
 																		cULayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.TRAILING)
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						jLabel73)
+																				.addComponent(
+																						cULoutSlider,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.PREFERRED_SIZE)
 																				.addGroup(
 																						cULayout.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.BASELINE)
-																								.addComponent(
-																										jLabel29)
 																								.addComponent(
 																										cULout,
 																										javax.swing.GroupLayout.PREFERRED_SIZE,
 																										javax.swing.GroupLayout.DEFAULT_SIZE,
 																										javax.swing.GroupLayout.PREFERRED_SIZE)
 																								.addComponent(
-																										jLabel45))
-																				.addComponent(
-																						cULoutSlider,
-																						javax.swing.GroupLayout.PREFERRED_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.PREFERRED_SIZE))
+																										jLabel45)))
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		jLabel64)
+																.addGap(13, 13,
+																		13)
 																.addGroup(
 																		cULayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.BASELINE)
+																				javax.swing.GroupLayout.Alignment.LEADING)
 																				.addComponent(
 																						jLabel27)
-																				.addComponent(
-																						cUAngle,
-																						javax.swing.GroupLayout.PREFERRED_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.PREFERRED_SIZE)
-																				.addComponent(
-																						jLabel46)))
-												.addComponent(
-														cUASlider,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addGroup(
-										cULayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														cULayout.createSequentialGroup()
+																				.addGroup(
+																						cULayout.createSequentialGroup()
+																								.addComponent(
+																										cUASlider,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addComponent(
+																										jLabel63))
+																				.addGroup(
+																						cULayout.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.BASELINE)
+																								.addComponent(
+																										cUAngle,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addComponent(
+																										jLabel46)))
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 																.addComponent(
 																		cULefty)
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
-																		submitCU))
-												.addComponent(jLabel47))
-								.addContainerGap(146, Short.MAX_VALUE)));
+																		submitCU)))
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jLabel47).addContainerGap()));
+
 		// rU
 		javax.swing.GroupLayout rULayout = new javax.swing.GroupLayout(rU);
 		rU.setLayout(rULayout);
@@ -2808,118 +2949,129 @@ public class AppGrip extends javax.swing.JApplet {
 								.addContainerGap()
 								.addGroup(
 										rULayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
-												.addGroup(
-														rULayout.createSequentialGroup()
-																.addGroup(
-																		rULayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						jLabel25)
-																				.addComponent(
-																						jLabel22)
-																				.addComponent(
-																						jLabel23)
-																				.addComponent(
-																						jLabel24))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(
-																		rULayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						rUWSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)
-																				.addComponent(
-																						rUASlider,
-																						javax.swing.GroupLayout.Alignment.TRAILING,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)
-																				.addComponent(
-																						rULoutSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)
-																				.addComponent(
-																						rUHSlider,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						Short.MAX_VALUE)))
-												.addGroup(
-														rULayout.createSequentialGroup()
-																.addGroup(
-																		rULayout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						rULefty)
-																				.addComponent(
-																						submitRU))
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																		28,
-																		Short.MAX_VALUE)
-																.addComponent(
-																		jLabel43,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		723,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										rULayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(rULefty)
 												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
 														rULayout.createSequentialGroup()
 																.addComponent(
-																		rULout,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																		jLabel23)
+																.addGap(48, 48,
+																		48)
+																.addGroup(
+																		rULayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addGroup(
+																						rULayout.createSequentialGroup()
+																								.addComponent(
+																										rUASlider,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										574,
+																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addComponent(
+																										rUAngle,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.PREFERRED_SIZE))
+																				.addComponent(
+																						jLabel59))
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(
-																		jLabel41))
+																.addGroup(
+																		rULayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						jLabel42)
+																				.addComponent(
+																						jLabel41)))
 												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
+														rULayout.createSequentialGroup()
+																.addGroup(
+																		rULayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						jLabel24)
+																				.addComponent(
+																						jLabel25))
+																.addGap(9, 9, 9)
+																.addGroup(
+																		rULayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						jLabel60)
+																				.addComponent(
+																						jLabel61)
+																				.addGroup(
+																						rULayout.createSequentialGroup()
+																								.addComponent(
+																										rUWSlider,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										569,
+																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addComponent(
+																										rUWidth,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addComponent(
+																										jLabel40))
+																				.addGroup(
+																						rULayout.createSequentialGroup()
+																								.addComponent(
+																										rULoutSlider,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										569,
+																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addComponent(
+																										rULout,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.PREFERRED_SIZE))))
+												.addGroup(
 														rULayout.createSequentialGroup()
 																.addComponent(
-																		rUHeight,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addGap(18, 18,
-																		18)
-																.addComponent(
-																		jLabel39))
-												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
-														rULayout.createSequentialGroup()
-																.addComponent(
-																		rUAngle,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																.addComponent(
-																		jLabel42))
-												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
-														rULayout.createSequentialGroup()
-																.addComponent(
-																		rUWidth,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addGap(18, 18,
-																		18)
-																.addComponent(
-																		jLabel40)))
-								.addContainerGap()));
+																		jLabel22)
+																.addGap(44, 44,
+																		44)
+																.addGroup(
+																		rULayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						jLabel62)
+																				.addGroup(
+																						rULayout.createSequentialGroup()
+																								.addComponent(
+																										rUHSlider,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										574,
+																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addComponent(
+																										rUHeight,
+																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addPreferredGap(
+																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																								.addComponent(
+																										jLabel39))))
+												.addComponent(submitRU)
+												.addComponent(
+														jLabel43,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														969,
+														javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addContainerGap(
+										javax.swing.GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)));
 		rULayout.setVerticalGroup(rULayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
@@ -2928,104 +3080,148 @@ public class AppGrip extends javax.swing.JApplet {
 								.addGroup(
 										rULayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel22)
+												.addComponent(
+														rUHSlider,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addGroup(
 														rULayout.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(
-																		jLabel22)
 																.addComponent(
 																		rUHeight,
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
 																		javax.swing.GroupLayout.DEFAULT_SIZE,
 																		javax.swing.GroupLayout.PREFERRED_SIZE)
 																.addComponent(
-																		jLabel39))
-												.addComponent(
-														rUHSlider,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+																		jLabel39)))
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jLabel62)
+								.addGap(6, 6, 6)
 								.addGroup(
 										rULayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
-												.addGroup(
-														rULayout.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(
-																		jLabel24)
-																.addComponent(
-																		rUWidth,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addComponent(
-																		jLabel40))
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel24)
 												.addComponent(
 														rUWSlider,
 														javax.swing.GroupLayout.PREFERRED_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										rULayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
+														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addGroup(
 														rULayout.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 																.addComponent(
-																		jLabel25)
+																		jLabel40)
 																.addComponent(
-																		rULout,
+																		rUWidth,
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
 																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addComponent(
-																		jLabel41))
-												.addComponent(
-														rULoutSlider,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+																		javax.swing.GroupLayout.PREFERRED_SIZE)))
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										rULayout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														rULayout.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(
-																		jLabel23)
-																.addComponent(
-																		rUAngle,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addComponent(
-																		jLabel42))
-												.addComponent(
-														rUASlider,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addComponent(jLabel61)
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										rULayout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
 												.addGroup(
 														rULayout.createSequentialGroup()
 																.addComponent(
-																		rULefty)
+																		rULoutSlider,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
 																.addComponent(
-																		submitRU))
-												.addComponent(jLabel43))
-								.addContainerGap(109, Short.MAX_VALUE)));
+																		rULefty))
+												.addGroup(
+														rULayout.createSequentialGroup()
+																.addComponent(
+																		jLabel42)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE))
+												.addGroup(
+														javax.swing.GroupLayout.Alignment.TRAILING,
+														rULayout.createSequentialGroup()
+																.addGroup(
+																		rULayout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addGroup(
+																						javax.swing.GroupLayout.Alignment.TRAILING,
+																						rULayout.createSequentialGroup()
+																								.addGroup(
+																										rULayout.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING)
+																												.addComponent(
+																														jLabel25)
+																												.addComponent(
+																														rULout,
+																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														javax.swing.GroupLayout.DEFAULT_SIZE,
+																														javax.swing.GroupLayout.PREFERRED_SIZE))
+																								.addGroup(
+																										rULayout.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING)
+																												.addGroup(
+																														rULayout.createSequentialGroup()
+																																.addGap(6,
+																																		6,
+																																		6)
+																																.addComponent(
+																																		jLabel60))
+																												.addGroup(
+																														rULayout.createSequentialGroup()
+																																.addGap(32,
+																																		32,
+																																		32)
+																																.addGroup(
+																																		rULayout.createParallelGroup(
+																																				javax.swing.GroupLayout.Alignment.BASELINE)
+																																				.addComponent(
+																																						rUAngle,
+																																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																																						javax.swing.GroupLayout.PREFERRED_SIZE)
+																																				.addComponent(
+																																						jLabel41)))
+																												.addGroup(
+																														rULayout.createSequentialGroup()
+																																.addGap(36,
+																																		36,
+																																		36)
+																																.addComponent(
+																																		jLabel23)))
+																								.addGap(8,
+																										8,
+																										8))
+																				.addComponent(
+																						rUASlider,
+																						javax.swing.GroupLayout.Alignment.TRAILING,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						javax.swing.GroupLayout.PREFERRED_SIZE))
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addComponent(
+																		jLabel59)
+																.addGap(42, 42,
+																		42)))
+								.addComponent(submitRU)
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jLabel43,
+										javax.swing.GroupLayout.PREFERRED_SIZE,
+										497,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(147, 147, 147)));
 		// finish
 		javax.swing.GroupLayout finishLayout = new javax.swing.GroupLayout(
 				finish);
@@ -3042,38 +3238,58 @@ public class AppGrip extends javax.swing.JApplet {
 												finishLayout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(jLabel49)
 														.addGroup(
 																finishLayout
 																		.createSequentialGroup()
-																		.addGap(10,
-																				10,
-																				10)
+																		.addComponent(
+																				jLabel53)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addComponent(
+																				gripName))
+														.addGroup(
+																finishLayout
+																		.createSequentialGroup()
 																		.addGroup(
 																				finishLayout
 																						.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.LEADING)
 																						.addComponent(
-																								selectScad)
-																						.addComponent(
-																								selectProfile)
-																						.addComponent(
-																								submitFinish)
-																						.addComponent(
-																								jLabel50)
-																						.addComponent(
-																								jLabel51)
-																						.addComponent(
-																								jLabel52)
+																								jLabel49)
 																						.addGroup(
 																								finishLayout
 																										.createSequentialGroup()
-																										.addGap(24,
-																												24,
-																												24)
-																										.addComponent(
-																												selectSTL)))))
-										.addContainerGap(240, Short.MAX_VALUE)));
+																										.addGap(10,
+																												10,
+																												10)
+																										.addGroup(
+																												finishLayout
+																														.createParallelGroup(
+																																javax.swing.GroupLayout.Alignment.LEADING)
+																														.addComponent(
+																																selectProfile)
+																														.addComponent(
+																																submitFinish)
+																														.addComponent(
+																																jLabel50)
+																														.addComponent(
+																																jLabel51)
+																														.addComponent(
+																																jLabel52)
+																														.addGroup(
+																																finishLayout
+																																		.createSequentialGroup()
+																																		.addGap(24,
+																																				24,
+																																				24)
+																																		.addComponent(
+																																				selectSTL))
+																														.addComponent(
+																																selectScad))))
+																		.addGap(0,
+																				228,
+																				Short.MAX_VALUE)))
+										.addContainerGap()));
 		finishLayout
 				.setVerticalGroup(finishLayout
 						.createParallelGroup(
@@ -3082,6 +3298,17 @@ public class AppGrip extends javax.swing.JApplet {
 								finishLayout
 										.createSequentialGroup()
 										.addContainerGap()
+										.addGroup(
+												finishLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(jLabel53)
+														.addComponent(
+																gripName,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGap(6, 6, 6)
 										.addComponent(jLabel49)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3094,12 +3321,12 @@ public class AppGrip extends javax.swing.JApplet {
 												25,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 										.addComponent(selectSTL)
-										.addGap(14, 14, 14)
-										.addComponent(submitFinish)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(submitFinish)
+										.addGap(18, 18, 18)
 										.addComponent(jLabel50)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3107,6 +3334,6 @@ public class AppGrip extends javax.swing.JApplet {
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(jLabel52)
-										.addContainerGap(418, Short.MAX_VALUE)));
+										.addContainerGap(385, Short.MAX_VALUE)));
 	}
 }
