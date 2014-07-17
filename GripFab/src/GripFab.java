@@ -9,13 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * GripFab processing class: Contains data about grips being developed and
@@ -33,48 +27,67 @@ public class GripFab {
 	 * name of files to be output
 	 */
 	protected String name = "";
-	/**
-	 * positions available for printing
-	 */
-	protected static String[] positions = { "Full Cylinder Hole",
-			"Protruded Cylinder Hole", "Straight Cylinder Barrel",
-			"Angled Cylinder Barrel" };
-	protected boolean lefty = false;
-	protected double diameter = 0; // in mm
-	protected double lout = 0; // length out of grip (in mm)
-	protected double lin = 0; // length into grip (in mm)
-	protected String position = ""; // a, b, c: add more as needed
-	protected double angle = 0;
-	protected double width = 0;
-	protected double height = 0;
 
-	private boolean throwDiameter = false;
-	private boolean throwDims = false;
+	protected Object[] barrelList = { "None", "Straight", "Angled" };
+	protected String[] holeList = { "Circle", "Rectangle" };
+	/**
+	 * determines if grip should be mirrored for left handed users
+	 */
+	protected boolean lefty = false;
+	/**
+	 * diameter of cylindrical extensions: in mm
+	 */
+	protected double diameter = 0;
+	/**
+	 * barrel length: in mm
+	 */
+	protected double lout = 0;
+	/**
+	 * grip depth: in mm
+	 */
+	protected double lin = 0;
+	/**
+	 * hole type of grip: Must match a value in extensions[]
+	 */
+	protected String hole = "";
+	protected String barrel = "";
+	/**
+	 * Angle from 0 to 90 degrees for direction of barrel
+	 */
+	protected double angle = 0;
+	/**
+	 * width of rectangular holes in mm
+	 */
+	protected double width = 0;
+	/**
+	 * heigth of rectangular holes in mm
+	 */
+	protected double height = 0;
 
 	protected GripFab() {
 
 	}
 
-	@SuppressWarnings("resource")
+	/**
+	 * Writes a openscad file to given directory with given name and preset
+	 * variables.
+	 * 
+	 * @throws PositionNotSupportedException
+	 * @throws invalidDiameterException
+	 * @throws STLNotPresentException
+	 * @throws invalidDimmensionsException
+	 * @throws IOException
+	 * @throws InterruptedException
+	 * @throws GripNotFoundException
+	 */
 	protected void writefile() throws PositionNotSupportedException,
 			invalidDiameterException, STLNotPresentException,
 			invalidDimmensionsException, IOException, InterruptedException {
-		if (diameter > 16) {
-			diameter = 16;
-			throwDiameter = true;
-		}
-		if (width > 13) {
-			width = 13;
-			throwDims = true;
-		}
-		if (height > 13) {
-			height = 13;
-			throwDims = true;
-		}
 		PrintWriter writer = new PrintWriter(directory + "\\" + name + ".scad");
 
 		// variables
-		writer.println("position = \"" + position + "\";");
+		writer.println("hole = \"" + hole + "\";");
+		writer.println("barrel = \"" + barrel + "\";");
 		writer.println("diameter =" + diameter + ";");
 		writer.println("x=" + width + ";");
 		writer.println("y=" + height + ";");
@@ -145,63 +158,76 @@ public class GripFab {
 		writer.println("}}");
 
 		writer.println("render(1){");
-		if (position.equals("Protruded Cylinder Hole")) {
-			if (lefty)
-				writer.println("mirror([0,1,0]){");
-			writer.println("hole();");
-			if (lefty)
-				writer.println("}");
-		} else if (position.equals("Protruded Rectangular Hole")) {
-			if (lefty)
-				writer.println("mirror([0,1,0]){");
-			writer.println("recHole();");
-			if (lefty)
-				writer.println("}");
-		} else if (position.equals("Angled Cylinder Barrel")) {
-			if (lefty)
-				writer.println("mirror([0,1,0]){");
-			writer.println("angledC();");
-			if (lefty)
-				writer.println("}");
-		} else if (position.equals("Angled Rectangular Barrel")) {
-			if (lefty)
-				writer.println("mirror([0,1,0]){");
-			writer.println("angledR();");
-			if (lefty)
-				writer.println("}");
-		} else if (position.equals("Straight Cylinder Barrel")) {
-			if (lefty)
-				writer.println("mirror([0,1,0]){");
-			writer.println("straightCyl();");
-			if (lefty)
-				writer.println("}");
-		} else if (position.equals("Straight Rectangular Barrel")) {
-			if (lefty)
-				writer.println("mirror([0,1,0]){");
-			writer.println("straightRec();");
-			if (lefty)
-				writer.println("}");
-		} else {
-			throw new PositionNotSupportedException();
+		if (hole.equals(holeList[0])) {
+			if (barrel.equals(barrelList[0])) {
+				if (lefty)
+					writer.println("mirror([0,1,0]){");
+				writer.println("hole();");
+				if (lefty)
+					writer.println("}");
+			} else if (barrel.equals(barrelList[1])) {
+				if (lefty)
+					writer.println("mirror([0,1,0]){");
+				writer.println("straightCyl();");
+				if (lefty)
+					writer.println("}");
+			} else if (barrel.equals(barrelList[2])) {
+				if (lefty)
+					writer.println("mirror([0,1,0]){");
+				writer.println("angledC();");
+				if (lefty)
+					writer.println("}");
+			} else {
+				throw new PositionNotSupportedException();
+			}
+		} else if (hole.equals(holeList[1])) {
+			if (barrel.equals(barrelList[0])) {
+				if (lefty)
+					writer.println("mirror([0,1,0]){");
+				writer.println("recHole();");
+				if (lefty)
+					writer.println("}");
+			} else if (barrel.equals(barrelList[1])) {
+				if (lefty)
+					writer.println("mirror([0,1,0]){");
+				writer.println("straightRec();");
+				if (lefty)
+					writer.println("}");
+			} else if (barrel.equals(barrelList[2])) {
+				if (lefty)
+					writer.println("mirror([0,1,0]){");
+				writer.println("angledR();");
+				if (lefty)
+					writer.println("}");
+			} else {
+				throw new PositionNotSupportedException();
+			}
 		}
 		writer.println("}");
-
-		if (throwDiameter)
-			throw new invalidDiameterException();
-		if (throwDims)
-			throw new invalidDimmensionsException();
 		writer.close();
 	}
 
+	/**
+	 * Uses command prompt to render stl file of openscad file by same name
+	 * 
+	 * @throws IOException
+	 */
 	protected void writeSTL() throws IOException {
 		Runtime.getRuntime().exec(
 				"cmd.exe /c start " + directory + "\\export.bat " + directory
 						+ " " + name + ".stl " + name + ".scad");
 	}
 
+	/**
+	 * writes a profile to a text document using already set values
+	 * 
+	 * @throws FileNotFoundException
+	 */
 	protected void writeProfile() throws FileNotFoundException {
 		PrintWriter writer = new PrintWriter(directory + "\\" + name + ".txt");
-		writer.println(position);
+		writer.println(hole);
+		writer.flush();
+		writer.println(barrel);
 		writer.flush();
 		writer.println(diameter);
 		writer.flush();
@@ -221,10 +247,19 @@ public class GripFab {
 
 	}
 
+	/**
+	 * pulls values in from a previously determined file, will not work if does
+	 * not have correct format
+	 * 
+	 * @param profile
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 */
 	protected void readProfile(File profile) throws NumberFormatException,
 			IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(profile));
-		position = reader.readLine();
+		hole = reader.readLine();
+		barrel = reader.readLine();
 		diameter = Double.parseDouble(reader.readLine());
 		width = Double.parseDouble(reader.readLine());
 		height = Double.parseDouble(reader.readLine());
@@ -235,24 +270,17 @@ public class GripFab {
 		reader.close();
 	}
 
-	protected void printFromProfile(File profile) throws NumberFormatException,
-			IOException, PositionNotSupportedException,
-			invalidDiameterException, STLNotPresentException,
-			invalidDimmensionsException {
-		readProfile(profile);
-
-	}
-
+	/**
+	 * takes a file name and splits it into directory and title and sets values
+	 * as variables
+	 * 
+	 * @param filename
+	 *            : filename for processing
+	 */
 	protected void processFileName(String filename) {
 		directory = filename.substring(0, filename.lastIndexOf("\\")) + "\\";
 		name = filename.substring(filename.lastIndexOf("\\"),
 				filename.lastIndexOf("."));
 
 	}
-
-	// public static void main(String[] args){
-	// GripFab gripFab = new GripFab();
-	// grripFab.writeFile();
-	//
-	// }
 }
