@@ -10,5 +10,7 @@ Further developement:
 variable diagrams of design
 error dialog boxes
 loading animation for rendering
+More grips
+
 
 for any errors that cannot be worked around or error messages that seem suspicious as to the cause please contact me at hofmann.megan@gmail.com.

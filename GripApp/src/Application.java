@@ -795,7 +795,7 @@ public class Application extends javax.swing.JFrame {
 
 		jLabel96.setText("mm");
 
-		jLabel97.setText("mm");
+		jLabel97.setText("degrees");
 
 		submitBarrel.setText("Submit Barrel");
 		submitBarrel.addActionListener(new java.awt.event.ActionListener() {
@@ -1239,7 +1239,9 @@ public class Application extends javax.swing.JFrame {
 																		.addGroup(
 																				barrelSettingsLayout
 																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING)
+																								javax.swing.GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								barrelPic)
 																						.addGroup(
 																								barrelSettingsLayout
 																										.createSequentialGroup()
@@ -1248,73 +1250,66 @@ public class Application extends javax.swing.JFrame {
 																														.createParallelGroup(
 																																javax.swing.GroupLayout.Alignment.LEADING)
 																														.addComponent(
-																																barrelPic)
-																														.addGroup(
-																																barrelSettingsLayout
-																																		.createSequentialGroup()
-																																		.addGroup(
-																																				barrelSettingsLayout
-																																						.createParallelGroup(
-																																								javax.swing.GroupLayout.Alignment.LEADING)
-																																						.addComponent(
-																																								jLabel93)
-																																						.addComponent(
-																																								jLabel94))
-																																		.addPreferredGap(
-																																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																																		.addGroup(
-																																				barrelSettingsLayout
-																																						.createParallelGroup(
-																																								javax.swing.GroupLayout.Alignment.LEADING)
-																																						.addComponent(
-																																								jLabel90)
-																																						.addComponent(
-																																								jLabel91)
-																																						.addComponent(
-																																								jLabel92)))
+																																jLabel93)
 																														.addComponent(
-																																jLabel75))
+																																jLabel94))
 																										.addPreferredGap(
-																												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																												javax.swing.GroupLayout.DEFAULT_SIZE,
-																												Short.MAX_VALUE)
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																										.addGroup(
 																												barrelSettingsLayout
 																														.createParallelGroup(
 																																javax.swing.GroupLayout.Alignment.LEADING)
 																														.addComponent(
-																																lefty,
-																																javax.swing.GroupLayout.Alignment.TRAILING)
+																																jLabel90)
 																														.addComponent(
-																																submitBarrel,
-																																javax.swing.GroupLayout.Alignment.TRAILING)))
+																																jLabel91)
+																														.addComponent(
+																																jLabel92)))
+																						.addComponent(
+																								jLabel75))
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																				30,
+																				Short.MAX_VALUE)
+																		.addGroup(
+																				barrelSettingsLayout
+																						.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								lefty,
+																								javax.swing.GroupLayout.Alignment.TRAILING)
+																						.addComponent(
+																								submitBarrel,
+																								javax.swing.GroupLayout.Alignment.TRAILING))
+																		.addGap(29,
+																				29,
+																				29))
+														.addGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																barrelSettingsLayout
+																		.createSequentialGroup()
+																		.addGroup(
+																				barrelSettingsLayout
+																						.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.TRAILING,
+																								false)
 																						.addGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING,
 																								barrelSettingsLayout
 																										.createSequentialGroup()
 																										.addComponent(
 																												jLabel900)
-																										.addGap(23,
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 																												23,
-																												23)
+																												Short.MAX_VALUE)
 																										.addComponent(
 																												linSlider,
 																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																												501,
-																												javax.swing.GroupLayout.PREFERRED_SIZE)
-																										.addPreferredGap(
-																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																										.addComponent(
-																												lin,
-																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																												javax.swing.GroupLayout.DEFAULT_SIZE,
-																												javax.swing.GroupLayout.PREFERRED_SIZE)
-																										.addPreferredGap(
-																												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																												javax.swing.GroupLayout.DEFAULT_SIZE,
-																												Short.MAX_VALUE)
-																										.addComponent(
-																												jLabel95))
+																												477,
+																												javax.swing.GroupLayout.PREFERRED_SIZE))
 																						.addGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING,
 																								barrelSettingsLayout
 																										.createSequentialGroup()
 																										.addGap(88,
@@ -1323,51 +1318,68 @@ public class Application extends javax.swing.JFrame {
 																										.addGroup(
 																												barrelSettingsLayout
 																														.createParallelGroup(
-																																javax.swing.GroupLayout.Alignment.LEADING)
+																																javax.swing.GroupLayout.Alignment.TRAILING,
+																																false)
+																														.addComponent(
+																																angleSlider,
+																																javax.swing.GroupLayout.DEFAULT_SIZE,
+																																477,
+																																Short.MAX_VALUE)
 																														.addComponent(
 																																loutSlider,
 																																javax.swing.GroupLayout.DEFAULT_SIZE,
 																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																Short.MAX_VALUE)
-																														.addComponent(
-																																angleSlider,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																Short.MAX_VALUE))
+																																Short.MAX_VALUE))))
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE)
+																		.addGroup(
+																				barrelSettingsLayout
+																						.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING)
+																						.addGroup(
+																								barrelSettingsLayout
+																										.createSequentialGroup()
+																										.addComponent(
+																												lin,
+																												javax.swing.GroupLayout.PREFERRED_SIZE,
+																												javax.swing.GroupLayout.DEFAULT_SIZE,
+																												javax.swing.GroupLayout.PREFERRED_SIZE)
 																										.addPreferredGap(
-																												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												jLabel95))
+																						.addGroup(
+																								barrelSettingsLayout
+																										.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING)
 																										.addGroup(
 																												barrelSettingsLayout
-																														.createParallelGroup(
-																																javax.swing.GroupLayout.Alignment.LEADING)
-																														.addGroup(
-																																barrelSettingsLayout
-																																		.createSequentialGroup()
-																																		.addComponent(
-																																				lout,
-																																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																																		.addPreferredGap(
-																																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																																		.addComponent(
-																																				jLabel96))
-																														.addGroup(
-																																barrelSettingsLayout
-																																		.createSequentialGroup()
-																																		.addComponent(
-																																				angle,
-																																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																																		.addPreferredGap(
-																																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																																		.addComponent(
-																																				jLabel97)))))
-																		.addGap(22,
-																				22,
-																				22)))
-										.addGap(19, 19, 19))
+																														.createSequentialGroup()
+																														.addComponent(
+																																lout,
+																																javax.swing.GroupLayout.PREFERRED_SIZE,
+																																javax.swing.GroupLayout.DEFAULT_SIZE,
+																																javax.swing.GroupLayout.PREFERRED_SIZE)
+																														.addPreferredGap(
+																																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																														.addComponent(
+																																jLabel96))
+																										.addGroup(
+																												javax.swing.GroupLayout.Alignment.TRAILING,
+																												barrelSettingsLayout
+																														.createSequentialGroup()
+																														.addComponent(
+																																angle,
+																																javax.swing.GroupLayout.PREFERRED_SIZE,
+																																javax.swing.GroupLayout.DEFAULT_SIZE,
+																																javax.swing.GroupLayout.PREFERRED_SIZE)
+																														.addPreferredGap(
+																																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																														.addComponent(
+																																jLabel97))))))
+										.addContainerGap())
 						.addGroup(
 								barrelSettingsLayout
 										.createSequentialGroup()
@@ -1458,28 +1470,21 @@ public class Application extends javax.swing.JFrame {
 																												14,
 																												14)
 																										.addComponent(
-																												jLabel91)
-																										.addGap(18,
-																												18,
-																												18))
+																												jLabel91))
 																						.addGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING,
 																								barrelSettingsLayout
-																										.createSequentialGroup()
-																										.addGroup(
-																												barrelSettingsLayout
-																														.createParallelGroup(
-																																javax.swing.GroupLayout.Alignment.BASELINE)
-																														.addComponent(
-																																lout,
-																																javax.swing.GroupLayout.PREFERRED_SIZE,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																javax.swing.GroupLayout.PREFERRED_SIZE)
-																														.addComponent(
-																																jLabel96))
-																										.addGap(38,
-																												38,
-																												38)))
+																										.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.BASELINE)
+																										.addComponent(
+																												lout,
+																												javax.swing.GroupLayout.PREFERRED_SIZE,
+																												javax.swing.GroupLayout.DEFAULT_SIZE,
+																												javax.swing.GroupLayout.PREFERRED_SIZE)
+																										.addComponent(
+																												jLabel96)))
+																		.addGap(18,
+																				18,
+																				18)
 																		.addGroup(
 																				barrelSettingsLayout
 																						.createParallelGroup(
@@ -1550,8 +1555,8 @@ public class Application extends javax.swing.JFrame {
 																javax.swing.GroupLayout.Alignment.LEADING)
 														.addComponent(
 																finishChooser,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																660,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																0,
 																Short.MAX_VALUE)
 														.addGroup(
 																finishLayout
@@ -1569,7 +1574,7 @@ public class Application extends javax.swing.JFrame {
 																						.addComponent(
 																								jLabel77))
 																		.addGap(0,
-																				0,
+																				181,
 																				Short.MAX_VALUE)))
 										.addContainerGap()));
 		finishLayout
@@ -1594,9 +1599,10 @@ public class Application extends javax.swing.JFrame {
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
 												finishChooser,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												500, Short.MAX_VALUE)
-										.addContainerGap()));
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												421,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(92, Short.MAX_VALUE)));
 		// group
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
