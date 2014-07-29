@@ -30,10 +30,6 @@ import javax.swing.event.ChangeEvent;
 @SuppressWarnings("serial")
 public class Application extends javax.swing.JFrame {
 	/**
-	 * list of possible grips made in this progra
-	 */
-	private String[] gripList = { "contracture" };
-	/**
 	 * gripFab object that processes the data to produces a new grip
 	 */
 	private GripFab gripFab = new GripFab();
@@ -52,15 +48,15 @@ public class Application extends javax.swing.JFrame {
 	/**
 	 * maximum hole dimensions
 	 */
-	private double maxDim = 26;
+	private double maxDim;
 	/**
 	 * maximum grip depth
 	 */
-	private double maxLin = 62;
+	private double maxLin;
 	/**
 	 * masimum barrel depth
 	 */
-	private double maxLout = 200;
+	private double maxLout;
 
 	/**
 	 * Creates new form Application
@@ -187,7 +183,17 @@ public class Application extends javax.swing.JFrame {
 	 */
 	private void chooseGripActionPerformed(ActionEvent evt) {
 		if (newCheck.isSelected()) {
-			if ((gripBox.getSelectedItem() + ".stl").equals("contracture.stl")) {
+			if (gripBox.getSelectedItem().equals(gripFab.gripList[0])) {
+				maxDim = 26;
+				maxLin = 62;
+				maxLout = 200;
+				gripFab.grip = (String) gripBox.getSelectedItem();
+				holes();
+			} else if (gripBox.getSelectedItem().equals(gripFab.gripList[1])) {
+				maxDim = 20;
+				maxLin = 55;
+				maxLout = 200;
+				gripFab.grip = (String) gripBox.getSelectedItem();
 				holes();
 			}
 		} else if (profileCheck.isSelected()) {
@@ -289,7 +295,7 @@ public class Application extends javax.swing.JFrame {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	protected void finishChooserActionPerformed(ActionEvent evt) {
+	private void finishChooserActionPerformed(ActionEvent evt) {
 		// TODO: make files come from Mac friendly location
 		// TODO: make unnecessary files delete themselves once printed
 		int result = finishChooser.showSaveDialog(this);
@@ -309,10 +315,8 @@ public class Application extends javax.swing.JFrame {
 				dispose();
 			}
 			if (selectSTL.isSelected()) {
-				// add grip files to final directory
-				// File f = new File("contractureA.stl");
-				Path source = Paths
-						.get("C:\\Program Files (x86)\\GripFab\\contractureA.stl");
+				Path source = Paths.get("C:\\Program Files (x86)\\GripFab\\"
+						+ gripFab.grip + "A.stl");
 				Path dirFinal = Paths.get(gripFab.directory);
 				try {
 					Files.copy(source, dirFinal.resolve(source.getFileName()),
@@ -321,8 +325,8 @@ public class Application extends javax.swing.JFrame {
 					e.printStackTrace();
 					dispose();
 				}
-				source = Paths
-						.get("C:\\Program Files (x86)\\GripFab\\contractureB.stl");
+				source = Paths.get("C:\\Program Files (x86)\\GripFab\\"
+						+ gripFab.grip + "B.stl");
 				try {
 					Files.copy(source, dirFinal.resolve(source.getFileName()),
 							StandardCopyOption.REPLACE_EXISTING);
@@ -557,7 +561,7 @@ public class Application extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void grips() {
-		gripBox.setModel(new DefaultComboBoxModel(gripList));
+		gripBox.setModel(new DefaultComboBoxModel(gripFab.gripList));
 		chooseGrip.setText("Choose");
 		chooseGrip.addActionListener(new java.awt.event.ActionListener() {
 			@Override
@@ -1707,6 +1711,9 @@ public class Application extends javax.swing.JFrame {
 		 * possible holes to choose
 		 */
 		protected String[] holeList = { "Circle", "Rectangle" };
+
+		protected String[] gripList = { "Contracture", "RefinedPinch" };
+		protected String grip;
 		/**
 		 * determines if grip should be mirrored for left handed users
 		 */
@@ -1777,87 +1784,25 @@ public class Application extends javax.swing.JFrame {
 			writer.println("lin=" + lin + ";");
 			writer.println("lout=" + lout + ";");
 			writer.println("angle=" + angle + ";");
-			// hole
-			writer.println("module hole(){");
-			writer.println("difference(){");
-			writer.println("import(\"contractureA.stl\");");
-			writer.println("cylinder(lin,diameter/2,diameter/2);");
-			writer.println("}}");
-
-			// recHole
-			writer.println("module recHole(){");
-			writer.println("difference(){");
-			writer.println("import(\"contractureA.stl\");");
-			writer.println("translate([-x/2,-y/2,0]) cube([x,y,lin]);");
-			writer.println("}}");
-
-			// cutBarrel to height
-			writer.println("module cutB(){");
-			writer.println("difference(){");
-			writer.println("import(\"contractureB.stl\");");
-			writer.println("translate([0,0,-200-lout]) cylinder(200,200,200);");
-			writer.println("}}");
-
-			// straigthCyl
-			writer.println("module straightCyl(){");
-			writer.println("difference(){");
-			writer.println("cutB();");
-			writer.println("translate([0,0,-lout]) cylinder(lout+lin,diameter/2,diameter/2);");
-			writer.println("}}");
-
-			// straightRec
-			writer.println("module straightRec(){");
-			writer.println("difference(){");
-			writer.println("cutB();");
-			writer.println("translate([-x/2,-y/2,-lout]) cube([x,y,lin+lout]);");
-			writer.println("}}");
-
-			// barrelC
-			writer.println("module barrelC(){");
-			writer.println("difference(){");
-			writer.println("cylinder(lout,4+diameter/2,4+diameter/2);");
-			writer.println("cylinder(lout,diameter/2,diameter/2);");
-			writer.println("}}");
-
-			// angledC
-			writer.println("module angledC(){");
-			writer.println("union(){");
-			writer.println("import(\"contractureA.stl\");");
-			writer.println("mirror([0,0,1]) translate([0,0,-diameter*sin(angle)]) rotate([0,angle,0]) barrelC();");
-			writer.println("}}");
-
-			// barrelR
-			writer.println("module barrelR(){");
-			writer.println("difference(){");
-			writer.println("cylinder(lout,10,10);");
-			writer.println("translate([-x/2,-y/2,0]) cube([x,y,lout]);");
-			writer.println("}}");
-
-			// angledR
-			writer.println("module angledR(){");
-			writer.println("union(){");
-			writer.println("import(\"contractureA.stl\");");
-			writer.println("mirror([0,0,1]) translate([0,0,-10*sin(angle)]) rotate([0,angle,0]) barrelR(lout,x,y);");
-			writer.println("}}");
 
 			writer.println("render(1){");
 			if (hole.equals(holeList[0])) {
 				if (barrel.equals(barrelList[0])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("hole();");
+					hole(writer);
 					if (lefty)
 						writer.println("}");
 				} else if (barrel.equals(barrelList[1])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("straightCyl();");
+					straightCyl(writer);
 					if (lefty)
 						writer.println("}");
 				} else if (barrel.equals(barrelList[2])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("angledC();");
+					angledC(writer);
 					if (lefty)
 						writer.println("}");
 				} else {
@@ -1867,19 +1812,19 @@ public class Application extends javax.swing.JFrame {
 				if (barrel.equals(barrelList[0])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("recHole();");
+					recHole(writer);
 					if (lefty)
 						writer.println("}");
 				} else if (barrel.equals(barrelList[1])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("straightRec();");
+					straightRec(writer);
 					if (lefty)
 						writer.println("}");
 				} else if (barrel.equals(barrelList[2])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("angledR();");
+					angledR(writer);
 					if (lefty)
 						writer.println("}");
 				} else {
@@ -1973,6 +1918,71 @@ public class Application extends javax.swing.JFrame {
 				name = filename.substring(filename.lastIndexOf("\\"),
 						filename.lastIndexOf("."));
 
+		}
+
+		private void hole(PrintWriter writer) {
+			writer.println("difference(){");
+			writer.println("import(\"" + grip + "A.stl\");");
+			writer.println("translate([0,0,-1]) cylinder(lin+1,diameter/2,diameter/2);");
+			writer.println("}");
+		}
+
+		private void recHole(PrintWriter writer) {
+			writer.println("difference(){");
+			writer.println("import(\"" + grip + "A.stl\");");
+			writer.println("translate([-x/2,-y/2,0]) cube([x,y,lin]);");
+			writer.println("}");
+		}
+
+		private void cutB(PrintWriter writer) {
+			writer.println("difference(){");
+			writer.println("import(\"" + grip + "B.stl\");");
+			writer.println("translate([0,0,-200-lout]) cylinder(200,200,200);");
+			writer.println("}");
+		}
+
+		private void straightCyl(PrintWriter writer) {
+			writer.println("difference(){");
+			cutB(writer);
+			writer.println("translate([0,0,-lout]) cylinder(lout+lin,diameter/2,diameter/2);");
+			writer.println("}");
+		}
+
+		private void straightRec(PrintWriter writer) {
+			writer.println("difference(){");
+			cutB(writer);
+			writer.println("translate([-x/2,-y/2,-lout]) cube([x,y,lin+lout]);");
+			writer.println("}");
+		}
+
+		private void barrelC(PrintWriter writer) {
+			writer.println("difference(){");
+			writer.println("cylinder(lout,4+diameter/2,4+diameter/2);");
+			writer.println("cylinder(lout,diameter/2,diameter/2);");
+			writer.println("}");
+		}
+
+		private void angledC(PrintWriter writer) {
+			writer.println("union(){");
+			writer.println("import(\"" + grip + "A.stl\");");
+			writer.println("mirror([0,0,1]) translate([0,0,-diameter*sin(angle)]) rotate([0,angle,0]){");
+			barrelC(writer);
+			writer.println("}}");
+		}
+
+		private void barrelR(PrintWriter writer) {
+			writer.println("difference(){");
+			writer.println("cylinder(lout,10,10);");
+			writer.println("translate([-x/2,-y/2,0]) cube([x,y,lout]);");
+			writer.println("}");
+		}
+
+		private void angledR(PrintWriter writer) {
+			writer.println("union(){");
+			writer.println("import(\"" + grip + "A.stl\");");
+			writer.println("mirror([0,0,1]) translate([0,0,-10*sin(angle)]) rotate([0,angle,0]) {");
+			barrelR(writer);
+			writer.println("}}");
 		}
 	}
 
