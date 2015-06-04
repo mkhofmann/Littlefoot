@@ -13,7 +13,10 @@ import java.text.DecimalFormat;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
+
+//import Application.PositionNotSupportedException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,13 +30,16 @@ import javax.swing.event.ChangeEvent;
  */
 public class ApplicationMac extends javax.swing.JFrame {
 
-	private String[] gripList = { "contracture" };
+	
 
 	private GripFab gripFab = new GripFab();
 	private DecimalFormat df = new DecimalFormat("###.##");
 
 	private String hole = "Circle";
 	private String barrel = "None";
+	private double maxDim;
+	private double maxLin;
+	private double maxLout;
 
 	/**
 	 * Creates new form Application
@@ -129,11 +135,7 @@ public class ApplicationMac extends javax.swing.JFrame {
 			throws GripNotFoundException {
 		int result = profileChooser.showSaveDialog(this);
 		if (result == JFileChooser.APPROVE_OPTION)
-			try {
-				chooseGripActionPerformed(evt);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			chooseGripActionPerformed(evt);
 	}
 
 	protected void newCheckActionPerformed(ActionEvent evt) {
@@ -144,25 +146,49 @@ public class ApplicationMac extends javax.swing.JFrame {
 	}
 
 	protected void chooseGripActionPerformed(ActionEvent evt)
-			throws GripNotFoundException, IOException {
-		if (newCheck.isSelected()) {
-			if ((gripBox.getSelectedItem() + ".stl").equals("contracture.stl")) {
-				// Path source = Paths
-				// .get("C:\\Program Files (x86)\\GripFab\\ContractureGrip\\contractureA.stl");
-				// Path dir = Paths.get(gripFab.directory);
-				// Path delete = Paths.get(gripFab.directory
-				// + "\\contractureA.stl");
-				// Files.deleteIfExists(delete);
-				// Files.copy(source, dir.resolve(source.getFileName()));
-				// source = Paths
-				// .get("C:\\Program Files (x86)\\GripFab\\ContractureGrip\\contractureB.stl");
-				// delete = Paths.get(gripFab.directory + "\\contractureB.stl");
-				// Files.deleteIfExists(delete);
-				// Files.copy(source, dir.resolve(source.getFileName()));
-				holes();
-			} else
-				throw new GripNotFoundException();
-		} else if (profileCheck.isSelected()) {
+			{
+	if (newCheck.isSelected()) {
+		if (gripBox.getSelectedItem().equals(gripFab.gripList[0])) {
+			maxDim = 26;
+			maxLin = 62;
+			maxLout = 200;
+			gripFab.grip = (String) gripBox.getSelectedItem();
+			holes();
+		} else if (gripBox.getSelectedItem().equals(gripFab.gripList[1])) {
+			maxDim = 20;
+			maxLin = 55;
+			maxLout = 200;
+			gripFab.grip = (String) gripBox.getSelectedItem();
+			holes();
+		} else if(gripBox.getSelectedItem().equals(gripFab.gripList[2])) 
+		{
+			//RIGHT NOW THIS IS JUST A COPT OF REFINED PINCH
+			maxDim = 30;
+			maxLin = 30;
+			maxLout = 200;
+			gripFab.grip = (String) gripBox.getSelectedItem();
+			holes();
+		}
+		else if(gripBox.getSelectedItem().equals(gripFab.gripList[3])) 
+		{
+			//RIGHT NOW THIS IS JUST A COPT OF REFINED PINCH
+			maxDim = 30;
+			maxLin = 30;
+			maxLout = 200;
+			gripFab.grip = (String) gripBox.getSelectedItem();
+			holes();
+		}
+	} else if (profileCheck.isSelected()) {
+		try {
+			gripFab.readProfile(profileChooser.getSelectedFile());
+			holes();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+		else if (profileCheck.isSelected()) {
 			try {
 				gripFab.readProfile(profileChooser.getSelectedFile());
 				holes();
@@ -206,6 +232,11 @@ public class ApplicationMac extends javax.swing.JFrame {
 		angle.setText(df.format((angleSlider.getValue() * 90.0) / 1000));
 	}
 
+	/*Changes Made for Mac
+	 * Changed Path from Program Files (X86) to my user/workspace folder on this computer//
+	 * Path Needs to be change to wherever the user wants to put the gripper stl files
+	 * 
+	 *   */
 	protected void finishChooserActionPerformed(ActionEvent evt)
 			throws PositionNotSupportedException, invalidDiameterException,
 			STLNotPresentException, invalidDimmensionsException, IOException,
@@ -215,30 +246,60 @@ public class ApplicationMac extends javax.swing.JFrame {
 			gripFab.lefty = lefty.isSelected();
 			gripFab.hole = hole;
 			gripFab.barrel = barrel;
+			
+			if (!(selectProfile.isSelected())&& !(selectSTL.isSelected()))
+			{
+				JOptionPane.showMessageDialog(null, "You need to select a desired profile"); 
+			}
+			
 			gripFab.processFileName(finishChooser.getSelectedFile()
-					.getAbsolutePath());
+			.getAbsolutePath());
+			
+			
 			if (selectProfile.isSelected()) {
 				gripFab.writeProfile();
 			}
+			
+		
+			
 			if (selectSTL.isSelected()) {
 				// add grip files to final directory
 				// File f = new File("contractureA.stl");
 				Path source = Paths
-						.get("\\Applications\\GripFab\\contractureA.stl");
+						.get("/Users/user/GripFab/" + gripFab.grip + "A.stl");
 				Path dirFinal = Paths.get(gripFab.directory);
+				
+				try
+				{Files.copy(source, dirFinal.resolve(source.getFileName()),
+						StandardCopyOption.REPLACE_EXISTING);
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+					dispose();
+				}
+				source = Paths
+						.get("/Users/user/GripFab/" + gripFab.grip + "B.stl");
 				Files.copy(source, dirFinal.resolve(source.getFileName()),
 						StandardCopyOption.REPLACE_EXISTING);
 				source = Paths
-						.get("\\Applications\\GripFab\\contractureB.stl");
-				Files.copy(source, dirFinal.resolve(source.getFileName()),
-						StandardCopyOption.REPLACE_EXISTING);
-				source = Paths
-						.get("\\Applications\\GripFab\\openscad.exe");
+						.get("/Users/user/GripFab/openscad.exe");
 				Files.copy(source, dirFinal.resolve(source.getFileName()),
 						StandardCopyOption.REPLACE_EXISTING);
 				// write scad file to dirScad
 				gripFab.writefile();
-				gripFab.writeSTL();
+				/*Application MAC CALL---gripFab.writeSTL();*/
+				try {
+					JOptionPane.showMessageDialog(null, "Please wait while your " + gripFab.grip + ".stl file is being created"); 
+					gripFab.writeSTL();
+					JOptionPane.showMessageDialog(null, gripFab.grip + ".stl is complete"); 
+				} catch (IOException e) {
+					e.printStackTrace();
+					dispose();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					dispose();
+				}
 				// delete scad files
 				// delete = Paths.get(dirFinal + "\\contractureA.stl");
 				// Files.deleteIfExists(delete);
@@ -249,6 +310,8 @@ public class ApplicationMac extends javax.swing.JFrame {
 				// delete = Paths.get(dirFinal + "\\openscad.exe");
 				// Files.deleteIfExists(delete);
 			}
+			
+			
 
 		}
 	}
@@ -376,20 +439,13 @@ public class ApplicationMac extends javax.swing.JFrame {
 		}
 	}
 
+	@SuppressWarnings({"unchecked","rawtypes" })
 	private void grips() {
-		gripBox.setModel(new DefaultComboBoxModel(gripList));
+		gripBox.setModel(new DefaultComboBoxModel(gripFab.gripList));
 		chooseGrip.setText("Choose");
 		chooseGrip.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				try {
-					chooseGripActionPerformed(evt);
-				} catch (GripNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				chooseGripActionPerformed(evt);
 			}
 		});
 
@@ -595,7 +651,7 @@ public class ApplicationMac extends javax.swing.JFrame {
 
 		jLabel96.setText("mm");
 
-		jLabel97.setText("mm");
+		jLabel97.setText("degrees");
 
 		submitBarrel.setText("Submit Barrel");
 		submitBarrel.addActionListener(new java.awt.event.ActionListener() {
@@ -1440,7 +1496,7 @@ public class ApplicationMac extends javax.swing.JFrame {
 	private javax.swing.JSlider diameterSlider;
 	private javax.swing.JPanel finish;
 	private javax.swing.JFileChooser finishChooser;
-	private javax.swing.JComboBox gripBox;
+	private javax.swing.JComboBox<?> gripBox;
 	private javax.swing.JPanel grips;
 	private javax.swing.JTextField height;
 	private javax.swing.JSlider heightSlider;
@@ -1498,7 +1554,13 @@ public class ApplicationMac extends javax.swing.JFrame {
 		protected String name = "";
 
 		protected Object[] barrelList = { "None", "Straight", "Angled" };
+		
 		protected String[] holeList = { "Circle", "Rectangle" };
+		
+		private String[] gripList = { "Contracture" , "RefinedPinch", "Rocker", "BuiltUp"};
+		
+		private String grip;
+		
 		/**
 		 * determines if grip should be mirrored for left handed users
 		 */
@@ -1552,7 +1614,7 @@ public class ApplicationMac extends javax.swing.JFrame {
 		protected void writefile() throws PositionNotSupportedException,
 				invalidDiameterException, STLNotPresentException,
 				invalidDimmensionsException, IOException, InterruptedException {
-			PrintWriter writer = new PrintWriter(directory + "\\" + name
+			PrintWriter writer = new PrintWriter(directory + "/" + name
 					+ ".scad");
 
 			// variables
@@ -1564,87 +1626,25 @@ public class ApplicationMac extends javax.swing.JFrame {
 			writer.println("lin=" + lin + ";");
 			writer.println("lout=" + lout + ";");
 			writer.println("angle=" + angle + ";");
-			// hole
-			writer.println("module hole(){");
-			writer.println("difference(){");
-			writer.println("import(\"contractureA.stl\");");
-			writer.println("cylinder(lin,diameter/2,diameter/2);");
-			writer.println("}}");
-
-			// recHole
-			writer.println("module recHole(){");
-			writer.println("difference(){");
-			writer.println("import(\"contractureA.stl\");");
-			writer.println("translate([-x/2,-y/2,0]) cube([x,y,lin]);");
-			writer.println("}}");
-
-			// cutBarrel to height
-			writer.println("module cutB(){");
-			writer.println("difference(){");
-			writer.println("import(\"contractureB.stl\");");
-			writer.println("translate([0,0,-200-lout]) cylinder(200,200,200);");
-			writer.println("}}");
-
-			// straigthCyl
-			writer.println("module straightCyl(){");
-			writer.println("difference(){");
-			writer.println("cutB(lout);");
-			writer.println("translate([0,0,-lout]) cylinder(lout+lin,diameter,diameter);");
-			writer.println("}}");
-
-			// straightRec
-			writer.println("module straightRec(){");
-			writer.println("difference(){");
-			writer.println("cutB(lout);");
-			writer.println("translate([-x/2,-y/2,-lout]) cube([x,y,lin+lout]);");
-			writer.println("}}");
-
-			// barrelC
-			writer.println("module barrelC(){");
-			writer.println("difference(){");
-			writer.println("cylinder(lout,4+diameter/2,4+diameter/2);");
-			writer.println("cylinder(lout,diameter/2,diameter/2);");
-			writer.println("}}");
-
-			// angledC
-			writer.println("module angledC(){");
-			writer.println("union(){");
-			writer.println("import(\"contractureA.stl\");");
-			writer.println("mirror([0,0,1]) translate([0,0,-diameter*sin(angle)]) rotate([0,angle,0]) barrelC(lout,diameter);");
-			writer.println("}}");
-
-			// barrelR
-			writer.println("module barrelR(){");
-			writer.println("difference(){");
-			writer.println("cylinder(lout,10,10);");
-			writer.println("translate([-x/2,-y/2,0]) cube([x,y,lout]);");
-			writer.println("}}");
-
-			// angledR
-			writer.println("module angledR(){");
-			writer.println("union(){");
-			writer.println("import(\"contractureA.stl\");");
-			writer.println("mirror([0,0,1]) translate([0,0,-10*sin(angle)]) rotate([0,angle,0]) barrelR(lout,x,y);");
-			writer.println("}}");
-
+			
 			writer.println("render(1){");
 			if (hole.equals(holeList[0])) {
 				if (barrel.equals(barrelList[0])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("hole();");
+					hole(writer);
 					if (lefty)
 						writer.println("}");
 				} else if (barrel.equals(barrelList[1])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("straightCyl();");
+					straightCyl(writer);
 					if (lefty)
 						writer.println("}");
 				} else if (barrel.equals(barrelList[2])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("angledC();");
+					angledC(writer);
 					if (lefty)
 						writer.println("}");
 				} else {
@@ -1654,29 +1654,32 @@ public class ApplicationMac extends javax.swing.JFrame {
 				if (barrel.equals(barrelList[0])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("recHole();");
+					recHole(writer);
 					if (lefty)
 						writer.println("}");
 				} else if (barrel.equals(barrelList[1])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("straightRec();");
+					straightRec(writer);
 					if (lefty)
 						writer.println("}");
 				} else if (barrel.equals(barrelList[2])) {
 					if (lefty)
 						writer.println("mirror([0,1,0]){");
-					writer.println("angledR();");
+					angledR(writer);
 					if (lefty)
 						writer.println("}");
 				} else {
 					throw new PositionNotSupportedException();
 				}
 			}
+			
 			writer.println("}");
 			writer.close();
 		}
-
+		
+			
+			
 		/**
 		 * Uses command prompt to render stl file of openscad file by same name
 		 * 
@@ -1686,11 +1689,14 @@ public class ApplicationMac extends javax.swing.JFrame {
 		protected void writeSTL() throws IOException, InterruptedException {
 			// System.out.println("cmd /c "+ directory +"\\openscad.exe -o "
 			// +directory+"\\"+name+".stl "+directory+"\\"+name+".scad");
+			
+			//SAM: I change "cmd" to "mkdir" to be used in apple terminal 
+			
 			Runtime.getRuntime()
-					.exec("cmd /c " + directory + "\\openscad.exe -o "
+					.exec("mkdir " + directory + "\\openscad.exe -o "
 							+ directory + "\\" + name + ".stl " + directory
 							+ "\\" + name + ".scad").waitFor();
-			Runtime.getRuntime().exec("cmd /c exit");
+			Runtime.getRuntime().exec("mkdir /c exit");
 		}
 
 		/**
@@ -1699,7 +1705,7 @@ public class ApplicationMac extends javax.swing.JFrame {
 		 * @throws FileNotFoundException
 		 */
 		protected void writeProfile() throws FileNotFoundException {
-			PrintWriter writer = new PrintWriter(directory + "\\" + name
+			PrintWriter writer = new PrintWriter(directory + "/" + name
 					+ ".txt");
 			writer.println(hole);
 			writer.flush();
@@ -1754,14 +1760,78 @@ public class ApplicationMac extends javax.swing.JFrame {
 		 *            : filename for processing
 		 */
 		protected void processFileName(String filename) {
-			directory = filename.substring(0, filename.lastIndexOf("\\"))
-					+ "\\";
+			directory = filename.substring(0, filename.lastIndexOf("/"))
+					+ "/";
 			if (filename.lastIndexOf(".") == -1)
-				name = filename.substring(filename.lastIndexOf("\\"));
+				name = filename.substring(filename.lastIndexOf("/"));
 			else
-				name = filename.substring(filename.lastIndexOf("\\"),
+				name = filename.substring(filename.lastIndexOf("/"),
 						filename.lastIndexOf("."));
 
+		}
+		private void hole(PrintWriter writer) {
+			writer.println("difference(){");
+			writer.println("import(\"" + grip + "A.stl\");");
+			writer.println("translate([0,0,-1]) cylinder(lin+1,diameter/2,diameter/2);");
+			writer.println("}");
+		}
+
+		private void recHole(PrintWriter writer) {
+			writer.println("difference(){");
+			writer.println("import(\"" + grip + "A.stl\");");
+			writer.println("translate([-x/2,-y/2,0]) cube([x,y,lin]);");
+			writer.println("}");
+		}
+
+		private void cutB(PrintWriter writer) {
+			writer.println("difference(){");
+			writer.println("import(\"" + grip + "B.stl\");");
+			writer.println("translate([0,0,-200-lout]) cylinder(200,200,200);");
+			writer.println("}");
+		}
+
+		private void straightCyl(PrintWriter writer) {
+			writer.println("difference(){");
+			cutB(writer);
+			writer.println("translate([0,0,-lout]) cylinder(lout+lin,diameter/2,diameter/2);");
+			writer.println("}");
+		}
+
+		private void straightRec(PrintWriter writer) {
+			writer.println("difference(){");
+			cutB(writer);
+			writer.println("translate([-x/2,-y/2,-lout]) cube([x,y,lin+lout]);");
+			writer.println("}");
+		}
+
+		private void barrelC(PrintWriter writer) {
+			writer.println("difference(){");
+			writer.println("cylinder(lout,4+diameter/2,4+diameter/2);");
+			writer.println("cylinder(lout,diameter/2,diameter/2);");
+			writer.println("}");
+		}
+
+		private void angledC(PrintWriter writer) {
+			writer.println("union(){");
+			writer.println("import(\"" + grip + "A.stl\");");
+			writer.println("mirror([0,0,1]) translate([0,0,-diameter*sin(angle)]) rotate([0,angle,0]){");
+			barrelC(writer);
+			writer.println("}}");
+		}
+
+		private void barrelR(PrintWriter writer) {
+			writer.println("difference(){");
+			writer.println("cylinder(lout,10,10);");
+			writer.println("translate([-x/2,-y/2,0]) cube([x,y,lout]);");
+			writer.println("}");
+		}
+
+		private void angledR(PrintWriter writer) {
+			writer.println("union(){");
+			writer.println("import(\"" + grip + "A.stl\");");
+			writer.println("mirror([0,0,1]) translate([0,0,-10*sin(angle)]) rotate([0,angle,0]) {");
+			barrelR(writer);
+			writer.println("}}");
 		}
 	}
 
@@ -1826,16 +1896,16 @@ public class ApplicationMac extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(Application.class.getName())
+			java.util.logging.Logger.getLogger(ApplicationMac.class.getName())
 					.log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(Application.class.getName())
+			java.util.logging.Logger.getLogger(ApplicationMac.class.getName())
 					.log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(Application.class.getName())
+			java.util.logging.Logger.getLogger(ApplicationMac.class.getName())
 					.log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(Application.class.getName())
+			java.util.logging.Logger.getLogger(ApplicationMac.class.getName())
 					.log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		// </editor-fold>
@@ -1843,7 +1913,7 @@ public class ApplicationMac extends javax.swing.JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new Application().setVisible(true);
+				new ApplicationMac().setVisible(true);
 			}
 		});
 	}
